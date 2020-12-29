@@ -5,61 +5,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.MainActivity">
+    tools:context="com.example.mallstable.ui.MainActivity">
 
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <RadioGroup
-        android:id="@+id/radio_group_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:minHeight="?attr/actionBarSize"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:gravity="center"
-            android:text="首页" />
-
-        <RadioButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:gravity="center"
-            android:text="分类" />
-
-        <RadioButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:gravity="center"
-            android:text="购物车" />
-
-        <RadioButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:gravity="center"
-            android:text="我的" />
-
-    </RadioGroup>
-
+        android:layout_weight="1"/>
+    
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:alpha="0.6"
         android:background="@android:color/darker_gray" />
+    
+    <RadioGroup
+        android:id="@+id/radio_group_button"
+        android:layout_width="match_parent"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
 
+        <RadioButton
+            android:tag="home"
+            android:id="@+id/radio_button_home"
+            style="@style/RadioGroupButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/main_tab_home_selector"
+            android:text="首页" />
+
+        <RadioButton
+            android:tag="category"
+            android:id="@+id/radio_button_category"
+            style="@style/RadioGroupButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/main_tab_category_selector"
+            android:text="分类" />
+
+        <RadioButton
+            android:tag="cart"
+            android:id="@+id/radio_button_cart"
+            style="@style/RadioGroupButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/main_tab_cart_selector"
+            android:text="购物车" />
+
+        <RadioButton
+            android:tag="user"
+            android:id="@+id/radio_button_user"
+            style="@style/RadioGroupButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/main_tab_me_selector"
+            android:text="我的" />
+    </RadioGroup>
 
 </LinearLayout>
