@@ -7,7 +7,8 @@ public class MallApplication extends Application {
     public void onCreate() {
         super.onCreate();
     }
-    private void initOkHttpUtils(){
+
+    private void initOkHttpUtils() {
 
     }
 }
