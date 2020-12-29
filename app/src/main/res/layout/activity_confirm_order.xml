@@ -1,46 +1,50 @@
-<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    tools:context="com.example.mallstable.fragment.CartFragment">-->
-
-<!--    &lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;-->
-<!--    <TextView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:text="购物车" />-->
-
-<!--</FrameLayout>-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="cn.techaction.mall.fragment.CartFragment">
-    <RelativeLayout
+    tools:context="cn.techaction.mall.ui.ConfirmOrderActivity">
+    <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimaryBlue">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryBlue"
+        android:minHeight="?attr/actionBarSize"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:theme="@style/ToolbarTheme"
+        app:titleTextColor="#fff">
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/address_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/detail_product_info_background"
+        android:orientation="vertical"
+        android:padding="10dp">
+
         <TextView
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:text="购物车"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/big_font" />
+            android:layout_marginBottom="5dp" />
+
         <TextView
-            android:id="@+id/edit_btn"
+            android:id="@+id/mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:drawableRight="@mipmap/icon_right_hover" />
+
+        <TextView
+            android:id="@+id/addr_detail"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:gravity="center_vertical"
-            android:text="编辑"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/normal_font" />
-    </RelativeLayout>
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 
     <RelativeLayout
@@ -50,6 +54,7 @@
         android:layout_alignParentBottom="true"
         android:background="@color/colorWhite"
         android:paddingLeft="20dp">
+
         <TextView
             android:id="@+id/total"
             android:layout_width="wrap_content"
@@ -58,6 +63,7 @@
             android:text="合计：￥0.00"
             android:textColor="@color/font_color_red"
             android:textSize="@dimen/normal_font" />
+
         <TextView
             android:id="@+id/buy_btn"
             android:layout_width="wrap_content"
@@ -67,7 +73,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
-            android:text="结算"
+            android:text="提交订单"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/big_font" />
     </RelativeLayout>
@@ -77,6 +83,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/bottomBar"
-        android:layout_below="@id/toolbar" />
-
+        android:layout_below="@id/address_container" />
 </RelativeLayout>
