@@ -9,5 +9,6 @@ public class MallApplication extends Application {
     }
     private void initOkHttpUtils(){
 
+
     }
 }
