@@ -10,7 +10,7 @@ import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
 import com.bumptech.glide.module.GlideModule;
 
 public class GlideModelConfig implements GlideModule {
-    int diskSize = 1024*1024*10;//磁盘大小
+    int diskSize = 1024*1024*10;//磁盘大
     int memorySize = (int)(Runtime.getRuntime().maxMemory())/8;//内存大小
     @Override
     public void applyOptions(Context context, GlideBuilder builder) {
