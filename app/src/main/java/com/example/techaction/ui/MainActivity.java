@@ -1,10 +1,10 @@
-package com.example.mallstable.ui;
+package com.example.techaction.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.mallstable.R;
+import com.example.techaction.R;
 
 public class MainActivity extends AppCompatActivity {
 
