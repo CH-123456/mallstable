@@ -18,38 +18,4 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/main_tab_color_selector</item>
     </style>
-    <!--toolbar上的搜索框-->
-    <style name="search_view">
-        <item name="android:textSize">@dimen/big_font</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textColorHint">@color/colorWhite</item>
-        <item name="android:background">@drawable/tool_bar_searchview_background</item>
-        <item name="android:paddingTop">6dp</item>
-        <item name="android:paddingBottom">6dp</item>
-        <item name="android:paddingLeft">4dp</item>
-        <item name="android:singleLine">true</item>
-    </style>
-
-    <style name="category_product_title">
-        <item name="android:textColor">@color/font_color</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:maxLines">1</item>
-    </style>
-    <style name="category_product_price">
-        <item name="android:textColor">@color/crimson</item>
-        <item name="android:textSize">20sp</item>
-    </style>
-
-    <style name="line">
-        <item name="android:background">@color/colorBackground</item>
-    </style>
-    <style name="line_vertical" parent="line">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item>
-    </style>
-
-    <style name="ToolbarTheme" parent="Theme.AppCompat.Light">
-        <item name="colorButtonNormal">@android:color/white</item>
-        <item name="colorControlNormal">@android:color/white</item>
-    </style>
 </resources>
