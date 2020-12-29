@@ -1,4 +1,4 @@
-package com.example.techaction.application;
+package com.example.mallstable.application;
 
 import android.app.Application;
 

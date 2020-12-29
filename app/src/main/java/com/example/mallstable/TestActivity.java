@@ -1,4 +1,4 @@
-package com.example.techaction;
+package com.example.mallstable;
 
 import androidx.appcompat.app.AppCompatActivity;
 

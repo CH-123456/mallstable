@@ -1,4 +1,4 @@
-package com.example.techaction.config;
+package com.example.mallstable.config;
 
 import android.content.Context;
 
