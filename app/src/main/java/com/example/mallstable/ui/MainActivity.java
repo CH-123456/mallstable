@@ -1,5 +1,6 @@
 package com.example.mallstable.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -82,5 +83,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mRadioButtonHome.setChecked(true);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        for (int i = 0;i<mRadioGroup.getChildCount();i++){
+            RadioButton mTab = (RadioButton)mRadioGroup.getChildAt(i);
+            FragmentManager fm = getSupportFragmentManager();
+            Fragment fragment = fm.findFragmentByTag((String)mTab.getTag());
+            FragmentTransaction ft = fm.beginTransaction();
+            if (fragment!=null){
+                if (!mTab.isChecked()){
+                    ft.hide(fragment);
+                }
+            }
+            ft.commit();
+        }
     }
 }
