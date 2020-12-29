@@ -10,6 +10,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.mallstable.R;
+import com.example.mallstable.fragment.CartFragment;
+import com.example.mallstable.fragment.CategoryFragment;
+import com.example.mallstable.fragment.HomeFragment;
+import com.example.mallstable.fragment.UserFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +31,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initFagment();
     }
 
-
+    private void initFagment(){
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        homeFragment = new HomeFragment();
+        ft.add(R.id.container,homeFragment,"home");
+        categoryFragment = new CategoryFragment();
+        ft.add(R.id.container,categoryFragment,"category");
+        cartFragment = new CartFragment();
+        ft.add(R.id.container,cartFragment,"cart");
+        userFragment = new UserFragment();
+        ft.add(R.id.container,userFragment,"user");
+        ft.show(homeFragment).hide(categoryFragment).hide(cartFragment).hide(userFragment).commit();
+    }
 }
