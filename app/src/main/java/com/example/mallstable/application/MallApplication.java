@@ -8,6 +8,6 @@ public class MallApplication extends Application {
         super.onCreate();
     }
     private void initOkHttpUtils(){
-      //CookieJarIml
+      //CookieJarImlhjhj
     }
 }
