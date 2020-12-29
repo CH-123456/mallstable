@@ -11,6 +11,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.mallstable.R;
+import com.example.mallstable.config.Constant;
+import com.example.mallstable.pojo.ResponeCode;
+import com.example.mallstable.pojo.SverResponse;
+import com.example.mallstable.pojo.User;
+import com.example.mallstable.utils.JSONUtils;
+import com.google.gson.reflect.TypeToken;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.lang.reflect.Type;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,14 +46,40 @@ public class UserFragment extends Fragment {
     //加载UI
     private void initView(View view){
         user=view.findViewById(R.id.user);
-        view
-        view.findViewById(R.id);
-        view.findViewById(R.id);
-        view.findViewById(R.id);
-        view.findViewById(R.id);
-        view.findViewById(R.id);
-        view.findViewById(R.id);
-        view.findViewById(R.id);
+        view.findViewById(R.id.btn_addr).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
+        view.findViewById(R.id.btn_all).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //view.findViewById(R.id);        view.findViewById(R.id);        view.findViewById(R.id);        view.findViewById(R.id);        view.findViewById(R.id);        view.findViewById(R.id);
+
+    }
+
+    private  void initUserInfo(){
+        OkHttpUtils.get()
+                .url(Constant.API.USER_INFO_URL)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Type type=new TypeToken<SverResponse<User>>(){}.getType();
+                        SverResponse<User> result= JSONUtils.formJson(response,type);
+                        if(result.getStatus()== ResponeCode.SUCCESS.getCode()){
+                            user.setText(result.getData().getAccount());
+                        }
+                    }
+                });
     }
 }
