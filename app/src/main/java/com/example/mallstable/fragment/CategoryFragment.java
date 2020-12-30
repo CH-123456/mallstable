@@ -41,15 +41,13 @@ import okhttp3.Call;
  */
 /*zhai*/
 public class CategoryFragment extends Fragment {
- private RecyclerView leftRecyclerView;   //左侧列表组件
- private List<Param>   leftCategoryData;  //左侧分类数据
+    private RecyclerView leftRecyclerView;   //左侧列表组件
+    private List<Param> leftCategoryData;  //左侧分类数据
 
     private CategoryLeftAdapter categoryLeftAdapter;//分类适配器
     private RecyclerView rightRecyclerView;
-    private List<Product>   rightProductData;
+    private List<Product> rightProductData;
     private CategoryRightAdapter categoryRightAdapter;
-
-
 
 
     public CategoryFragment() {
@@ -61,7 +59,7 @@ public class CategoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_category, container, false);
+        View view = inflater.inflate(R.layout.fragment_category, container, false);
         initView(view);
         loadParams();
 
@@ -69,28 +67,28 @@ public class CategoryFragment extends Fragment {
     }
 
 
-    private void initView(View view){
+    private void initView(View view) {
         //初始化
-        leftRecyclerView=(RecyclerView)view.findViewById(R.id.category_rv);
-        rightRecyclerView=(RecyclerView)view.findViewById(R.id.product_rv);
+        leftRecyclerView = (RecyclerView) view.findViewById(R.id.category_rv);
+        rightRecyclerView = (RecyclerView) view.findViewById(R.id.product_rv);
 
 
-        leftCategoryData=new ArrayList<>();
-        categoryLeftAdapter=new CategoryLeftAdapter(getActivity(),leftCategoryData);
+        leftCategoryData = new ArrayList<>();
+        categoryLeftAdapter = new CategoryLeftAdapter(getActivity(), leftCategoryData);
 
-    rightProductData=new ArrayList<>();
-    categoryRightAdapter=new CategoryRightAdapter(getActivity(),rightProductData);
+        rightProductData = new ArrayList<>();
+        categoryRightAdapter = new CategoryRightAdapter(getActivity(), rightProductData);
 
         //设置布局管理器
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         leftRecyclerView.setLayoutManager(linearLayoutManager);
         //设置适配器
         leftRecyclerView.setAdapter(categoryLeftAdapter);
         categoryLeftAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
-                String typeId=leftCategoryData.get(pos).getId()+"";
-                findProductByParam(typeId,1,10,true);
+                String typeId = leftCategoryData.get(pos).getId() + "";
+                findProductByParam(typeId, 1, 10, true);
             }
         });
 
@@ -105,12 +103,13 @@ public class CategoryFragment extends Fragment {
         });
 
         //网格布局管理器
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         rightRecyclerView.setLayoutManager(gridLayoutManager);
-       rightRecyclerView.setAdapter(categoryRightAdapter);
+        rightRecyclerView.setAdapter(categoryRightAdapter);
 
     }
-    private void loadParams(){
+
+    private void loadParams() {
         //加载产品分类参数
         OkHttpUtils.get()
                 .url(Constant.API.CATEGORY_PARAM_URL)
@@ -123,16 +122,17 @@ public class CategoryFragment extends Fragment {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        final Type type = new TypeToken<SverResponse<List<Param>>>(){}.getType();
-                        SverResponse<List<Param>> result = JSONUtils.fromJson(response,type);
-                        if (result.getStatus()== ResponeCode.SUCCESS.getCode()) {
+                        final Type type = new TypeToken<SverResponse<List<Param>>>() {
+                        }.getType();
+                        SverResponse<List<Param>> result = JSONUtils.fromJson(response, type);
+                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
                             if (result.getData() == null)
                                 return;
                             leftCategoryData.addAll(result.getData());
 
-                               String typeId=leftCategoryData.get(0).getId()+"";
-                               leftCategoryData.get(0).setPressed(true);
-                               findProductByParam(typeId,1,10,true);
+                            String typeId = leftCategoryData.get(0).getId() + "";
+                            leftCategoryData.get(0).setPressed(true);
+                            findProductByParam(typeId, 1, 10, true);
 
                             categoryLeftAdapter.notifyDataSetChanged();
 
@@ -140,12 +140,13 @@ public class CategoryFragment extends Fragment {
                     }
                 });
     }
-    private  void findProductByParam(String productTypeId, int pageNum, int pageSize, final boolean flag){
+
+    private void findProductByParam(String productTypeId, int pageNum, int pageSize, final boolean flag) {
         OkHttpUtils.get()
                 .url(Constant.API.CATEGORY_PRODUCT_URL)
-                .addParams("productTypeId",productTypeId)
-                .addParams("pageNum",pageNum+"")
-                .addParams("pageSize",pageSize+"")
+                .addParams("productTypeId", productTypeId)
+                .addParams("pageNum", pageNum + "")
+                .addParams("pageSize", pageSize + "")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -155,22 +156,21 @@ public class CategoryFragment extends Fragment {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        final Type type = new TypeToken<SverResponse<PageBean<Product>>>(){}.getType();
-                        SverResponse<PageBean<Product>> result = JSONUtils.fromJson(response,type);
+                        final Type type = new TypeToken<SverResponse<PageBean<Product>>>() {
+                        }.getType();
+                        SverResponse<PageBean<Product>> result = JSONUtils.fromJson(response, type);
 
-                        if (result.getStatus()== ResponeCode.SUCCESS.getCode()) {
+                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
                             if (result.getData() == null) {
-                                if (flag){
+                                if (flag) {
                                     rightProductData.clear();
                                 }
                                 rightProductData.addAll(result.getData().getData());
                                 categoryRightAdapter.notifyDataSetChanged();
                             }
-                    }
+                        }
                     }
                 });
 
     }
-
-
 }

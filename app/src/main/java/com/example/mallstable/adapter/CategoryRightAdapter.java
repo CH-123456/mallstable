@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.mallstable.R;
 import com.example.mallstable.config.Constant;
-import com.example.mallstable.listener.OnItemClickListener;
 import com.example.mallstable.pojo.Product;
 
 import java.util.List;
@@ -22,15 +21,10 @@ public class CategoryRightAdapter extends RecyclerView.Adapter<CategoryRightAdap
 
     private Context context;
     private List<Product> mData;
-    private OnItemClickListener onItemClickListener;
 
     public CategoryRightAdapter(Context context, List<Product> mData) {
         this.context = context;
         this.mData = mData;
-    }
-
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
