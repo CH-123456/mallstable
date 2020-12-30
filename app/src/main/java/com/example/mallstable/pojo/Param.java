@@ -10,6 +10,8 @@ public class Param {
     private String created;
     private String updated;
 
+    private boolean pressed=false;
+
     public Param() {
     }
 
@@ -22,6 +24,14 @@ public class Param {
         this.level = level;
         this.created = created;
         this.updated = updated;
+    }
+
+    public boolean isPressed() {
+        return pressed;
+    }
+
+    public void setPressed(boolean pressed) {
+        this.pressed = pressed;
     }
 
     public int getId() {
