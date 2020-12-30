@@ -66,6 +66,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         initView(view);
+        loadParams();
         return view;
     }
 
@@ -145,6 +146,13 @@ public class HomeFragment extends Fragment {
                             if (result.getData()==null)
                                 return;
 
+                            if (result.getData().size()%PARAM_ROW_COL==0){
+                                mCategoryData.addAll(result.getData());
+                            }else {
+                                int count = result.getData().size()/PARAM_ROW_COL;
+                                mCategoryData.addAll(result.getData().subList(0,count*PARAM_ROW_COL));
+                            }
+                            homeTopBannerAndParamAdapter.notifyDataSetChanged();
                         }
                     }
                 });
