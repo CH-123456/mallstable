@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context="com.example.mallstable.ui.LoginActivity">
     <!--头像部分开始-->
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
