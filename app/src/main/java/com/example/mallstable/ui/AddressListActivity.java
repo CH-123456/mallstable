@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.mallstable.R;
+
 public class AddressListActivity extends AppCompatActivity {
 
     @Override

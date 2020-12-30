@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.mallstable.ui.DetailActivity">
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:background="@color/colorPrimaryBlue"
@@ -19,7 +19,7 @@
         app:titleTextColor="#fff"
         app:theme="@style/ToolbarTheme">
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
     <!--底部菜单-->
     <RelativeLayout
         android:id="@+id/bottom"

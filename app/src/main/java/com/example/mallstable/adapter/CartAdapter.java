@@ -108,7 +108,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @Override
     public void onClick(View v) {
         if (onItemClickListener!=null){
-    //购物车适配器实现 有点问题
             onItemClickListener.onItemClick(v,(int)v.getTag());
         }
     }
