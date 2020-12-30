@@ -10,15 +10,26 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mallstable.R;
-import com.example.mallstable.TestActivity;
+/*import com.example.mallstable.TestActivity;*/
+import com.example.mallstable.listener.OnItemClickListener;
 import com.example.mallstable.pojo.Param;
 
 import java.util.List;
 
-public class CategoryLeftAdapter extends RecyclerView.Adapter<CategoryLeftAdapter.CategroyViewHolder> {
+public class CategoryLeftAdapter extends RecyclerView.Adapter<CategoryLeftAdapter.CategroyViewHolder> implements  View.OnClickListener{
     private Context context;
     private List<Param> mData;
+    private OnItemClickListener onItemClickListener;
 
+
+    public CategoryLeftAdapter(Context context, List<Param> mData) {
+        this.context = context;
+        this.mData = mData;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 
     @NonNull
     @Override
@@ -31,11 +42,31 @@ public class CategoryLeftAdapter extends RecyclerView.Adapter<CategoryLeftAdapte
     public void onBindViewHolder(@NonNull CategroyViewHolder holder, int position) {
         Param param=mData.get(position);
         holder.name.setText(param.getName());
+        holder.name.setTag(position);
         if (param.isPressed()){
             holder.name.setBackgroundResource(R.color.font_color);
         }else{
             holder.name.setBackgroundResource(R.color.colorWhite);
         }
+  holder.name.setOnClickListener(this);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+  int pos=(int)v.getTag();
+  for (int i=0;i<mData.size();i++){
+      if (i==pos){
+          mData.get(i).setPressed(true);
+      }else{
+          mData.get(i).setPressed(false);
+      }
+  }
+  notifyDataSetChanged();
+  if(onItemClickListener!=null){
+      onItemClickListener.onItemClick(v,pos);
+  }
+
     }
 
     @Override
