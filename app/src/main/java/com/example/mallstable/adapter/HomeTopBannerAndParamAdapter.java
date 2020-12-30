@@ -22,6 +22,9 @@ import java.util.List;
  * reated by ZangJie 12.30
  */
 
+/**
+ * 头部Adapter的定义
+ */
 public class HomeTopBannerAndParamAdapter extends DelegateAdapter.Adapter<HomeTopBannerAndParamAdapter.BannerAndParamViewHolder>{
     public static final int TYPE_HEADER = 0;
     public static final int TYPE_NORMAL = 1;
@@ -83,6 +86,12 @@ public class HomeTopBannerAndParamAdapter extends DelegateAdapter.Adapter<HomeTo
         final int pos = getRealPosition(holder);
         holder.tv.setText(mData.get(pos).getName());
     }
+
+    /**
+     * 读取数据位置
+     * @param holder
+     * @return
+     */
     private int getRealPosition(RecyclerView.ViewHolder holder){
         int pos = holder.getLayoutPosition();
         return mHeadView == null?pos:pos-1;
