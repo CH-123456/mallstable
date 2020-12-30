@@ -4,12 +4,13 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * 利   12.30
+ *Created by wangquanli 2020/12/30
+ * 接受后台传来的数据
  */
-// 接收 传来的数据
+
 public class Cart {
-    private List<CartItem> lists;
-    private BigDecimal totalPrice;
+    private List<CartItem> lists;      // 总体列表界面
+    private BigDecimal totalPrice;     // 总体的价值信息
 
     public List<CartItem> getLists() {
 

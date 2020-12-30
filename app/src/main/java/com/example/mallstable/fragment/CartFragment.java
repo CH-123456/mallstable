@@ -44,16 +44,19 @@ import okhttp3.Call;
  * A simple {@link Fragment} subclass.
  */
 public class CartFragment extends Fragment {
-    // li 12,30
-    private RecyclerView recyclerView;
-    private List<CartItem> mData;
-    private CartAdapter cartAdapter;
+    /**
+     * Created by wangquanli 2020/12/30
+     * */
+    private RecyclerView recyclerView;  //界面控件
+    private List<CartItem> mData;        //界面上的数据集合
+    private CartAdapter cartAdapter;     //适配器
+
     //要显示的总价格
     private TextView total;
     private TextView btn_buy;
 
     private  boolean isEdit =false;
-    //上bian
+
 
 
     //本地广播
@@ -124,13 +127,15 @@ public class CartFragment extends Fragment {
 
                     @Override
                     public void onResponse(String response, int id) {
+                        //在这里取数据
                         Type type = new TypeToken<SverResponse<Cart>>(){}.getType();
                         SverResponse<Cart> result = JSONUtils.fromJson(response,type);
                         if (result.getStatus()== ResponeCode.SUCCESS.getCode()){
-                            if (result.getData().getLists()!=null){
-                                mData.clear();
+                            if (result.getData().getLists()!=null){ //拿到项的集合
+
+                                mData.clear();   //先清空
                                 mData.addAll(result.getData().getLists());
-                                cartAdapter.notifyDataSetChanged();
+                                cartAdapter.notifyDataSetChanged(); //放进
                             }
                             total.setText("合计：￥"+result.getData().getTotalPrice());
                         }
@@ -202,15 +207,19 @@ public class CartFragment extends Fragment {
     }
     //12.30
     public void initView(View view) {
+        //找到界面组件
         recyclerView = (RecyclerView)view.findViewById(R.id.cart_rv);
         total = (TextView)view.findViewById(R.id.total);
         btn_buy = (TextView)view.findViewById(R.id.buy_btn);
 
-        mData = new ArrayList<>();
-        cartAdapter = new CartAdapter(getActivity(),mData);
+        mData = new ArrayList<>();  //初始化数据
+        cartAdapter = new CartAdapter(getActivity(),mData);  //初始化
         LinearLayoutManager  linearLayoutManager = new LinearLayoutManager(getActivity());
+        //将现行布局添加到recyclerView
         recyclerView.setLayoutManager(linearLayoutManager);
+        //进行绑定
         recyclerView.setAdapter(cartAdapter);
+        //接口的实现：删除，接收数量
         cartAdapter.setOnCartOptListener(new CartAdapter.OnCartOptListener() {
             @Override
             public void updateProductCount(int productId, int count) {

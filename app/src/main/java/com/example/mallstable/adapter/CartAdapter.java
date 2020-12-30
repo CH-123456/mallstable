@@ -18,22 +18,22 @@ import com.example.mallstable.pojo.CartItem;
 import java.util.List;
 
 /***
- * li 12.30
+ * Created by wangquanli 2020/12/30
  */
 public class CartAdapter extends
         RecyclerView.Adapter<CartAdapter.CartViewHolder>
         implements View.OnClickListener {
-    private Context context;//上下文
-    private List<CartItem> mData;
-    private AdapterView.OnItemClickListener onItemClickListener;
-    private OnCartOptListener onCartOptListener;
+    private Context context;                                      //上下文
+    private List<CartItem> mData;                                 //数据每个项
+    private AdapterView.OnItemClickListener onItemClickListener;  //
+    private OnCartOptListener onCartOptListener;                  //
 
     public CartAdapter(Context context, List<CartItem> mData) {
         this.context = context;
         this.mData = mData;
     }
 
-    // @NonNull
+
     @Override
     public CartViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //生成一个viewholder
@@ -56,18 +56,21 @@ public class CartAdapter extends
 
     @Override
     public void onBindViewHolder(CartViewHolder holder, int position) {
-         final CartItem cartItem = mData.get(position);
+
+         final CartItem cartItem = mData.get(position);   //拿出数据
+        //显示相关数据
          holder.name.setText(cartItem.getName());
          holder.price.setText(cartItem.getPrice()+"");
          holder.edit_num.setText(cartItem.getQuantity()+"");
-        Glide.with(context).load(Constant.API.BASE_URL+cartItem.getIconUrl()).into(holder.icon_url);
+         Glide.with(context).load(Constant.API.BASE_URL+cartItem.getIconUrl()).into(holder.icon_url);
+
         //事件监听绑定
         //整个条目的监听器
-        holder.itemView.setTag(position);
-        holder.itemView.setOnClickListener(this);
+         holder.itemView.setTag(position);
+         holder.itemView.setOnClickListener(this);
 
         //增加按钮
-        holder.btn_jia.setOnClickListener(new View.OnClickListener() {
+         holder.btn_jia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(cartItem.getQuantity()+1<=cartItem.getStock()){
@@ -75,10 +78,10 @@ public class CartAdapter extends
                         onCartOptListener.updateProductCount(cartItem.getProductId(),cartItem.getQuantity()+1);
                     }
                 }
-            }
+             }
         });
-        //减,,,数量上的更新
-        holder.btn_jian.setOnClickListener(new View.OnClickListener() {
+        //减....数量上的更新
+         holder.btn_jian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(cartItem.getQuantity()-1>=1){
@@ -86,16 +89,16 @@ public class CartAdapter extends
                         onCartOptListener.updateProductCount(cartItem.getProductId(),cartItem.getQuantity()-1);
                     }
                 }
-            }
+             }
         });
 
-        if (cartItem.isEdit()){
+         if (cartItem.isEdit()){
             holder.btn_del.setVisibility(View.VISIBLE);
-        }else {
+         }else {
             holder.btn_del.setVisibility(View.GONE);
-        }
+         }
 
-       holder.btn_del.setOnClickListener(new View.OnClickListener() {
+         holder.btn_del.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                if (onCartOptListener!=null){
@@ -120,19 +123,19 @@ public class CartAdapter extends
 
     public static class CartViewHolder extends RecyclerView.ViewHolder{
         //定义相关控件
-        private View itemView;
-        public ImageView icon_url;
-        public TextView name;
-        public TextView price;
-        public TextView btn_jian;
-        public EditText edit_num;
-        public TextView btn_jia;
-        public TextView btn_del;
+        private View itemView;        //
+        public ImageView icon_url;    //用来显示图片
+        public TextView name;         //
+        public TextView price;        //
+        public TextView btn_jian;     //
+        public EditText edit_num;     //
+        public TextView btn_jia;      //
+        public TextView btn_del;      //
 
        public CartViewHolder(View itemView){
            super(itemView);
-           this.itemView = itemView;
-           name =(TextView)itemView.findViewById(R.id.name);
+           this.itemView = itemView;      //记录整个控件
+           name =(TextView)itemView.findViewById(R.id.name);         //
            price = (TextView)itemView.findViewById(R.id.price);
            btn_del = (TextView)itemView.findViewById(R.id.btn_del);
            btn_jian = (TextView)itemView.findViewById(R.id.btn_jian);

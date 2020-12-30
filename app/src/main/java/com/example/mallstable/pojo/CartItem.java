@@ -1,23 +1,27 @@
 package com.example.mallstable.pojo;
+/**
+ * Created by wangquanli 2020/12/30
+ * 购物车第信息
+ */
 
 import android.content.Intent;
 
 import java.math.BigDecimal;
 
 public class CartItem {
-    private Integer id;
-    private Integer userId;
-    private Integer productId;
-    private String name;
-    private Integer quantity;
+    private Integer id;             //id
+    private Integer userId;         //用户id
+    private Integer productId;      //商品编号
+    private String name;            //商品名称
+    private Integer quantity;       //商品数量
 
-    private BigDecimal price;
-    private Integer status;
-    private BigDecimal totalPrice;
-    private Integer stock;
-    private String iconUrl;
+    private BigDecimal price;       //商品价格
+    private Integer status;         //商品状态
+    private BigDecimal totalPrice;  //商品总价格
+    private Integer stock;          //商品库存
+    private String iconUrl;         //商品图片地址
 
-    private  boolean isEdit =false;//数量是否添加
+    private  boolean isEdit =false; //数量是否添加,是否被编辑
 
     public Integer getId() {
         return id;
