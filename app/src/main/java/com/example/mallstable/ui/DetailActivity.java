@@ -110,7 +110,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         int inputNum = Integer.valueOf(num.getText().toString());
         switch (view.getId()) {
-            case R.id.btn_cart:
+            case R.id.cart_btn:
                 addProduct2Cart();
                 break;
             case R.id.btn_jia:
@@ -161,6 +161,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                                     "text/html",
                                     "utf-8",
                                     null);
+                        } else {
+                            DetailActivity.this.finish();
                         }
                     }
                 });
