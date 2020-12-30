@@ -27,6 +27,7 @@ import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
+ * create by liben12.29
  */
 public class UserFragment extends Fragment {
     private TextView user;
@@ -41,6 +42,7 @@ public class UserFragment extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_user, container, false);
         initView(view);
+        initUserInfo();
         return view;
     }
     //加载UI
@@ -58,7 +60,6 @@ public class UserFragment extends Fragment {
 
             }
         });
-        //view.findViewById(R.id);        view.findViewById(R.id);        view.findViewById(R.id);        view.findViewById(R.id);        view.findViewById(R.id);        view.findViewById(R.id);
 
     }
 
@@ -78,6 +79,9 @@ public class UserFragment extends Fragment {
                         SverResponse<User> result= JSONUtils.formJson(response,type);
                         if(result.getStatus()== ResponeCode.SUCCESS.getCode()){
                             user.setText(result.getData().getAccount());
+                        }
+                        else {
+                            //跳转到登陆页面
                         }
                     }
                 });
