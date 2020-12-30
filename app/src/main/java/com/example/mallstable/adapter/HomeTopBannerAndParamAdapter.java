@@ -18,9 +18,7 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
-/**
- * created by ZangJie 12.30
- */
+
 
 /**
  * 头部Adapter的定义2
