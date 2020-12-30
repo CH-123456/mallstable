@@ -18,6 +18,7 @@ import com.example.mallstable.adapter.CategoryLeftAdapter;
 import com.example.mallstable.adapter.CategoryRightAdapter;
 import com.example.mallstable.config.Constant;
 import com.example.mallstable.listener.OnItemClickListener;
+import com.example.mallstable.pojo.PageBean;
 import com.example.mallstable.pojo.Param;
 import com.example.mallstable.pojo.Product;
 import com.example.mallstable.pojo.ResponeCode;
@@ -87,7 +88,7 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onItemClick(View view, int pos) {
                 String typeId=leftCategoryData.get(pos).getId()+"";
-                findProductByParam(typeId,1,10);
+                findProductByParam(typeId,1,10,true);
             }
         });
 
@@ -119,7 +120,7 @@ public class CategoryFragment extends Fragment {
 
                                String typeId=leftCategoryData.get(0).getId()+"";
                                leftCategoryData.get(0).setPressed(true);
-                               findProductByParam(typeId,1,10);
+                               findProductByParam(typeId,1,10,true);
 
                             categoryLeftAdapter.notifyDataSetChanged();
 
@@ -127,7 +128,7 @@ public class CategoryFragment extends Fragment {
                     }
                 });
     }
-    private  void findProductByParam(String productTypeId,int pageNum,int pageSize){
+    private  void findProductByParam(String productTypeId, int pageNum, int pageSize, final boolean flag){
         OkHttpUtils.get()
                 .url(Constant.API.CATEGORY_PRODUCT_URL)
                 .addParams("productTypeId",productTypeId)
@@ -142,11 +143,15 @@ public class CategoryFragment extends Fragment {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        final Type type = new TypeToken<SverResponse<List<Param>>>(){}.getType();
-                        SverResponse<List<Product>> result = JSONUtils.fromJson(response,type);
+                        final Type type = new TypeToken<SverResponse<PageBean<Product>>>(){}.getType();
+                        SverResponse<PageBean<Product>> result = JSONUtils.fromJson(response,type);
+
                         if (result.getStatus()== ResponeCode.SUCCESS.getCode()) {
                             if (result.getData() == null) {
-                                rightProductData.addAll(result.getData());
+                                if (flag){
+                                    rightProductData.clear();
+                                }
+                                rightProductData.addAll(result.getData().getData());
                                 categoryRightAdapter.notifyDataSetChanged();
                             }
                     }
