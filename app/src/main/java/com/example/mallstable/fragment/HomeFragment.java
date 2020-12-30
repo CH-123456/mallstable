@@ -15,8 +15,10 @@ import android.widget.ImageView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
+import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.bumptech.glide.Glide;
 import com.example.mallstable.R;
+import com.example.mallstable.adapter.HomeActAdapter;
 import com.example.mallstable.adapter.HomeTopBannerAndParamAdapter;
 import com.example.mallstable.config.Constant;
 import com.example.mallstable.pojo.Param;
@@ -108,6 +110,9 @@ public class HomeFragment extends Fragment {
         adapters.add(homeTopBannerAndParamAdapter);
 
         /*活动区*/
+        LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
+        linearLayoutHelper.setMarginBottom(Utils.dp2px(getActivity(),20));
+        adapters.add(new HomeActAdapter(getActivity(),linearLayoutHelper));
 
 
         /*热销商品*/
