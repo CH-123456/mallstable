@@ -21,6 +21,7 @@ import com.example.mallstable.config.Constant;
 import com.example.mallstable.pojo.ResponeCode;
 import com.example.mallstable.pojo.SverResponse;
 import com.example.mallstable.pojo.User;
+import com.example.mallstable.ui.LoginActivity;
 import com.example.mallstable.utils.JSONUtils;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -122,6 +123,8 @@ public class UserFragment extends Fragment {
                         }
                         else {
                             //跳转到登陆页面
+                            Intent intent=new Intent(getActivity(), LoginActivity.class);
+                            startActivity(intent);
                         }
                     }
                 });

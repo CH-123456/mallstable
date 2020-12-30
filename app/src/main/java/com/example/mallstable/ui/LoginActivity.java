@@ -40,15 +40,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_login:
-/*跳转登录*/
+               login();
                 break;
             case R.id.btn_register:
-                /*跳转注册*/
+                /*调用注册方法*/
+
                 break;
 
         }
     }
-    private  void Login(){
+    private  void login(){
         String account=accountEdit.getText().toString();
         String password=accountEdit.getText().toString()
                 if(TextUtils.isEmpty(account)){
