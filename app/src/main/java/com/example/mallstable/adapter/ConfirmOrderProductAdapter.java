@@ -42,7 +42,7 @@ public class ConfirmOrderProductAdapter extends RecyclerView.Adapter<ConfirmOrde
         CartItem item=mData.get(position);
         holder.name.setText(item.getName());
         holder.name.setText(item.getPrice()+"");
-        holder.name.setText(item.getQuantity());
+        holder.name.setText(item.getQuantity()+"");
         Glide.with(context).load(Constant.API.BASE_URL+item.getIconUrl()).into(holder.icon_url);
     }
 
