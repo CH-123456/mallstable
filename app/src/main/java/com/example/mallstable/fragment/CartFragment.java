@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.example.mallstable.R;
 import com.example.mallstable.adapter.CartAdapter;
 import com.example.mallstable.config.Constant;
+import com.example.mallstable.listener.OnItemClickListener;
 import com.example.mallstable.pojo.Cart;
 import com.example.mallstable.pojo.CartItem;
 import com.example.mallstable.pojo.ResponeCode;
@@ -259,12 +260,12 @@ public class CartFragment extends Fragment {
         });
 
         //12.30
-        cartAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        cartAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(View view, int pos) {
                 //跳转到详情页面
-
             }
+
         });
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
