@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--created by bing 12.29
+    modified by bing 12.30
+-->
+<resources>
+    <dimen name="category_left_width">100dp</dimen>
+    <dimen name="normal_font">16sp</dimen>
+    <dimen name="big_font">18sp</dimen>
+    <dimen name="bigger_font">20sp</dimen><!--本行代码未确定-->
+</resources>
