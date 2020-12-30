@@ -68,6 +68,7 @@ public class HomeFragment extends Fragment {
 
         /*轮播图*/
 
+
         /*活动区*/
 
         /*热销商品*/
