@@ -4,6 +4,7 @@ package com.example.mallstable.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,8 +15,11 @@ import android.view.ViewGroup;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.example.mallstable.R;
 import com.example.mallstable.adapter.CategoryLeftAdapter;
+import com.example.mallstable.adapter.CategoryRightAdapter;
 import com.example.mallstable.config.Constant;
+import com.example.mallstable.listener.OnItemClickListener;
 import com.example.mallstable.pojo.Param;
+import com.example.mallstable.pojo.Product;
 import com.example.mallstable.pojo.ResponeCode;
 import com.example.mallstable.pojo.SverResponse;
 import com.example.mallstable.utils.JSONUtils;
@@ -32,11 +36,18 @@ import okhttp3.Call;
 /**
  * A simple {@link Fragment} subclass.
  */
+/*zhai*/
 public class CategoryFragment extends Fragment {
  private RecyclerView leftRecyclerView;   //左侧列表组件
  private List<Param>   leftCategoryData;  //左侧分类数据
 
-    private CategoryLeftAdapter categoryLeftAdapter;
+    private CategoryLeftAdapter categoryLeftAdapter;//分类适配器
+    private RecyclerView rightRecyclerView;
+    private List<Product>   rightProductData;
+    private CategoryRightAdapter categoryRightAdapter;
+
+
+
 
     public CategoryFragment() {
         // Required empty public constructor
@@ -58,15 +69,32 @@ public class CategoryFragment extends Fragment {
     private void initView(View view){
         //初始化
         leftRecyclerView=(RecyclerView)view.findViewById(R.id.category_rv);
+        rightRecyclerView=(RecyclerView)view.findViewById(R.id.product_rv);
+
 
         leftCategoryData=new ArrayList<>();
         categoryLeftAdapter=new CategoryLeftAdapter(getActivity(),leftCategoryData);
 
-        //布局管理器设置
+    rightProductData=new ArrayList<>();
+    categoryRightAdapter=new CategoryRightAdapter(getActivity(),rightProductData);
+
+        //设置布局管理器
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         leftRecyclerView.setLayoutManager(linearLayoutManager);
         //设置适配器
         leftRecyclerView.setAdapter(categoryLeftAdapter);
+        categoryLeftAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int pos) {
+                String typeId=leftCategoryData.get(pos).getId()+"";
+                findProductByParam(typeId,1,10);
+            }
+        });
+
+        //网格布局管理器
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),2);
+        rightRecyclerView.setLayoutManager(gridLayoutManager);
+       rightRecyclerView.setAdapter(categoryRightAdapter);
 
     }
     private void loadParams(){
@@ -89,11 +117,42 @@ public class CategoryFragment extends Fragment {
                                 return;
                             leftCategoryData.addAll(result.getData());
 
+                               String typeId=leftCategoryData.get(0).getId()+"";
+                               leftCategoryData.get(0).setPressed(true);
+                               findProductByParam(typeId,1,10);
+
                             categoryLeftAdapter.notifyDataSetChanged();
 
                         }
                     }
                 });
+    }
+    private  void findProductByParam(String productTypeId,int pageNum,int pageSize){
+        OkHttpUtils.get()
+                .url(Constant.API.CATEGORY_PRODUCT_URL)
+                .addParams("productTypeId",productTypeId)
+                .addParams("pageNum",pageNum+"")
+                .addParams("pageSize",pageSize+"")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        final Type type = new TypeToken<SverResponse<List<Param>>>(){}.getType();
+                        SverResponse<List<Product>> result = JSONUtils.fromJson(response,type);
+                        if (result.getStatus()== ResponeCode.SUCCESS.getCode()) {
+                            if (result.getData() == null) {
+                                rightProductData.addAll(result.getData());
+                                categoryRightAdapter.notifyDataSetChanged();
+                            }
+                    }
+                    }
+                });
+
     }
 
 
