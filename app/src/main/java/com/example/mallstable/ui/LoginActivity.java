@@ -1,5 +1,6 @@
 package com.example.mallstable.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -7,8 +8,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.mallstable.R;
+import com.example.mallstable.config.Constant;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -39,9 +42,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_login:
-
+/*跳转登录*/
                 break;
             case R.id.btn_register:
+                /*跳转注册*/
                 break;
 
         }
@@ -74,7 +78,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 /*TypeToken 导包*/
                 SverResponse<User> result=JSONUtils.fromJson(response.type);
                 if(result.getStatus()==ResponeCode.SUCESS.getCode()){
-
+//发送本地广播
+                    Intent intent=new Intent(Constant.ACTION.LOAD_CART_ACTION);
+                    LocalBroadcastManager.getInstance(LoginActivity.this).sendBroadcast(intent);
+                    LoginActivity.this.finish();
                 }else{
                     Toast.makeText(LoginActivity.this,result.getMsg(),Toast.LENGTH_SHORT).show();
                 }
