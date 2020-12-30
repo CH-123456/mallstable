@@ -2,6 +2,7 @@ package com.example.mallstable.config;
 /*
 *created by wangquanli 12.29
 * modified by liben 12.30
+* modified by bing 12.30 10:21
  */
 public class Constant {
     //api 接口
@@ -43,6 +44,8 @@ public class Constant {
         public static final String ORDER_LIST_URL= BASE_URL+"order/getlist.do";
 
 
+        //商品详情 by bing 12.30 10:21
+        public static final String PRODUCT_DETAIL_URL=BASE_URL+"product/getdetail.do";
     }
     //广播
     public static class ACTION{

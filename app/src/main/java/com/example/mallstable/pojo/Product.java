@@ -3,7 +3,7 @@ package com.example.mallstable.pojo;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ActionProduct {
+public class Product {
     private Integer id;
     private String name;
     private Integer productId;//产品类型便哈
