@@ -10,19 +10,36 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.mallstable.R;
+import com.example.mallstable.adapter.CartAdapter;
 import com.example.mallstable.config.Constant;
+import com.example.mallstable.pojo.CartItem;
 import com.example.mallstable.ui.LoginActivity;
+
+import org.w3c.dom.Text;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class CartFragment extends Fragment {
+    // li 12,30
+    private RecyclerView recyclerView;
+    private List<CartItem> mData;
+    private CartAdapter cartAdapter;
+    //要显示的总价格
+    private TextView total;
+    private TextView btn_buy;
+    //上bian
+
 
     //本地广播
     private LocalBroadcastManager localBroadcastManager;
@@ -90,6 +107,7 @@ public class CartFragment extends Fragment {
     }
 
     public void initView(View view) {
+        recyclerView = (RecyclerView)view.findViewById(R.id.cart_rv)
     }
 
 }
