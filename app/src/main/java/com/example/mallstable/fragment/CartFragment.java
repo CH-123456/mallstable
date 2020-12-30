@@ -107,7 +107,7 @@ public class CartFragment extends Fragment {
     }
 
     public void initView(View view) {
-        recyclerView = (RecyclerView)view.findViewById(R.id.cart_rv)
+        recyclerView = (RecyclerView)view.findViewById(R.id.cart_rv);
     }
 
 }
