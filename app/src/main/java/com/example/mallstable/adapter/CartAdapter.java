@@ -20,8 +20,7 @@ import java.util.List;
 /***
  * li 12.30
  */
-public class CartAdapter extends
-        RecyclerView.Adapter<CartAdapter.CartViewHolder>
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder>
         implements View.OnClickListener {
     private Context context;//上下文
     private List<CartItem> mData;
@@ -109,7 +108,9 @@ public class CartAdapter extends
     public void onClick(View v) {
         if (onItemClickListener!=null){
     //购物车适配器实现 有点问题
-            onItemClickListener.onItemClick(v,(int)v.getTag());
+            //onItemClickListener.onItemClick(v,(int)v.getTag());
+            int a= (int) v.getTag();
+            onItemClickListener.onItemClick(R.id.,v,a,);
         }
     }
 

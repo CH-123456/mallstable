@@ -72,7 +72,7 @@
             android:textSize="@dimen/big_font" />
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <RecyclerView
         android:id="@+id/cart_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
