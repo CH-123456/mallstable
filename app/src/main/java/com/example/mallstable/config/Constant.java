@@ -3,6 +3,7 @@ package com.example.mallstable.config;
 *created by wangquanli 12.29
 * modified by liben 12.30
 * modified by bing 12.30 10:21
+* modified by bing 12.30 10:42
  */
 public class Constant {
     //api 接口
@@ -10,7 +11,7 @@ public class Constant {
         //基地址
         public static final  String BASE_URL = "http://192.168.1.60:8080/mallstable";//文件名待查
         //产品类型参数地址
-        public static final String CATEGORY_PARAM =BASE_URL+"param/findallparams.do";
+        public static final String CATEGORY_PARAM_URL =BASE_URL+"param/findallparams.do";
         //热销商品
         public static final String HOT_PRODUCT_URL = BASE_URL+"product/findhotproducts.do";
 

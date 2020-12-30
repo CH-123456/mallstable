@@ -19,11 +19,11 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 /**
- * reated by ZangJie 12.30
+ * created by ZangJie 12.30
  */
 
 /**
- * 头部Adapter的定义
+ * 头部Adapter的定义2
  */
 public class HomeTopBannerAndParamAdapter extends DelegateAdapter.Adapter<HomeTopBannerAndParamAdapter.BannerAndParamViewHolder>{
     public static final int TYPE_HEADER = 0;
