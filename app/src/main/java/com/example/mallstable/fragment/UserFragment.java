@@ -1,9 +1,15 @@
 package com.example.mallstable.fragment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,9 +37,14 @@ import okhttp3.Response;
  */
 public class UserFragment extends Fragment {
     private TextView user;
+    //本地广播
+    private LocalBroadcastManager localBroadcastManager;
+    private IntentFilter intentFilter;
+    private BroadcastReceiver broadcastReceiver;
 
     public UserFragment() {
         // Required empty public constructor
+
     }
 
     @Override
@@ -45,6 +56,35 @@ public class UserFragment extends Fragment {
         initUserInfo();
         return view;
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        localBroadcastManager=LocalBroadcastManager.getInstance(getActivity());
+      intentFilter =new IntentFilter();
+      intentFilter.addAction(Constant.ACTION.LOAD_CART_ACTION);
+      broadcastReceiver=new BroadcastReceiver() {
+          @Override
+          public void onReceive(Context context, Intent intent) {
+        initUserInfo();
+          }
+      };
+      localBroadcastManager.registerReceiver(broadcastReceiver,intentFilter);
+    }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    localBroadcastManager.unregisterReceiver(broadcastReceiver);
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden){
+            initUserInfo();
+        }
+    }
+
     //加载UI
     private void initView(View view){
         user=view.findViewById(R.id.user);

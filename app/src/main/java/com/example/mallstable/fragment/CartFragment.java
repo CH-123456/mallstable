@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.example.mallstable.R;
 import com.example.mallstable.config.Constant;
+import com.example.mallstable.ui.LoginActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,8 +77,16 @@ public class CartFragment extends Fragment {
             loadCartData();
         }
     }
-
+/*加载购物车数据*/
     private void loadCartData() {
+
+        /*
+        if(result.getStatus()....)
+        else{
+        Intent intent=new Intent(getActivity(), LoginActivity.class);
+        startActivity(intent);
+       }
+        * */
     }
 
     public void initView(View view) {

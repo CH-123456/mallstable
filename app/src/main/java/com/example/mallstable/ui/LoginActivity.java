@@ -35,8 +35,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.btn_login).setOnClickListener(this);
         findViewById(R.id.btn_register).setOnClickListener(this);
 
-
-
     }
     @Override
     public void onClick(View v) {
@@ -78,7 +76,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 /*TypeToken 导包*/
                 SverResponse<User> result=JSONUtils.fromJson(response.type);
                 if(result.getStatus()==ResponeCode.SUCESS.getCode()){
-//发送本地广播
+                 //发送本地广播
                     Intent intent=new Intent(Constant.ACTION.LOAD_CART_ACTION);
                     LocalBroadcastManager.getInstance(LoginActivity.this).sendBroadcast(intent);
                     LoginActivity.this.finish();
