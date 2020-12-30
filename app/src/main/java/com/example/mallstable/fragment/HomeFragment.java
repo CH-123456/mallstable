@@ -109,6 +109,7 @@ public class HomeFragment extends Fragment {
 
         /*活动区*/
 
+
         /*热销商品*/
 
         delegateAdapter = new DelegateAdapter(layoutManager);
