@@ -1,5 +1,7 @@
 <resources>
-
+    <!--
+        modified by bing 12.29
+    -->
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -18,6 +20,7 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/main_tab_color_selector</item>
     </style>
+
     <!--toolbar上的搜索框-->
     <style name="search_view">
         <item name="android:textSize">@dimen/big_font</item>
@@ -35,6 +38,7 @@
         <item name="android:textSize">20sp</item>
         <item name="android:maxLines">1</item>
     </style>
+
     <style name="category_product_price">
         <item name="android:textColor">@color/crimson</item>
         <item name="android:textSize">20sp</item>
@@ -43,6 +47,7 @@
     <style name="line">
         <item name="android:background">@color/colorBackground</item>
     </style>
+
     <style name="line_vertical" parent="line">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
