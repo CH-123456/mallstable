@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,6 +43,7 @@ public class ConfirmOrderActivity extends AppCompatActivity {
     private TextView mobile;
     private TextView addr_detail;
     private TextView total;
+    private Toolbar toolbar;
 
     private RecyclerView recyclerView;
     private ConfirmOrderProductAdapter confirmOrderProductAdapter;
@@ -62,7 +64,15 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         addr_detail=findViewById(R.id.addr_detail);
         recyclerView=findViewById(R.id.cart_rv);
         total=findViewById(R.id.total);
-
+        toolbar=findViewById(R.id.toolbar);
+        toolbar.setTitle("确认订单信息");
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         cartItems=new ArrayList<>();
         confirmOrderProductAdapter=new ConfirmOrderProductAdapter(this,cartItems);
