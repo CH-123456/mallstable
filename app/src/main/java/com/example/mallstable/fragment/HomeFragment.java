@@ -2,6 +2,7 @@ package com.example.mallstable.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -27,6 +28,7 @@ import com.example.mallstable.pojo.Param;
 import com.example.mallstable.pojo.Product;
 import com.example.mallstable.pojo.ResponeCode;
 import com.example.mallstable.pojo.SverResponse;
+import com.example.mallstable.ui.DetailActivity;
 import com.example.mallstable.utils.JSONUtils;
 import com.example.mallstable.utils.Utils;
 import com.google.gson.reflect.TypeToken;
@@ -130,6 +132,9 @@ public class HomeFragment extends Fragment {
             public void onItemClick(View view, int pos) {
                 //提取产品编号并跳转
                 String id = mProductData.get(pos).getId() + "";
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
             }
         });
         adapters.add(homeHotProductAdapter);

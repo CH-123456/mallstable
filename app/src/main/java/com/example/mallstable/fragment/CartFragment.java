@@ -44,13 +44,13 @@ import okhttp3.Call;
 
 /**
  * A simple {@link Fragment} subclass.
- *
+ * <p>
  * modified by liben 12.30 15:29
  */
 public class CartFragment extends Fragment {
     /**
      * Created by wangquanli 2020/12/30
-     * */
+     */
     private RecyclerView recyclerView;  //界面控件
     private List<CartItem> mData;        //界面上的数据集合
     private CartAdapter cartAdapter;     //适配器
@@ -59,8 +59,7 @@ public class CartFragment extends Fragment {
     private TextView total;
     private TextView btn_buy;
 
-    private  boolean isEdit =false;
-
+    private boolean isEdit = false;
 
 
     //本地广播
@@ -77,12 +76,11 @@ public class CartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_cart, container, false);
+        View view = inflater.inflate(R.layout.fragment_cart, container, false);
         initView(view);
         loadCartData();
-        return  view;
+        return view;
     }
-
 
 
     /*登录注册广播修改    CH*/
@@ -90,17 +88,17 @@ public class CartFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //注册广播
-        localBroadcastManager=LocalBroadcastManager.getInstance(getActivity());
-        intentFilter=new IntentFilter();
+        localBroadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        intentFilter = new IntentFilter();
         intentFilter.addAction(Constant.ACTION.LOAD_CART_ACTION);
-        broadcastReceiver=new BroadcastReceiver() {
+        broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 //加载购物车数据
             }
         };
         /*注册*/
-        localBroadcastManager.registerReceiver(broadcastReceiver,intentFilter);
+        localBroadcastManager.registerReceiver(broadcastReceiver, intentFilter);
     }
 
     @Override
@@ -113,11 +111,12 @@ public class CartFragment extends Fragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (!hidden){
+        if (!hidden) {
             loadCartData();
         }
     }
-/*加载购物车数据*/
+
+    /*加载购物车数据*/
     private void loadCartData() {
         // 12.30 li
         OkHttpUtils.get()
@@ -132,16 +131,17 @@ public class CartFragment extends Fragment {
                     @Override
                     public void onResponse(String response, int id) {
                         //在这里取数据
-                        Type type = new TypeToken<SverResponse<Cart>>(){}.getType();
-                        SverResponse<Cart> result = JSONUtils.fromJson(response,type);
-                        if (result.getStatus()== ResponeCode.SUCCESS.getCode()){
-                            if (result.getData().getLists()!=null){ //拿到项的集合
+                        Type type = new TypeToken<SverResponse<Cart>>() {
+                        }.getType();
+                        SverResponse<Cart> result = JSONUtils.fromJson(response, type);
+                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+                            if (result.getData().getLists() != null) { //拿到项的集合
 
                                 mData.clear();   //先清空
                                 mData.addAll(result.getData().getLists());
                                 cartAdapter.notifyDataSetChanged(); //放进
                             }
-                            total.setText("合计：￥"+result.getData().getTotalPrice());
+                            total.setText("合计：￥" + result.getData().getTotalPrice());
                         }
                     }
                 });
@@ -154,11 +154,12 @@ public class CartFragment extends Fragment {
        }
         * */
     }
-    private  void updateProduct(int productId,int count){
+
+    private void updateProduct(int productId, int count) {
         OkHttpUtils.get()
                 .url(Constant.API.CART_UPDATE_URL)
-                .addParams("productId",productId+"")
-                .addParams("count",count+"")
+                .addParams("productId", productId + "")
+                .addParams("count", count + "")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -168,25 +169,27 @@ public class CartFragment extends Fragment {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Type type = new TypeToken<SverResponse<Cart>>(){}.getType();
-                        SverResponse<Cart> result = JSONUtils.fromJson(response,type);
-                        if (result.getStatus()== ResponeCode.SUCCESS.getCode()){
-                            if (result.getData().getLists()!=null){
+                        Type type = new TypeToken<SverResponse<Cart>>() {
+                        }.getType();
+                        SverResponse<Cart> result = JSONUtils.fromJson(response, type);
+                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+                            if (result.getData().getLists() != null) {
                                 mData.clear();
                                 mData.addAll(result.getData().getLists());
                                 cartAdapter.notifyDataSetChanged();
                             }
-                            total.setText("合计：￥"+result.getData().getTotalPrice());
+                            total.setText("合计：￥" + result.getData().getTotalPrice());
                         }
 
                     }
                 });
     }
+
     /*删除商品 12.30 li*/
-    private  void delProductById(int productId){
+    private void delProductById(int productId) {
         OkHttpUtils.get()
                 .url(Constant.API.CART_DEL_URL)
-                .addParams("productId",productId+"")
+                .addParams("productId", productId + "")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -196,29 +199,31 @@ public class CartFragment extends Fragment {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Type type = new TypeToken<SverResponse<Cart>>(){}.getType();
-                        SverResponse<Cart> result = JSONUtils.fromJson(response,type);
-                        if (result.getStatus()== ResponeCode.SUCCESS.getCode()){
-                            if (result.getData().getLists()!=null){
+                        Type type = new TypeToken<SverResponse<Cart>>() {
+                        }.getType();
+                        SverResponse<Cart> result = JSONUtils.fromJson(response, type);
+                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+                            if (result.getData().getLists() != null) {
                                 mData.clear();
                                 mData.addAll(result.getData().getLists());
                                 cartAdapter.notifyDataSetChanged();
                             }
-                            total.setText("合计：￥"+result.getData().getTotalPrice());
+                            total.setText("合计：￥" + result.getData().getTotalPrice());
                         }
                     }
                 });
     }
+
     //12.30
     public void initView(View view) {
         //找到界面组件
-        recyclerView = (RecyclerView)view.findViewById(R.id.cart_rv);
-        total = (TextView)view.findViewById(R.id.total);
-        btn_buy = (TextView)view.findViewById(R.id.buy_btn);
+        recyclerView = (RecyclerView) view.findViewById(R.id.cart_rv);
+        total = (TextView) view.findViewById(R.id.total);
+        btn_buy = (TextView) view.findViewById(R.id.buy_btn);
 
         mData = new ArrayList<>();  //初始化数据
-        cartAdapter = new CartAdapter(getActivity(),mData);  //初始化
-        LinearLayoutManager  linearLayoutManager = new LinearLayoutManager(getActivity());
+        cartAdapter = new CartAdapter(getActivity(), mData);  //初始化
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         //将现行布局添加到recyclerView
         recyclerView.setLayoutManager(linearLayoutManager);
         //进行绑定
@@ -227,13 +232,13 @@ public class CartFragment extends Fragment {
         cartAdapter.setOnCartOptListener(new CartAdapter.OnCartOptListener() {
             @Override
             public void updateProductCount(int productId, int count) {
-                updateProduct(productId,count);
+                updateProduct(productId, count);
 
             }
 
             @Override
             public void delProductFromCart(int productId) {
-                 delProductById(productId);
+                delProductById(productId);
             }
         });
 
@@ -241,15 +246,15 @@ public class CartFragment extends Fragment {
         view.findViewById(R.id.edit_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isEdit){
+                if (isEdit) {
                     isEdit = false;
-                    for (CartItem item:mData){
+                    for (CartItem item : mData) {
                         item.setEdit(true);
                     }
 
-                }else {
+                } else {
                     isEdit = true;
-                    for (CartItem item: mData){
+                    for (CartItem item : mData) {
                         item.setEdit(false);
                     }
                 }
@@ -264,6 +269,10 @@ public class CartFragment extends Fragment {
             @Override
             public void onItemClick(View view, int pos) {
                 //跳转到详情页面
+                String id = mData.get(pos).getId() + "";
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
             }
 
         });
@@ -271,7 +280,7 @@ public class CartFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //跳转到确定订单页
-                Intent intent=new Intent(getActivity(), DetailActivity.class);
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
                 startActivity(intent);
             }
         });

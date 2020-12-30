@@ -1,6 +1,7 @@
 package com.example.mallstable.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -22,6 +23,7 @@ import com.example.mallstable.pojo.Param;
 import com.example.mallstable.pojo.Product;
 import com.example.mallstable.pojo.ResponeCode;
 import com.example.mallstable.pojo.SverResponse;
+import com.example.mallstable.ui.DetailActivity;
 import com.example.mallstable.utils.JSONUtils;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -88,6 +90,16 @@ public class CategoryFragment extends Fragment {
             public void onItemClick(View view, int pos) {
                 String typeId=leftCategoryData.get(pos).getId()+"";
                 findProductByParam(typeId,1,10);
+            }
+        });
+
+        categoryRightAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int pos) {
+                String id = rightProductData.get(pos).getId() + "";
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
             }
         });
 
