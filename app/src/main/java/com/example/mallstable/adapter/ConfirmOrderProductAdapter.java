@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.mallstable.R;
 import com.example.mallstable.config.Constant;
+import com.example.mallstable.pojo.CartItem;
 
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class ConfirmOrderProductAdapter extends RecyclerView.Adapter<ConfirmOrde
         holder.name.setText(item.getName());
         holder.name.setText(item.getPrice()+"");
         holder.name.setText(item.getQuantity());
-        Glide.with(context).load(Constant.API.BASE_URL+item)
+        Glide.with(context).load(Constant.API.BASE_URL+item.getIconUrl()).into(holder.icon_url);
     }
 
     @Override
