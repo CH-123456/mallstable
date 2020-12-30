@@ -28,7 +28,12 @@ public class CartAdapter extends
     private AdapterView.OnItemClickListener onItemClickListener;
     private OnCartOptListener onCartOptListener;
 
-   // @NonNull
+    public CartAdapter(Context context, List<CartItem> mData) {
+        this.context = context;
+        this.mData = mData;
+    }
+
+    // @NonNull
     @Override
     public CartViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //生成一个viewholder
@@ -43,6 +48,10 @@ public class CartAdapter extends
 
     public void setOnCartOptListener(OnCartOptListener onCartOptListener) {
         this.onCartOptListener = onCartOptListener;
+    }
+
+    public void setOnItemClickListener(AdapterView.OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
@@ -90,7 +99,7 @@ public class CartAdapter extends
            @Override
            public void onClick(View view) {
                if (onCartOptListener!=null){
-                   onCartOptListener.delProdutFromCart(cartItem.getProductId());
+                   onCartOptListener.delProductFromCart(cartItem.getProductId());
                }
            }
        });
@@ -139,6 +148,6 @@ public class CartAdapter extends
         //更新商品数量
         public void updateProductCount(int productId,int count);
         //删除商品
-        public void delProdutFromCart(int productId);
+        public void delProductFromCart(int productId);
     }
 }
