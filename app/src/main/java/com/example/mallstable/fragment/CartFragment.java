@@ -26,6 +26,7 @@ import com.example.mallstable.pojo.Cart;
 import com.example.mallstable.pojo.CartItem;
 import com.example.mallstable.pojo.ResponeCode;
 import com.example.mallstable.pojo.SverResponse;
+import com.example.mallstable.ui.DetailActivity;
 import com.example.mallstable.ui.LoginActivity;
 import com.example.mallstable.utils.JSONUtils;
 import com.google.gson.reflect.TypeToken;
@@ -42,6 +43,8 @@ import okhttp3.Call;
 
 /**
  * A simple {@link Fragment} subclass.
+ *
+ * modified by liben 12.30 15:29
  */
 public class CartFragment extends Fragment {
     /**
@@ -260,14 +263,18 @@ public class CartFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //跳转到详情页面
+
             }
         });
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //跳转到确定订单页
+                Intent intent=new Intent(getActivity(), DetailActivity.class);
+                startActivity(intent);
             }
         });
+
     }
 
 }
