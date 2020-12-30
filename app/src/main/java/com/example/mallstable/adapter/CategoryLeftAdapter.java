@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mallstable.R;
-import com.example.mallstable.TestActivity;
+/*import com.example.mallstable.TestActivity;*/
 import com.example.mallstable.pojo.Param;
 
 import java.util.List;
@@ -19,6 +19,10 @@ public class CategoryLeftAdapter extends RecyclerView.Adapter<CategoryLeftAdapte
     private Context context;
     private List<Param> mData;
 
+    public CategoryLeftAdapter(Context context, List<Param> mData) {
+        this.context = context;
+        this.mData = mData;
+    }
 
     @NonNull
     @Override
