@@ -23,7 +23,7 @@ import java.util.List;
  */
 
 /**
- * 头部Adapter的定义
+ * 头部Adapter的定义2
  */
 public class HomeTopBannerAndParamAdapter extends DelegateAdapter.Adapter<HomeTopBannerAndParamAdapter.BannerAndParamViewHolder>{
     public static final int TYPE_HEADER = 0;
