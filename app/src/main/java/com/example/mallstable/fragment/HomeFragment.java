@@ -114,8 +114,9 @@ public class HomeFragment extends Fragment {
         linearLayoutHelper.setMarginBottom(Utils.dp2px(getActivity(),20));
         adapters.add(new HomeActAdapter(getActivity(),linearLayoutHelper));
 
-
         /*热销商品*/
+
+
 
         delegateAdapter = new DelegateAdapter(layoutManager);
         delegateAdapter.setAdapters(adapters);
