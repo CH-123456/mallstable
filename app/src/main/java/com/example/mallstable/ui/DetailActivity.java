@@ -16,6 +16,7 @@ import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.mallstable.R;
@@ -107,7 +108,22 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-
+        int inputNum = Integer.valueOf(num.getText().toString());
+        switch (view.getId()) {
+            case R.id.btn_cart:
+                addProduct2Cart();
+                break;
+            case R.id.btn_jia:
+                if (inputNum + 1 <= product.getStock()) {
+                    num.setText((inputNum + 1) + "");
+                }
+                break;
+            case R.id.btn_jian:
+                if (inputNum - 1 >= 1) {
+                    num.setText((inputNum - 1) + "");
+                }
+                break;
+        }
     }
 
     //加载商品数据
@@ -154,7 +170,26 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     private void addProduct2Cart() {
         if (product != null) {
             OkHttpUtils.post()
-                    .url(Constant.API)
+                    .url(Constant.API.CART_ADD_URL)
+                    .addParams("productId", product.getId() + "")
+                    .addParams("count", num.getText().toString())
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            SverResponse result = JSONUtils.formJson(response, SverResponse.class);
+                            if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+                                //
+                            } else {
+                                Toast.makeText(DetailActivity.this, result.getMsg(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
         }
     }
 }
