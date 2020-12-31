@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     created by bing 12.30 16:19
-    modified by liben 12.31 change cehckbox's background
+    modified by liben 12.31 change checkbox's background
  -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
