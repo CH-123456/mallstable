@@ -25,6 +25,7 @@ import com.example.mallstable.config.Constant;
 import com.example.mallstable.listener.OnItemClickListener;
 import com.example.mallstable.pojo.Cart;
 import com.example.mallstable.pojo.CartItem;
+import com.example.mallstable.pojo.Product;
 import com.example.mallstable.pojo.ResponeCode;
 import com.example.mallstable.pojo.SverResponse;
 import com.example.mallstable.ui.DetailActivity;
@@ -37,6 +38,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import org.w3c.dom.Text;
 
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,8 +82,7 @@ public class CartFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         initView(view);
-        //loadCartData();
-        total.setText("合计：￥" + "AADD" );
+        loadCartData();
         return view;
     }
 
@@ -98,8 +99,7 @@ public class CartFragment extends Fragment {
             @Override
             public void onReceive(Context context, Intent intent) {
                 //加载购物车数据
-                //loadCartData();
-                total.setText("合计：￥" + "AADD" );
+                loadCartData();
             }
         };
         /*注册*/
@@ -117,40 +117,59 @@ public class CartFragment extends Fragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            //loadCartData();
-            total.setText("合计：￥" + "AADD" );
+            loadCartData();
         }
     }
 
     /*加载购物车数据*/
     private void loadCartData() {
         // 12.30 li
-        OkHttpUtils.get()
-                .url(Constant.API.CART_LIST_URL)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
+        List<CartItem> lists=new ArrayList<>();
+        for(int i=0;i<9;i++){
+            CartItem param=new CartItem();
+            param.setEdit(true);
+            param.setIconUrl("vsddgs");
+            param.setId(32);
+            param.setName("sdfdff");
+            param.setPrice(new BigDecimal(5646));
+            param.setProductId(654);
+            param.setStatus(52);
+            param.setStock(32);
+            param.setUserId(6);
+            param.setTotalPrice(new BigDecimal(987988989));
+            param.setQuantity(3);
+            lists.add(param);
+        }
+        mData.addAll(lists);
+        cartAdapter.notifyDataSetChanged(); //放进
+        total.setText("合计：￥" + "AADD" );
 
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        //在这里取数据
-                        Type type = new TypeToken<SverResponse<Cart>>() {
-                        }.getType();
-                        SverResponse<Cart> result = JSONUtils.fromJson(response, type);
-                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
-                            if (result.getData().getLists() != null) { //拿到项的集合
-
-                                mData.clear();   //先清空
-                                mData.addAll(result.getData().getLists());
-                                cartAdapter.notifyDataSetChanged(); //放进
-                            }
-                            total.setText("合计：￥" + result.getData().getTotalPrice());
-                        }
-                    }
-                });
+//        OkHttpUtils.get()
+//                .url(Constant.API.CART_LIST_URL)
+//                .build()
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onResponse(String response, int id) {
+//                        //在这里取数据
+//                        Type type = new TypeToken<SverResponse<Cart>>() {
+//                        }.getType();
+//                        SverResponse<Cart> result = JSONUtils.fromJson(response, type);
+//                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+//                            if (result.getData().getLists() != null) { //拿到项的集合
+//
+//                                mData.clear();   //先清空
+//                                mData.addAll(result.getData().getLists());
+//                                cartAdapter.notifyDataSetChanged(); //放进
+//                            }
+//                            total.setText("合计：￥" + result.getData().getTotalPrice());
+//                        }
+//                    }
+//                });
         //12.30
         /*
         if(result.getStatus()....)

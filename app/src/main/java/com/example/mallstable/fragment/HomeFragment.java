@@ -38,6 +38,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -159,59 +160,85 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadParams() {
+        //添加的数据（类别的）
+        List<Param> result =new ArrayList<Param>();
+        for(int i=0;i<9;i++){
+            Param param=new Param(123,456, "sfd",true,33, 2,"", "");
+            result.add(param);
+        }
+        mCategoryData.addAll(result);
+        homeTopBannerAndParamAdapter.notifyDataSetChanged();
         //加载产品分类参数
-        OkHttpUtils.get()
-                .url(Constant.API.CATEGORY_PARAM_URL)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        final Type type = new TypeToken<SverResponse<List<Param>>>() {
-                        }.getType();
-                        SverResponse<List<Param>> result = JSONUtils.fromJson(response, type);
-                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
-                            if (result.getData() == null)
-                                return;
-
-                            if (result.getData().size() % PARAM_ROW_COL == 0) {
-                                mCategoryData.addAll(result.getData());
-                            } else {
-                                int count = result.getData().size() / PARAM_ROW_COL;
-                                mCategoryData.addAll(result.getData().subList(0, count * PARAM_ROW_COL));
-                            }
-                            homeTopBannerAndParamAdapter.notifyDataSetChanged();
-                        }
-                    }
-                });
+//        OkHttpUtils.get()
+//                .url(Constant.API.CATEGORY_PARAM_URL)
+//                .build()
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onResponse(String response, int id) {
+//                        final Type type = new TypeToken<SverResponse<List<Param>>>() {
+//                        }.getType();
+//                        SverResponse<List<Param>> result = JSONUtils.fromJson(response, type);
+//                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+//                            if (result.getData() == null)
+//                                return;
+//
+//                            if (result.getData().size() % PARAM_ROW_COL == 0) {
+//                                mCategoryData.addAll(result.getData());
+//                            } else {
+//                                int count = result.getData().size() / PARAM_ROW_COL;
+//                                mCategoryData.addAll(result.getData().subList(0, count * PARAM_ROW_COL));
+//                            }
+//                            homeTopBannerAndParamAdapter.notifyDataSetChanged();
+//                        }
+//                    }
+//                });
     }
 
     private void loadHotProducts() {
-        OkHttpUtils.get()
-                .url(Constant.API.HOT_PRODUCT_URL)
-                .addParams("num", "10")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        final Type type = new TypeToken<SverResponse<List<Product>>>() {
-                        }.getType();
-                        SverResponse<List<Product>> result = JSONUtils.fromJson(response, type);
-                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
-                            if (result.getData() != null) {
-                                mProductData.addAll(result.getData());
-                            }
-                        }
-                    }
-                });
+        //热销产品
+        List<Product> products =new ArrayList<Product>();
+        for(int i=0;i<9;i++){
+            Product param=new Product();
+            param.setDetail("fdsfsd");
+            param.setHot(1);
+            param.setIconUrl("sdfsd");
+            param.setId(12);
+            param.setName("sfsdfsdfs");
+            param.setPrice(new BigDecimal(113));
+            param.setProductId(54);
+            param.setStatus(56);
+            param.setStock(56656);
+            products.add(param);
+        }
+        mProductData.addAll(products);
+        homeHotProductAdapter.notifyDataSetChanged();
+//        OkHttpUtils.get()
+//                .url(Constant.API.HOT_PRODUCT_URL)
+//                .addParams("num", "10")
+//                .build()
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onResponse(String response, int id) {
+//                        final Type type = new TypeToken<SverResponse<List<Product>>>() {
+//                        }.getType();
+//                        SverResponse<List<Product>> result = JSONUtils.fromJson(response, type);
+//                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+//                            if (result.getData() != null) {
+//                                mProductData.addAll(result.getData());
+//                            }
+//                            homeHotProductAdapter.notifyDataSetChanged();
+//                        }
+//                    }
+//                });
     }
 }
