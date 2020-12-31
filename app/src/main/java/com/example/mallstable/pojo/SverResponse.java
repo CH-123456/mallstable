@@ -15,7 +15,6 @@ public class SverResponse<T> implements Serializable {
         this.status = status;
         this.msg = msg;
         this.data = data;
-
     }
 
     public int getStatus() {
