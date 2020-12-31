@@ -16,6 +16,10 @@ import com.example.mallstable.fragment.CategoryFragment;
 import com.example.mallstable.fragment.HomeFragment;
 import com.example.mallstable.fragment.UserFragment;
 
+/*
+ *modified by liben 12.31 add data
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     private RadioGroup mRadioGroup;

@@ -46,6 +46,8 @@ import okhttp3.Call;
  * A simple {@link Fragment} subclass.
  * <p>
  * modified by liben 12.30 15:29
+ * modified by liben 12.31 add data
+ *
  */
 public class CartFragment extends Fragment {
     /**
@@ -78,7 +80,8 @@ public class CartFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         initView(view);
-        loadCartData();
+        //loadCartData();
+        total.setText("合计：￥" + "AADD" );
         return view;
     }
 
@@ -95,6 +98,8 @@ public class CartFragment extends Fragment {
             @Override
             public void onReceive(Context context, Intent intent) {
                 //加载购物车数据
+                //loadCartData();
+                total.setText("合计：￥" + "AADD" );
             }
         };
         /*注册*/
@@ -112,7 +117,8 @@ public class CartFragment extends Fragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            loadCartData();
+            //loadCartData();
+            total.setText("合计：￥" + "AADD" );
         }
     }
 
