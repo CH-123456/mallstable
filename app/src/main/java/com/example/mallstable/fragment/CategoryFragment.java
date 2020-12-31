@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
+import com.cjj.MaterialRefreshLayout;
+import com.cjj.MaterialRefreshListener;
 import com.example.mallstable.R;
 import com.example.mallstable.adapter.CategoryLeftAdapter;
 import com.example.mallstable.adapter.CategoryRightAdapter;
@@ -46,6 +48,9 @@ public class CategoryFragment extends Fragment {
     private RecyclerView rightRecyclerView;
     private List<Product>   rightProductData;
     private CategoryRightAdapter categoryRightAdapter;
+    private MaterialRefreshLayout refreshLayout;
+    private SverResponse<PageBean<Product>> result;
+    private String typeId;
 
 
 
@@ -71,6 +76,7 @@ public class CategoryFragment extends Fragment {
         //初始化
         leftRecyclerView=(RecyclerView)view.findViewById(R.id.category_rv);
         rightRecyclerView=(RecyclerView)view.findViewById(R.id.product_rv);
+        refreshLayout=(MaterialRefreshLayout)view.findViewById(R.id.refresh_layout);
 
 
         leftCategoryData=new ArrayList<>();
@@ -87,7 +93,7 @@ public class CategoryFragment extends Fragment {
         categoryLeftAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
-                String typeId=leftCategoryData.get(pos).getId()+"";
+                typeId=leftCategoryData.get(pos).getId()+"";
                 findProductByParam(typeId,1,10,true);
             }
         });
@@ -98,6 +104,30 @@ public class CategoryFragment extends Fragment {
        rightRecyclerView.setAdapter(categoryRightAdapter);
 
     }
+
+    private void bindRefreshLinstener(){
+        refreshLayout.setLoadMore(true);
+        refreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
+            @Override
+            public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
+                //下拉刷新
+                refreshLayout.finishRefresh();
+            }
+
+            @Override
+            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
+                //super.onRefreshLoadMore(materialRefreshLayout);
+                if (result!=null&&result.getStatus()==ResponeCode.SUCCESS.getCode()){
+                     PageBean pageBean=result.getData();
+                     if (pageBean.getPageNum()!=pageBean.getNextPage()){
+                         findProductByParam(typeId,pageBean.getNextPage(),pageBean.getPageSize(),false);
+                     }
+                }
+
+            }
+        });
+    }
+
     private void loadParams(){
         //加载产品分类参数
         OkHttpUtils.get()
@@ -128,6 +158,7 @@ public class CategoryFragment extends Fragment {
                     }
                 });
     }
+
     private  void findProductByParam(String productTypeId, int pageNum, int pageSize, final boolean flag){
         OkHttpUtils.get()
                 .url(Constant.API.CATEGORY_PRODUCT_URL)
@@ -144,7 +175,7 @@ public class CategoryFragment extends Fragment {
                     @Override
                     public void onResponse(String response, int id) {
                         final Type type = new TypeToken<SverResponse<PageBean<Product>>>(){}.getType();
-                        SverResponse<PageBean<Product>> result = JSONUtils.fromJson(response,type);
+                       result = JSONUtils.fromJson(response,type);
 
                         if (result.getStatus()== ResponeCode.SUCCESS.getCode()) {
                             if (result.getData() == null) {
