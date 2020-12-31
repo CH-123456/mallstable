@@ -51,6 +51,7 @@ import okhttp3.Call;
  * modified by liben 12.30 15:29
  * modified by liben 12.31 add data
  * modified by zangjie 12.31 Modified jump address
+ * modified by liben 12.31 add data
  */
 public class CartFragment extends Fragment {
     /**
@@ -129,9 +130,9 @@ public class CartFragment extends Fragment {
         for(int i=0;i<9;i++){
             CartItem param=new CartItem();
             param.setEdit(true);
-            param.setIconUrl("vsddgs");
+            param.setIconUrl("初始加载的");
             param.setId(32);
-            param.setName("sdfdff");
+            param.setName("初始加载的");
             param.setPrice(new BigDecimal(5646));
             param.setProductId(654);
             param.setStatus(52);
@@ -182,62 +183,101 @@ public class CartFragment extends Fragment {
     }
 
     private void updateProduct(int productId, int count) {
-        OkHttpUtils.get()
-                .url(Constant.API.CART_UPDATE_URL)
-                .addParams("productId", productId + "")
-                .addParams("count", count + "")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
+        List<CartItem> lists=new ArrayList<>();
+        for(int i=0;i<9;i++){
+            CartItem param=new CartItem();
+            param.setEdit(true);
+            param.setIconUrl("更新的");
+            param.setId(32);
+            param.setName("更新的");
+            param.setPrice(new BigDecimal(5646));
+            param.setProductId(654);
+            param.setStatus(52);
+            param.setStock(32);
+            param.setUserId(6);
+            param.setTotalPrice(new BigDecimal(987988989));
+            param.setQuantity(3);
+            lists.add(param);
+        }
+        mData.addAll(lists);
+        cartAdapter.notifyDataSetChanged(); //放进
+        total.setText("合计：￥" + "AADD" );
 
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Type type = new TypeToken<SverResponse<Cart>>() {
-                        }.getType();
-                        SverResponse<Cart> result = JSONUtils.fromJson(response, type);
-                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
-                            if (result.getData().getLists() != null) {
-                                mData.clear();
-                                mData.addAll(result.getData().getLists());
-                                cartAdapter.notifyDataSetChanged();
-                            }
-                            total.setText("合计：￥" + result.getData().getTotalPrice());
-                        }
-
-                    }
-                });
+//        OkHttpUtils.get()
+//                .url(Constant.API.CART_UPDATE_URL)
+//                .addParams("productId", productId + "")
+//                .addParams("count", count + "")
+//                .build()
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onResponse(String response, int id) {
+//                        Type type = new TypeToken<SverResponse<Cart>>() {
+//                        }.getType();
+//                        SverResponse<Cart> result = JSONUtils.fromJson(response, type);
+//                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+//                            if (result.getData().getLists() != null) {
+//                                mData.clear();
+//                                mData.addAll(result.getData().getLists());
+//                                cartAdapter.notifyDataSetChanged();
+//                            }
+//                            total.setText("合计：￥" + result.getData().getTotalPrice());
+//                        }
+//
+//                    }
+//                });
     }
 
     /*删除商品 12.30 li*/
     private void delProductById(int productId) {
-        OkHttpUtils.get()
-                .url(Constant.API.CART_DEL_URL)
-                .addParams("productId", productId + "")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Type type = new TypeToken<SverResponse<Cart>>() {
-                        }.getType();
-                        SverResponse<Cart> result = JSONUtils.fromJson(response, type);
-                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
-                            if (result.getData().getLists() != null) {
-                                mData.clear();
-                                mData.addAll(result.getData().getLists());
-                                cartAdapter.notifyDataSetChanged();
-                            }
-                            total.setText("合计：￥" + result.getData().getTotalPrice());
-                        }
-                    }
-                });
+        List<CartItem> lists=new ArrayList<>();
+        for(int i=0;i<9;i++){
+            CartItem param=new CartItem();
+            param.setEdit(true);
+            param.setIconUrl("删除的");
+            param.setId(32);
+            param.setName("删除的");
+            param.setPrice(new BigDecimal(5646));
+            param.setProductId(654);
+            param.setStatus(52);
+            param.setStock(32);
+            param.setUserId(6);
+            param.setTotalPrice(new BigDecimal(987988989));
+            param.setQuantity(3);
+            lists.add(param);
+        }
+        mData.addAll(lists);
+        cartAdapter.notifyDataSetChanged(); //放进
+        total.setText("合计：￥" + "AADD" );
+//        OkHttpUtils.get()
+//                .url(Constant.API.CART_DEL_URL)
+//                .addParams("productId", productId + "")
+//                .build()
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onResponse(String response, int id) {
+//                        Type type = new TypeToken<SverResponse<Cart>>() {
+//                        }.getType();
+//                        SverResponse<Cart> result = JSONUtils.fromJson(response, type);
+//                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+//                            if (result.getData().getLists() != null) {
+//                                mData.clear();
+//                                mData.addAll(result.getData().getLists());
+//                                cartAdapter.notifyDataSetChanged();
+//                            }
+//                            total.setText("合计：￥" + result.getData().getTotalPrice());
+//                        }
+//                    }
+//                });
     }
 
     //12.30
