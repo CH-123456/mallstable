@@ -57,9 +57,6 @@ public class CategoryFragment extends Fragment {
     private SverResponse<PageBean<Product>> result;
     private String typeId;
 
-
-
-
     public CategoryFragment() {
         // Required empty public constructor
     }
