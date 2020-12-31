@@ -1,6 +1,6 @@
 package com.example.mallstable.fragment;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -25,7 +25,6 @@ import com.example.mallstable.pojo.Param;
 import com.example.mallstable.pojo.Product;
 import com.example.mallstable.pojo.ResponeCode;
 import com.example.mallstable.pojo.SverResponse;
-import com.example.mallstable.ui.DetailActivity;
 import com.example.mallstable.utils.JSONUtils;
 import com.example.mallstable.utils.SpaceItemDecoration;
 import com.example.mallstable.utils.Utils;
@@ -44,54 +43,60 @@ import okhttp3.Call;
  */
 /*zhai*/
 public class CategoryFragment extends Fragment {
-    private RecyclerView leftRecyclerView;   //左侧列表组件
-    private List<Param> leftCategoryData;  //左侧分类数据
+ private RecyclerView leftRecyclerView;   //左侧列表组件
+ private List<Param>   leftCategoryData;  //左侧分类数据
 
     private CategoryLeftAdapter categoryLeftAdapter;//分类适配器
     private RecyclerView rightRecyclerView;
-    private List<Product> rightProductData;
+    private List<Product>   rightProductData;
     private CategoryRightAdapter categoryRightAdapter;
     private MaterialRefreshLayout refreshLayout;
     private SverResponse<PageBean<Product>> result;
     private String typeId;
 
+
+
+
     public CategoryFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_category, container, false);
+        View view=inflater.inflate(R.layout.fragment_category, container, false);
         initView(view);
         loadParams();
+
         return view;
     }
 
-    private void initView(View view) {
+
+    private void initView(View view){
         //初始化
-        leftRecyclerView = (RecyclerView) view.findViewById(R.id.category_rv);
-        rightRecyclerView = (RecyclerView) view.findViewById(R.id.product_rv);
-        refreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh_layout);
+        leftRecyclerView=(RecyclerView)view.findViewById(R.id.category_rv);
+        rightRecyclerView=(RecyclerView)view.findViewById(R.id.product_rv);
+        refreshLayout=(MaterialRefreshLayout)view.findViewById(R.id.refresh_layout);
 
 
-        leftCategoryData = new ArrayList<>();
-        categoryLeftAdapter = new CategoryLeftAdapter(getActivity(), leftCategoryData);
+        leftCategoryData=new ArrayList<>();
+        categoryLeftAdapter=new CategoryLeftAdapter(getActivity(),leftCategoryData);
 
-        rightProductData = new ArrayList<>();
-        categoryRightAdapter = new CategoryRightAdapter(getActivity(), rightProductData);
+    rightProductData=new ArrayList<>();
+    categoryRightAdapter=new CategoryRightAdapter(getActivity(),rightProductData);
 
         //设置布局管理器
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         leftRecyclerView.setLayoutManager(linearLayoutManager);
         //设置适配器
         leftRecyclerView.setAdapter(categoryLeftAdapter);
         categoryLeftAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
-                typeId = leftCategoryData.get(pos).getId() + "";
-                findProductByParam(typeId, 1, 10, true);
+                typeId=leftCategoryData.get(pos).getId()+"";
+                findProductByParam(typeId,1,10,true);
             }
         });
 
@@ -99,22 +104,18 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onItemClick(View view, int pos) {
                 //跳转到详情页面
-                //提取产品编号并跳转
-                String id = rightProductData.get(pos).getId() + "";
-                Intent intent = new Intent(getActivity(), DetailActivity.class);
-                intent.putExtra("id", id);
-                startActivity(intent);
+
             }
         });
         //网格布局管理器
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
-        rightRecyclerView.addItemDecoration(new SpaceItemDecoration(Utils.dp2px(getActivity(), 10), Utils.dp2px(getActivity(), 5)));
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),2);
+        rightRecyclerView.addItemDecoration(new SpaceItemDecoration(Utils.dp2px(getActivity(),10),Utils.dp2px(getActivity(),5)));
         rightRecyclerView.setLayoutManager(gridLayoutManager);
-        rightRecyclerView.setAdapter(categoryRightAdapter);
+       rightRecyclerView.setAdapter(categoryRightAdapter);
 
     }
 
-    private void bindRefreshLinstener() {
+    private void bindRefreshLinstener(){
         refreshLayout.setLoadMore(true);
         refreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
@@ -126,19 +127,21 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
                 //super.onRefreshLoadMore(materialRefreshLayout);
-                if (result != null && result.getStatus() == ResponeCode.SUCCESS.getCode()) {
-                    PageBean pageBean = result.getData();
-                    if (pageBean.getPageNum() != pageBean.getNextPage()) {
-                        findProductByParam(typeId, pageBean.getNextPage(), pageBean.getPageSize(), false);
-                    }
-                } else {
+                if (result!=null&&result.getStatus()==ResponeCode.SUCCESS.getCode()){
+                     PageBean pageBean=result.getData();
+                     if (pageBean.getPageNum()!=pageBean.getNextPage()){
+                         findProductByParam(typeId,pageBean.getNextPage(),pageBean.getPageSize(),false);
+                     }
+
+                }else{
                     materialRefreshLayout.finishRefreshLoadMore();
                 }
+
             }
         });
     }
 
-    private void loadParams() {
+    private void loadParams(){
         //加载产品分类参数
         OkHttpUtils.get()
                 .url(Constant.API.CATEGORY_PARAM_URL)
@@ -146,58 +149,63 @@ public class CategoryFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
+
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        final Type type = new TypeToken<SverResponse<List<Param>>>() {
-                        }.getType();
-                        SverResponse<List<Param>> result = JSONUtils.fromJson(response, type);
-                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+                        final Type type = new TypeToken<SverResponse<List<Param>>>(){}.getType();
+                        SverResponse<List<Param>> result = JSONUtils.fromJson(response,type);
+                        if (result.getStatus()== ResponeCode.SUCCESS.getCode()) {
                             if (result.getData() == null)
                                 return;
                             leftCategoryData.addAll(result.getData());
 
-                            typeId = leftCategoryData.get(0).getId() + "";
-                            leftCategoryData.get(0).setPressed(true);
-                            findProductByParam(typeId, 1, 10, true);
+                            typeId=leftCategoryData.get(0).getId()+"";
+                               leftCategoryData.get(0).setPressed(true);
+                               findProductByParam(typeId,1,10,true);
 
                             categoryLeftAdapter.notifyDataSetChanged();
+
                         }
                     }
                 });
     }
 
-    private void findProductByParam(String productTypeId, int pageNum, int pageSize, final boolean flag) {
+    private  void findProductByParam(String productTypeId, int pageNum, int pageSize, final boolean flag){
         OkHttpUtils.get()
                 .url(Constant.API.CATEGORY_PRODUCT_URL)
-                .addParams("productTypeId", productTypeId)
-                .addParams("pageNum", pageNum + "")
-                .addParams("pageSize", pageSize + "")
+                .addParams("productTypeId",productTypeId)
+                .addParams("pageNum",pageNum+"")
+                .addParams("pageSize",pageSize+"")
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
+
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        final Type type = new TypeToken<SverResponse<PageBean<Product>>>() {
-                        }.getType();
-                        result = JSONUtils.fromJson(response, type);
-                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+                        final Type type = new TypeToken<SverResponse<PageBean<Product>>>(){}.getType();
+                       result = JSONUtils.fromJson(response,type);
+
+                        if (result.getStatus()== ResponeCode.SUCCESS.getCode()) {
                             if (result.getData() == null) {
-                                if (flag) {
+                                if (flag){
                                     rightProductData.clear();
                                 }
                                 rightProductData.addAll(result.getData().getData());
                                 categoryRightAdapter.notifyDataSetChanged();
                             }
-                            if (!flag) {
+                            if(!flag){
                                 refreshLayout.finishRefreshLoadMore();
                             }
-                        }
+                    }
                     }
                 });
+
     }
+
+
 }
