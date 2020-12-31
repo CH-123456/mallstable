@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:background="@drawable/fragment_home_act_list_item_background"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.example.mallstable.fragment.CategoryFragment">
     <TextView
         android:id="@+id/category_tv"
         android:layout_width="@dimen/category_left_width"

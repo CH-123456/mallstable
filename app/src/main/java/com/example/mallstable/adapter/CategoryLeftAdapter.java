@@ -1,6 +1,7 @@
 package com.example.mallstable.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.List;
 public class CategoryLeftAdapter extends RecyclerView.Adapter<CategoryLeftAdapter.CategroyViewHolder> implements  View.OnClickListener{
     private Context context;
     private List<Param> mData;
+    private View view;
     private OnItemClickListener onItemClickListener;
 
 
@@ -34,7 +36,7 @@ public class CategoryLeftAdapter extends RecyclerView.Adapter<CategoryLeftAdapte
     @NonNull
     @Override
     public CategroyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.fragment_category_left_list_item,null,false);
+        view= LayoutInflater.from(context).inflate(R.layout.fragment_category_left_list_item,null,false);
         return new CategroyViewHolder(view);
     }
 
@@ -78,7 +80,7 @@ public class CategoryLeftAdapter extends RecyclerView.Adapter<CategoryLeftAdapte
         public TextView name;
         public CategroyViewHolder(View itemView){
             super(itemView);
-            name=(TextView)itemView.findViewById(R.id.name);
+            name=(TextView)itemView.findViewById(R.id.category_tv);
         }
     }
 
