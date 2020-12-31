@@ -51,7 +51,8 @@ public class Constant {
     //广播
     public static class ACTION{
         //加载购物车列表的
-  public static final String  LOAD_CART_ACTION="cn.techaction.mall.LOAD_CART_ACTION";
+  //public static final String  LOAD_CART_ACTION="cn.techaction.mall.LOAD_CART_ACTION";
+        public static final String  LOAD_CART_ACTION="com.example.mallstable.LOAD_CART_ACTION";
     }
 
 
