@@ -23,6 +23,11 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
     private OnItemClickListener onItemClickListener;
     private OnAddrOptListener onAddrOptListener;
 
+    public AddressAdapter(Context context, List<Address> mData) {
+        this.context = context;
+        this.mData = mData;
+    }
+
     @NonNull
     @Override
     public AddressViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

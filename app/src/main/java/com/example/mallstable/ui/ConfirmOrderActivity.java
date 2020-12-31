@@ -36,6 +36,7 @@ import okhttp3.Call;
 
 /*
  *created by liben 12.30
+ * modified by bing 12.31 10:24
  */
 
 public class ConfirmOrderActivity extends AppCompatActivity {
@@ -50,6 +51,9 @@ public class ConfirmOrderActivity extends AppCompatActivity {
     private List<CartItem> cartItems;
 
     private Address defaultAddr;
+
+    private static final int REQ_ADDR_CODE = 0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,13 +62,14 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         initDefaultAdr();
         initCartProducts();
     }
-    private void initView(){
-        name=findViewById(R.id.name);
-        mobile=findViewById(R.id.mobile);
-        addr_detail=findViewById(R.id.addr_detail);
-        recyclerView=findViewById(R.id.cart_rv);
-        total=findViewById(R.id.total);
-        toolbar=findViewById(R.id.toolbar);
+
+    private void initView() {
+        name = findViewById(R.id.name);
+        mobile = findViewById(R.id.mobile);
+        addr_detail = findViewById(R.id.addr_detail);
+        recyclerView = findViewById(R.id.cart_rv);
+        total = findViewById(R.id.total);
+        toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("确认订单信息");
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -74,9 +79,9 @@ public class ConfirmOrderActivity extends AppCompatActivity {
             }
         });
 
-        cartItems=new ArrayList<>();
-        confirmOrderProductAdapter=new ConfirmOrderProductAdapter(this,cartItems);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        cartItems = new ArrayList<>();
+        confirmOrderProductAdapter = new ConfirmOrderProductAdapter(this, cartItems);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(confirmOrderProductAdapter);
 
@@ -92,13 +97,36 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         findViewById(R.id.address_container).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(ConfirmOrderActivity.this, AddressListActivity.class);
+                startActivityForResult(intent, REQ_ADDR_CODE);
             }
         });
     }
 
-    //加载地址
-    private void initDefaultAdr(){
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == REQ_ADDR_CODE) {
+            if (resultCode == RESULT_OK) {
+                defaultAddr = (Address) data.getSerializableExtra("address");
+                displayInfo();
+            }
+        }
+    }
+
+    /**
+     * 显示地址信息
+     */
+    private void displayInfo() {
+        name.setText(defaultAddr.getName());
+        mobile.setText(defaultAddr.getMobile());
+        addr_detail.setText(defaultAddr.getProvince() + " " + defaultAddr.getCity()
+                + " " + defaultAddr.getDistrict() + " " + defaultAddr.getAddr());
+    }
+
+    /**
+     * 加载默认地址
+     */
+    private void initDefaultAdr() {
         OkHttpUtils.get()
                 .url(Constant.API.USER_ADDR_LIST_URL)
                 .build()
@@ -110,32 +138,29 @@ public class ConfirmOrderActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Type type=new TypeToken<SverResponse<List<Address>>>(){}.getType();
-                        SverResponse<List<Address>> result= JSONUtils.formJson(response,type);
-                        if(result.getStatus()== ResponeCode.SUCCESS.getCode()){
-                            if(result.getData()!=null) {
+                        Type type = new TypeToken<SverResponse<List<Address>>>() {
+                        }.getType();
+                        SverResponse<List<Address>> result = JSONUtils.formJson(response, type);
+                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+                            if (result.getData() != null) {
                                 //迭代器找到默认地址
-                                for (Address adr : result.getData()){
-                                    if(adr.isDfault()){
-                                        defaultAddr=adr;
+                                for (Address adr : result.getData()) {
+                                    if (adr.isDfault()) {
+                                        defaultAddr = adr;
                                         break;
                                     }
                                 }
                                 //设置默认值
-                                if(defaultAddr==null){
-                                    defaultAddr=result.getData().get(0);
+                                if (defaultAddr == null) {
+                                    defaultAddr = result.getData().get(0);
                                 }
-                                name.setText(defaultAddr.getName());
-                                mobile.setText(defaultAddr.getMobile());
-                                addr_detail.setText(defaultAddr.getProvince()+" "+defaultAddr.getCity()
-                                        +" "+defaultAddr.getDistrict()+" "+defaultAddr.getAddr());
-                            }else{
+                                displayInfo();
+                            } else {
                                 name.setText("");
                                 mobile.setText("");
                                 addr_detail.setText("请选择收件地址");
                             }
-                        }
-                        else {
+                        } else {
                             name.setText("");
                             mobile.setText("");
                             addr_detail.setText("请选择收件地址");
@@ -144,7 +169,10 @@ public class ConfirmOrderActivity extends AppCompatActivity {
                 });
     }
 
-    private void initCartProducts(){
+    /**
+     * 加载购物车数据
+     */
+    private void initCartProducts() {
         OkHttpUtils.get()
                 .url(Constant.API.CART_LIST_URL)
                 .build()
@@ -156,26 +184,27 @@ public class ConfirmOrderActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Type type=new TypeToken<SverResponse<Cart>>(){}.getType();
-                        SverResponse<Cart> result= JSONUtils.formJson(response,type);
-                        if(result.getStatus()== ResponeCode.SUCCESS.getCode()){
+                        Type type = new TypeToken<SverResponse<Cart>>() {
+                        }.getType();
+                        SverResponse<Cart> result = JSONUtils.formJson(response, type);
+                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
                             cartItems.clear();
                             cartItems.addAll(result.getData().getLists());
                             confirmOrderProductAdapter.notifyDataSetChanged();
                         }
-                        total.setText("合计："+result.getData().getTotalPrice());
+                        total.setText("合计：" + result.getData().getTotalPrice());
                     }
                 });
     }
 
-    private void submitOrder(){
-        if(defaultAddr==null){
-            Toast.makeText(this,"请选择收货地址！",Toast.LENGTH_LONG).show();
+    private void submitOrder() {
+        if (defaultAddr == null) {
+            Toast.makeText(this, "请选择收货地址！", Toast.LENGTH_LONG).show();
             return;
         }
         OkHttpUtils.post()
                 .url(Constant.API.ORDER_CREATED_URL)
-                .addParams("addrId",defaultAddr.getId()+"")
+                .addParams("addrId", defaultAddr.getId() + "")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -185,13 +214,13 @@ public class ConfirmOrderActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Type type=new TypeToken<SverResponse<Order>>(){}.getType();
-                        SverResponse<Order> result= JSONUtils.formJson(response,type);
-                        if(result.getStatus()== ResponeCode.SUCCESS.getCode()){
+                        Type type = new TypeToken<SverResponse<Order>>() {
+                        }.getType();
+                        SverResponse<Order> result = JSONUtils.formJson(response, type);
+                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
                             //跳转到订单详情
-                        }
-                        else{
-                            Toast.makeText(ConfirmOrderActivity.this,result.getStatus(),Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(ConfirmOrderActivity.this, result.getStatus(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });

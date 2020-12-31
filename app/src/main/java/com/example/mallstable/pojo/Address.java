@@ -1,12 +1,14 @@
 package com.example.mallstable.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /*
-    *created by liben 12.30
+ * created by liben 12.30
+ * modified bt bing 12.31 添加序列化
  */
 
-public class Address {
+public class Address implements Serializable {
     private Integer id;
     private Integer uid;
     private String name;
