@@ -28,6 +28,7 @@ import com.example.mallstable.pojo.CartItem;
 import com.example.mallstable.pojo.Product;
 import com.example.mallstable.pojo.ResponeCode;
 import com.example.mallstable.pojo.SverResponse;
+import com.example.mallstable.ui.ConfirmOrderActivity;
 import com.example.mallstable.ui.DetailActivity;
 import com.example.mallstable.ui.LoginActivity;
 import com.example.mallstable.utils.JSONUtils;
@@ -49,7 +50,7 @@ import okhttp3.Call;
  * <p>
  * modified by liben 12.30 15:29
  * modified by liben 12.31 add data
- *
+ *modified by zangjie 12.31 Modified jump address
  */
 public class CartFragment extends Fragment {
     /**
@@ -305,7 +306,7 @@ public class CartFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //跳转到确定订单页
-                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                Intent intent = new Intent(getActivity(), ConfirmOrderActivity.class);
                 startActivity(intent);
             }
         });
