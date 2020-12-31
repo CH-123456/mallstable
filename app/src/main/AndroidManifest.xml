@@ -22,11 +22,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-<!--        <activity android:name=".ui.RegisterActivity">-->
-<!--            <intent-filter>-->
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
+        <activity android:name=".ui.RegisterActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.AddressListActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
