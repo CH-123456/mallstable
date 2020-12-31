@@ -10,7 +10,7 @@ public class JSONUtils {
 
     private  static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();//创建gson对象,转化传过来的就jVAV对象
 
-    public static <T> T formJson(String json, Type clz){
+    public static <T> T formJson(String json, Class<T> clz){
         return gson.fromJson(json,clz);
     }
     //fan xing fang fa

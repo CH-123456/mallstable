@@ -1,5 +1,9 @@
 package com.example.mallstable.application;
 
+/***
+ * Created by wangquanli
+ */
+
 import android.app.Application;
 
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -17,6 +21,11 @@ public class MallApplication extends Application {
         super.onCreate();
         initOkHttpUtils();
     }
+
+    /***
+     * 配置OKHTTP网络请求框架
+     *
+     */
     private void initOkHttpUtils(){
         //保持Cookie
         CookieJarImpl cookieJar = new CookieJarImpl(new

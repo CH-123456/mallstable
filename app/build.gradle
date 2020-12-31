@@ -44,6 +44,7 @@ dependencies {
     implementation 'com.cjj.materialrefeshlayout:library:1.3.0'
     //vLayout及gson库
     implementation('com.alibaba.android:vlayout:1.2.8@aar') { transitive = true }
+    //啥x
     implementation 'com.google.code.gson:gson:2.8.5'
     //cartview包,用androidx的就行好像
     implementation 'com.android.support:cardview-v7:28.0.0'
