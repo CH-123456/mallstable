@@ -35,6 +35,7 @@ import okhttp3.Response;
 /**
  * A simple {@link Fragment} subclass.
  * create by liben12.29
+ * modified by liben 12.31
  */
 public class UserFragment extends Fragment {
     private TextView user;
@@ -105,28 +106,31 @@ public class UserFragment extends Fragment {
     }
 
     private  void initUserInfo(){
-        OkHttpUtils.get()
-                .url(Constant.API.USER_INFO_URL)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
+        //添加用户数据
+        user.setText("sdfsf");
 
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Type type=new TypeToken<SverResponse<User>>(){}.getType();
-                        SverResponse<User> result= JSONUtils.formJson(response,type);
-                        if(result.getStatus()== ResponeCode.SUCCESS.getCode()){
-                            user.setText(result.getData().getAccount());
-                        }
-                        else {
-                            //跳转到登陆页面
-                            Intent intent=new Intent(getActivity(), LoginActivity.class);
-                            startActivity(intent);
-                        }
-                    }
-                });
+//        OkHttpUtils.get()
+//                .url(Constant.API.USER_INFO_URL)
+//                .build()
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onResponse(String response, int id) {
+//                        Type type=new TypeToken<SverResponse<User>>(){}.getType();
+//                        SverResponse<User> result= JSONUtils.formJson(response,type);
+//                        if(result.getStatus()== ResponeCode.SUCCESS.getCode()){
+//                            user.setText(result.getData().getAccount());
+//                        }
+//                        else {
+//                            //跳转到登陆页面
+//                            Intent intent=new Intent(getActivity(), LoginActivity.class);
+//                            startActivity(intent);
+//                        }
+//                    }
+//                });
     }
 }
