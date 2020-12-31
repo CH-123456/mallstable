@@ -72,7 +72,6 @@ public class CategoryFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_category, container, false);
         initView(view);
         loadParams();
-
         return view;
     }
 
@@ -146,6 +145,7 @@ public class CategoryFragment extends Fragment {
 
     private void loadParams(){
         //
+
         List<Param> result=new ArrayList<>();
         for(int i=0;i<9;i++){
             Param param=new Param(123,456, "sfd",true,33, 2,"", "");

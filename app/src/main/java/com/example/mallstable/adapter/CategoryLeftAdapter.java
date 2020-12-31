@@ -41,14 +41,14 @@ public class CategoryLeftAdapter extends RecyclerView.Adapter<CategoryLeftAdapte
     @Override
     public void onBindViewHolder(@NonNull CategroyViewHolder holder, int position) {
         Param param=mData.get(position);
-        holder.name.setText(param.getName());
-        holder.name.setTag(position);
-        if (param.isPressed()){
-            holder.name.setBackgroundResource(R.color.font_color);
-        }else{
-            holder.name.setBackgroundResource(R.color.colorWhite);
-        }
-  holder.name.setOnClickListener(this);
+//        holder.name.setText(param.getName());
+//        holder.name.setTag(position);
+//        if (param.isPressed()){
+//            holder.name.setBackgroundResource(R.color.font_color);
+//        }else{
+//            holder.name.setBackgroundResource(R.color.colorWhite);
+//        }
+//  holder.name.setOnClickListener(this);
     }
 
 
