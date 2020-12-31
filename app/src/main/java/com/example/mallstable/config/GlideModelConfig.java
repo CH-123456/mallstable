@@ -21,9 +21,9 @@ public class GlideModelConfig implements GlideModule {
           builder.setDiskCache(new ExternalCacheDiskCacheFactory(context,"cahce",diskSize));//sd卡中
 
           builder.setMemoryCache(new LruResourceCache(memorySize));
-          builder.setBitmapPool(new LruBitmapPool(memorySize));
+          builder.setBitmapPool(new LruBitmapPool(memorySize));      //图片值大小
 
-          builder.setDecodeFormat(DecodeFormat.PREFER_ARGB_8888);
+          builder.setDecodeFormat(DecodeFormat.PREFER_ARGB_8888);   //图片格式
     }
 
     @Override

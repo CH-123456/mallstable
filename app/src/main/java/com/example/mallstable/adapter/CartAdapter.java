@@ -61,7 +61,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
          holder.price.setText(cartItem.getPrice()+"");
          holder.edit_num.setText(cartItem.getQuantity()+"");
         Glide.with(context).load(Constant.API.BASE_URL+cartItem.getIconUrl()).into(holder.icon_url);
-        //事件监听绑定
+        //绑定点击item的监听
         //整个条目的监听器
         holder.itemView.setTag(position);
         holder.itemView.setOnClickListener(this);
