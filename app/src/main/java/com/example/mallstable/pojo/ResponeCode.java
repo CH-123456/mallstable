@@ -7,16 +7,16 @@ public enum ResponeCode {
     private final int code;//码
     private final String desc;//描述
 
+    private ResponeCode(int code, String desc) {
+        this.code = code;
+        this.desc = desc;
+    }
+
     public int getCode() {
         return code;
     }
 
     public String getDesc() {
         return desc;
-    }
-
-    private ResponeCode(int code, String desc) {
-        this.code = code;
-        this.desc = desc;
     }
 }
