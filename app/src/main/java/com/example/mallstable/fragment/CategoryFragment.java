@@ -20,6 +20,7 @@ import com.example.mallstable.adapter.CategoryLeftAdapter;
 import com.example.mallstable.adapter.CategoryRightAdapter;
 import com.example.mallstable.config.Constant;
 import com.example.mallstable.listener.OnItemClickListener;
+import com.example.mallstable.pojo.CartItem;
 import com.example.mallstable.pojo.PageBean;
 import com.example.mallstable.pojo.Param;
 import com.example.mallstable.pojo.Product;
@@ -33,6 +34,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -144,69 +146,96 @@ public class CategoryFragment extends Fragment {
 
     private void loadParams(){
         //
+        List<Param> result=new ArrayList<>();
+        for(int i=0;i<9;i++){
+            Param param=new Param(123,456, "sfd",true,33, 2,"", "");
+            result.add(param);
+        }
+        leftCategoryData.addAll(result);
+        findProductByParam(typeId,1,10,true);
 
+        categoryLeftAdapter.notifyDataSetChanged();
         //加载产品分类参数
-        OkHttpUtils.get()
-                .url(Constant.API.CATEGORY_PARAM_URL)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        final Type type = new TypeToken<SverResponse<List<Param>>>(){}.getType();
-                        SverResponse<List<Param>> result = JSONUtils.fromJson(response,type);
-                        if (result.getStatus()== ResponeCode.SUCCESS.getCode()) {
-                            if (result.getData() == null)
-                                return;
-                            leftCategoryData.addAll(result.getData());
-
-                            typeId=leftCategoryData.get(0).getId()+"";
-                               leftCategoryData.get(0).setPressed(true);
-                               findProductByParam(typeId,1,10,true);
-
-                            categoryLeftAdapter.notifyDataSetChanged();
-
-                        }
-                    }
-                });
+//        OkHttpUtils.get()
+//                .url(Constant.API.CATEGORY_PARAM_URL)
+//                .build()
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onResponse(String response, int id) {
+//                        final Type type = new TypeToken<SverResponse<List<Param>>>(){}.getType();
+//                        SverResponse<List<Param>> result = JSONUtils.fromJson(response,type);
+//                        if (result.getStatus()== ResponeCode.SUCCESS.getCode()) {
+//                            if (result.getData() == null)
+//                                return;
+//                            leftCategoryData.addAll(result.getData());
+//
+//                            typeId=leftCategoryData.get(0).getId()+"";
+//                               leftCategoryData.get(0).setPressed(true);
+//                               findProductByParam(typeId,1,10,true);
+//
+//                            categoryLeftAdapter.notifyDataSetChanged();
+//
+//                        }
+//                    }
+//                });
     }
 
     private  void findProductByParam(String productTypeId, int pageNum, int pageSize, final boolean flag){
-        OkHttpUtils.get()
-                .url(Constant.API.CATEGORY_PRODUCT_URL)
-                .addParams("productTypeId",productTypeId)
-                .addParams("pageNum",pageNum+"")
-                .addParams("pageSize",pageSize+"")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
+        //
+        List<Product> result1=new ArrayList<>();
+        for(int i=0;i<9;i++){
+            Product param=new Product();
+            param.setStock(111);
+            param.setStatus(2);
+            param.setProductId(13);
+            param.setPrice(new BigDecimal(1465));
+            param.setName("chanpin1");
+            param.setId(6545);
+            param.setHot(2);
+            param.setDetail("dfs");
+            param.setSpecParam("sdfsdf");
+            param.setPartsId(65465);
+            result1.add(param);
+        }
+        rightProductData.addAll(result1);
+        categoryRightAdapter.notifyDataSetChanged();
 
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        final Type type = new TypeToken<SverResponse<PageBean<Product>>>(){}.getType();
-                       result = JSONUtils.fromJson(response,type);
-
-                        if (result.getStatus()== ResponeCode.SUCCESS.getCode()) {
-                            if (result.getData() == null) {
-                                if (flag){
-                                    rightProductData.clear();
-                                }
-                                rightProductData.addAll(result.getData().getData());
-                                categoryRightAdapter.notifyDataSetChanged();
-                            }
-                            if(!flag){
-                                refreshLayout.finishRefreshLoadMore();
-                            }
-                    }
-                    }
-                });
+//        OkHttpUtils.get()
+//                .url(Constant.API.CATEGORY_PRODUCT_URL)
+//                .addParams("productTypeId",productTypeId)
+//                .addParams("pageNum",pageNum+"")
+//                .addParams("pageSize",pageSize+"")
+//                .build()
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onResponse(String response, int id) {
+//                        final Type type = new TypeToken<SverResponse<PageBean<Product>>>(){}.getType();
+//                       result = JSONUtils.fromJson(response,type);
+//
+//                        if (result.getStatus()== ResponeCode.SUCCESS.getCode()) {
+//                            if (result.getData() == null) {
+//                                if (flag){
+//                                    rightProductData.clear();
+//                                }
+//                                rightProductData.addAll(result.getData().getData());
+//                                categoryRightAdapter.notifyDataSetChanged();
+//                            }
+//                            if(!flag){
+//                                refreshLayout.finishRefreshLoadMore();
+//                            }
+//                    }
+//                    }
+//                });
 
     }
 
