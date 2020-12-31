@@ -38,6 +38,7 @@ import okhttp3.Call;
 
 /**
  * A simple {@link Fragment} subclass.
+ * modified by liben 12.31
  */
 /*zhai*/
 public class CategoryFragment extends Fragment {
@@ -129,6 +130,8 @@ public class CategoryFragment extends Fragment {
     }
 
     private void loadParams(){
+        //
+
         //加载产品分类参数
         OkHttpUtils.get()
                 .url(Constant.API.CATEGORY_PARAM_URL)
