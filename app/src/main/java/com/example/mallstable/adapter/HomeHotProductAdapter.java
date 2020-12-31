@@ -88,7 +88,6 @@ public class HomeHotProductAdapter extends DelegateAdapter.Adapter<HomeHotProduc
         public ImageView icon_url;
         public TextView stock;
         public TextView price;
-
         public HotProductViewHolder(@NonNull View itemView) {
             super(itemView);
             titleContainer = (RelativeLayout) itemView.findViewById(R.id.title_container);

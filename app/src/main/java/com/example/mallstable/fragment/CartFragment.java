@@ -67,7 +67,6 @@ public class CartFragment extends Fragment {
 
     private boolean isEdit = false;
 
-
     //本地广播
     private LocalBroadcastManager localBroadcastManager;
     private IntentFilter intentFilter;
@@ -76,7 +75,6 @@ public class CartFragment extends Fragment {
     public CartFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,7 +85,6 @@ public class CartFragment extends Fragment {
         loadCartData();
         return view;
     }
-
 
     /*登录注册广播修改    CH*/
     @Override
@@ -123,12 +120,81 @@ public class CartFragment extends Fragment {
         }
     }
 
+    //12.30
+    public void initView(View view) {
+        //找到界面组件
+        recyclerView = (RecyclerView) view.findViewById(R.id.cart_rv);
+        total = (TextView) view.findViewById(R.id.total);
+        btn_buy = (TextView) view.findViewById(R.id.buy_btn);
+
+        mData = new ArrayList<>();  //初始化数据
+        cartAdapter = new CartAdapter(getActivity(), mData);  //初始化
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        //将现行布局添加到recyclerView
+        recyclerView.setLayoutManager(linearLayoutManager);
+        //进行绑定
+        recyclerView.setAdapter(cartAdapter);
+        //接口的实现：删除，接收数量
+        cartAdapter.setOnCartOptListener(new CartAdapter.OnCartOptListener() {
+            @Override
+            public void updateProductCount(int productId, int count) {
+                updateProduct(productId, count);
+
+            }
+
+            @Override
+            public void delProductFromCart(int productId) {
+                delProductById(productId);
+            }
+        });
+
+        view.findViewById(R.id.edit_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isEdit) {
+                    isEdit = false;
+                    for (CartItem item : mData) {
+                        item.setEdit(true);
+                    }
+
+                } else {
+                    isEdit = true;
+                    for (CartItem item : mData) {
+                        item.setEdit(false);
+                    }
+                }
+                cartAdapter.notifyDataSetChanged();
+            }
+        });
+
+        //12.30
+        btn_buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //跳转到确定订单页
+                Intent intent = new Intent(getActivity(), ConfirmOrderActivity.class);
+                startActivity(intent);
+            }
+        });
+        cartAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int pos) {
+                //跳转到详情页面
+                String id = mData.get(pos).getId() + "";
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
+            }
+
+        });
+    }
+
     /*加载购物车数据*/
     private void loadCartData() {
         // 12.30 li
-        List<CartItem> lists=new ArrayList<>();
-        for(int i=0;i<9;i++){
-            CartItem param=new CartItem();
+        List<CartItem> lists = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            CartItem param = new CartItem();
             param.setEdit(true);
             param.setIconUrl("初始加载的");
             param.setId(32);
@@ -144,7 +210,7 @@ public class CartFragment extends Fragment {
         }
         mData.addAll(lists);
         cartAdapter.notifyDataSetChanged(); //放进
-        total.setText("合计：￥" + "AADD" );
+        total.setText("合计：￥" + "AADD");
 
 //        OkHttpUtils.get()
 //                .url(Constant.API.CART_LIST_URL)
@@ -183,9 +249,9 @@ public class CartFragment extends Fragment {
     }
 
     private void updateProduct(int productId, int count) {
-        List<CartItem> lists=new ArrayList<>();
-        for(int i=0;i<9;i++){
-            CartItem param=new CartItem();
+        List<CartItem> lists = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            CartItem param = new CartItem();
             param.setEdit(true);
             param.setIconUrl("更新的");
             param.setId(32);
@@ -201,7 +267,7 @@ public class CartFragment extends Fragment {
         }
         mData.addAll(lists);
         cartAdapter.notifyDataSetChanged(); //放进
-        total.setText("合计：￥" + "AADD" );
+        total.setText("合计：￥" + "AADD");
 
 //        OkHttpUtils.get()
 //                .url(Constant.API.CART_UPDATE_URL)
@@ -234,9 +300,9 @@ public class CartFragment extends Fragment {
 
     /*删除商品 12.30 li*/
     private void delProductById(int productId) {
-        List<CartItem> lists=new ArrayList<>();
-        for(int i=0;i<9;i++){
-            CartItem param=new CartItem();
+        List<CartItem> lists = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            CartItem param = new CartItem();
             param.setEdit(true);
             param.setIconUrl("删除的");
             param.setId(32);
@@ -252,7 +318,7 @@ public class CartFragment extends Fragment {
         }
         mData.addAll(lists);
         cartAdapter.notifyDataSetChanged(); //放进
-        total.setText("合计：￥" + "AADD" );
+        total.setText("合计：￥" + "AADD");
 //        OkHttpUtils.get()
 //                .url(Constant.API.CART_DEL_URL)
 //                .addParams("productId", productId + "")
@@ -278,79 +344,6 @@ public class CartFragment extends Fragment {
 //                        }
 //                    }
 //                });
-    }
-
-    //12.30
-    public void initView(View view) {
-        //找到界面组件
-        recyclerView = (RecyclerView) view.findViewById(R.id.cart_rv);
-        total = (TextView) view.findViewById(R.id.total);
-        btn_buy = (TextView) view.findViewById(R.id.buy_btn);
-
-        mData = new ArrayList<>();  //初始化数据
-        cartAdapter = new CartAdapter(getActivity(), mData);  //初始化
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        //将现行布局添加到recyclerView
-        recyclerView.setLayoutManager(linearLayoutManager);
-        //进行绑定
-        recyclerView.setAdapter(cartAdapter);
-        //接口的实现：删除，接收数量
-        cartAdapter.setOnCartOptListener(new CartAdapter.OnCartOptListener() {
-            @Override
-            public void updateProductCount(int productId, int count) {
-                updateProduct(productId, count);
-
-            }
-
-            @Override
-            public void delProductFromCart(int productId) {
-                delProductById(productId);
-            }
-        });
-
-
-        view.findViewById(R.id.edit_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isEdit) {
-                    isEdit = false;
-                    for (CartItem item : mData) {
-                        item.setEdit(true);
-                    }
-
-                } else {
-                    isEdit = true;
-                    for (CartItem item : mData) {
-                        item.setEdit(false);
-                    }
-                }
-
-                cartAdapter.notifyDataSetChanged();
-
-            }
-        });
-
-        //12.30
-        cartAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int pos) {
-                //跳转到详情页面
-                String id = mData.get(pos).getId() + "";
-                Intent intent = new Intent(getActivity(), DetailActivity.class);
-                intent.putExtra("id", id);
-                startActivity(intent);
-            }
-
-        });
-        btn_buy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //跳转到确定订单页
-                Intent intent = new Intent(getActivity(), ConfirmOrderActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
 }
