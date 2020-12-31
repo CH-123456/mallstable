@@ -26,6 +26,8 @@ import com.example.mallstable.pojo.Product;
 import com.example.mallstable.pojo.ResponeCode;
 import com.example.mallstable.pojo.SverResponse;
 import com.example.mallstable.utils.JSONUtils;
+import com.example.mallstable.utils.SpaceItemDecoration;
+import com.example.mallstable.utils.Utils;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -99,8 +101,16 @@ public class CategoryFragment extends Fragment {
             }
         });
 
+        categoryRightAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int pos) {
+                //跳转到详情页面
+
+            }
+        });
         //网格布局管理器
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),2);
+        rightRecyclerView.addItemDecoration(new SpaceItemDecoration(Utils.dp2px(getActivity(),10),Utils.dp2px(getActivity(),5)));
         rightRecyclerView.setLayoutManager(gridLayoutManager);
        rightRecyclerView.setAdapter(categoryRightAdapter);
 
@@ -123,6 +133,9 @@ public class CategoryFragment extends Fragment {
                      if (pageBean.getPageNum()!=pageBean.getNextPage()){
                          findProductByParam(typeId,pageBean.getNextPage(),pageBean.getPageSize(),false);
                      }
+
+                }else{
+                    materialRefreshLayout.finishRefreshLoadMore();
                 }
 
             }
@@ -151,7 +164,7 @@ public class CategoryFragment extends Fragment {
                                 return;
                             leftCategoryData.addAll(result.getData());
 
-                               String typeId=leftCategoryData.get(0).getId()+"";
+                            typeId=leftCategoryData.get(0).getId()+"";
                                leftCategoryData.get(0).setPressed(true);
                                findProductByParam(typeId,1,10,true);
 
@@ -187,6 +200,9 @@ public class CategoryFragment extends Fragment {
                                 }
                                 rightProductData.addAll(result.getData().getData());
                                 categoryRightAdapter.notifyDataSetChanged();
+                            }
+                            if(!flag){
+                                refreshLayout.finishRefreshLoadMore();
                             }
                     }
                     }
