@@ -81,10 +81,8 @@ public class CategoryFragment extends Fragment {
         rightRecyclerView = (RecyclerView) view.findViewById(R.id.product_rv);
         refreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh_layout);
 
-
         leftCategoryData = new ArrayList<>();
         categoryLeftAdapter = new CategoryLeftAdapter(getActivity(), leftCategoryData);
-
         rightProductData = new ArrayList<>();
         categoryRightAdapter = new CategoryRightAdapter(getActivity(), rightProductData);
 
@@ -217,7 +215,7 @@ public class CategoryFragment extends Fragment {
 //                    @Override
 //                    public void onResponse(String response, int id) {
 //                        final Type type = new TypeToken<SverResponse<PageBean<Product>>>(){}.getType();
-//                       result = JSONUtils.fromJson(response,type);
+//                        result = JSONUtils.fromJson(response,type);
 //
 //                        if (result.getStatus()== ResponeCode.SUCCESS.getCode()) {
 //                            if (result.getData() == null) {
@@ -233,8 +231,5 @@ public class CategoryFragment extends Fragment {
 //                    }
 //                    }
 //                });
-
     }
-
-
 }
