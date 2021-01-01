@@ -1,6 +1,5 @@
 package com.example.mallstable.fragment;
 
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -46,14 +45,13 @@ public class UserFragment extends Fragment {
 
     public UserFragment() {
         // Required empty public constructor
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_user, container, false);
+        View view = inflater.inflate(R.layout.fragment_user, container, false);
         initView(view);
         initUserInfo();
         return view;
@@ -62,34 +60,35 @@ public class UserFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        localBroadcastManager=LocalBroadcastManager.getInstance(getActivity());
-      intentFilter =new IntentFilter();
-      intentFilter.addAction(Constant.ACTION.LOAD_CART_ACTION);
-      broadcastReceiver=new BroadcastReceiver() {
-          @Override
-          public void onReceive(Context context, Intent intent) {
-        initUserInfo();
-          }
-      };
-      localBroadcastManager.registerReceiver(broadcastReceiver,intentFilter);
+        localBroadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        intentFilter = new IntentFilter();
+        intentFilter.addAction(Constant.ACTION.LOAD_CART_ACTION);
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                initUserInfo();
+            }
+        };
+        localBroadcastManager.registerReceiver(broadcastReceiver, intentFilter);
     }
+
     @Override
     public void onDetach() {
         super.onDetach();
-    localBroadcastManager.unregisterReceiver(broadcastReceiver);
+        localBroadcastManager.unregisterReceiver(broadcastReceiver);
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (!hidden){
+        if (!hidden) {
             initUserInfo();
         }
     }
 
     //加载UI
-    private void initView(View view){
-        user=view.findViewById(R.id.user);
+    private void initView(View view) {
+        user = view.findViewById(R.id.user);
         view.findViewById(R.id.btn_addr).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,7 +104,7 @@ public class UserFragment extends Fragment {
 
     }
 
-    private  void initUserInfo(){
+    private void initUserInfo() {
         //添加用户数据
         user.setText("sdfsf");
 

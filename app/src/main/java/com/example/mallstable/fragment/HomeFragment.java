@@ -1,6 +1,5 @@
 package com.example.mallstable.fragment;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +7,13 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
@@ -48,6 +50,9 @@ import okhttp3.Call;
 /**
  * reated by ZangJie 12.30
  * modified by liben 12.31 add data
+ * modified by liben 1.1 add function search
+ * 商品按名称搜索的功能不知道好不好使（不知道接口是怎么传递参数的）
+ * 而且首页的搜索框应该执行什么逻辑也不知道，是搜索全部商品还是搜索热销的商品
  */
 
 /**
@@ -59,6 +64,7 @@ public class HomeFragment extends Fragment {
     private List<Param> mCategoryData;  //产品类型参数
     private List<Product> mProductData; //热销商品
     private final int PARAM_ROW_COL = 3;
+    private TextView search;
 
     private HomeTopBannerAndParamAdapter homeTopBannerAndParamAdapter;
     private HomeHotProductAdapter homeHotProductAdapter;
@@ -157,13 +163,25 @@ public class HomeFragment extends Fragment {
             }
         });
         banner.start();
+
+        //搜索功能
+        search = view.findViewById(R.id.toolbar_searchview);
+        search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH) {
+                    loadSearch();
+                }
+                return false;
+            }
+        });
     }
 
     private void loadParams() {
         //添加的数据（类别的）
-        List<Param> result =new ArrayList<Param>();
-        for(int i=0;i<9;i++){
-            Param param=new Param(123,456, "sfd",true,33, 2,"", "");
+        List<Param> result = new ArrayList<Param>();
+        for (int i = 0; i < 9; i++) {
+            Param param = new Param(123, 456, "sfd", true, 33, 2, "", "");
             result.add(param);
         }
         mCategoryData.addAll(result);
@@ -201,9 +219,9 @@ public class HomeFragment extends Fragment {
 
     private void loadHotProducts() {
         //热销产品
-        List<Product> products =new ArrayList<Product>();
-        for(int i=0;i<9;i++){
-            Product param=new Product();
+        List<Product> products = new ArrayList<Product>();
+        for (int i = 0; i < 9; i++) {
+            Product param = new Product();
             param.setDetail("fdsfsd");
             param.setHot(1);
             param.setIconUrl("sdfsd");
@@ -238,6 +256,60 @@ public class HomeFragment extends Fragment {
 //                            }
 //                            homeHotProductAdapter.notifyDataSetChanged();
 //                        }
+//                    }
+//                });
+    }
+
+    private void loadSearch() {
+        List<Product> result1 = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            Product param = new Product();
+            param.setStock(111);
+            param.setStatus(2);
+            param.setProductId(13);
+            param.setPrice(new BigDecimal(1465));
+            param.setName("搜索的");
+            param.setId(6545);
+            param.setHot(2);
+            param.setDetail("搜索的");
+            param.setSpecParam("搜索的");
+            param.setPartsId(65465);
+            result1.add(param);
+        }
+        mProductData.clear();
+        mProductData.addAll(result1);
+        homeHotProductAdapter.notifyDataSetChanged();
+
+        //HTTP 请求要添加的参数好像不对，具体修改
+//        OkHttpUtils.get()
+//                .url(Constant.API.CATEGORY_PRODUCT_URL)
+//                .addParams("productTypeId",productTypeId)
+//                .addParams("pageNum",pageNum+"")
+//                .addParams("pageSize",pageSize+"")
+//                .build()
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onResponse(String response, int id) {
+//                        final Type type = new TypeToken<SverResponse<PageBean<Product>>>(){}.getType();
+//                       result = JSONUtils.fromJson(response,type);
+//
+//                        if (result.getStatus()== ResponeCode.SUCCESS.getCode()) {
+//                            if (result.getData() == null) {
+//                                if (flag){
+//                                    rightProductData.clear();
+//                                }
+//                                rightProductData.addAll(result.getData().getData());
+//                                categoryRightAdapter.notifyDataSetChanged();
+//                            }
+//                            if(!flag){
+//                                refreshLayout.finishRefreshLoadMore();
+//                            }
+//                    }
 //                    }
 //                });
     }
