@@ -1,7 +1,7 @@
 package com.example.mallstable.pojo;
 
 public class Param {
-    private  int id;
+    private int id;
     private int parent_id;
     private String name;
     private boolean status;
@@ -10,7 +10,7 @@ public class Param {
     private String created;
     private String updated;
 
-    private boolean pressed=false;
+    private boolean pressed = false;
 
     public Param() {
     }

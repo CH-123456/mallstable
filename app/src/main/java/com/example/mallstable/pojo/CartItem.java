@@ -21,7 +21,7 @@ public class CartItem {
     private Integer stock;          //商品库存
     private String iconUrl;         //商品图片地址
 
-    private  boolean isEdit =false; //数量是否添加,是否被编辑
+    private boolean isEdit = false; //数量是否添加,是否被编辑
 
     public Integer getId() {
         return id;

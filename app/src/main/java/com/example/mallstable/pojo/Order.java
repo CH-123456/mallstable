@@ -18,7 +18,7 @@ public class Order {
     private String finishTime;//
     private String closeTime;//
     private String created;//
-    private Integer addrId ;//
+    private Integer addrId;//
     private String deliverName;//
 
     public Long getOrderNo() {
