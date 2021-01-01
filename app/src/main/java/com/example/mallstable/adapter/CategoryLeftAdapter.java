@@ -83,6 +83,4 @@ public class CategoryLeftAdapter extends RecyclerView.Adapter<CategoryLeftAdapte
             name=(TextView)itemView.findViewById(R.id.category_tv);
         }
     }
-
-
 }
