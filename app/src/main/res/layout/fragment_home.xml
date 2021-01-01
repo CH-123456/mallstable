@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
+            android:imeOptions="actionSearch"
             android:drawableLeft="@mipmap/icon_search"
             android:gravity="center"
             android:hint="请输入搜索内容"

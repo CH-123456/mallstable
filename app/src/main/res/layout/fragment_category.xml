@@ -35,6 +35,7 @@
             android:layout_gravity="center"
             android:drawableLeft="@mipmap/icon_search"
             android:gravity="center"
+            android:imeOptions="actionSearch"
             android:hint="请输入搜索内容"
             android:textSize="14sp"
             android:visibility="visible" />
