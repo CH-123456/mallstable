@@ -89,34 +89,48 @@ public class AddressListActivity extends AppCompatActivity {
      * 加载地址列表
      */
     private void loadAddressList() {
-        OkHttpUtils.get()
-                .url(Constant.API.USER_ADDR_LIST_URL)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Type type = new TypeToken<SverResponse<List<Address>>>() {
-                        }.getType();
-                        SverResponse<List<Address>> result = JSONUtils.fromJson(response, type);
-                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
-                            mData.clear();
-                            mData.addAll(result.getData());
-                            addressAdapter.notifyDataSetChanged();
-                        }
-                    }
-                });
+        /**
+         * Created by wangquanli 2021/1/1
+         */
+        List<Address>  result = new ArrayList<>();
+        for(int i=0;i<5;i++){
+            Address address = new Address();
+            address.setAddr("我是一个小可爱呀");
+            result.add(address);
+        }
+        mData.clear();
+        mData.addAll(result);
+        addressAdapter.notifyDataSetChanged();
+//        OkHttpUtils.get()
+//                .url(Constant.API.USER_ADDR_LIST_URL)
+//                .build()
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onResponse(String response, int id) {
+//                        Type type = new TypeToken<SverResponse<List<Address>>>() {
+//                        }.getType();
+//                        SverResponse<List<Address>> result = JSONUtils.fromJson(response, type);
+//                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+//                            mData.clear();
+//                            mData.addAll(result.getData());
+//                            addressAdapter.notifyDataSetChanged();
+//                        }
+//                    }
+//                });
     }
 
     /**
      * 根据编号删除地址
      */
     private void deleteAddress(String id) {
-        OkHttpUtils.get()
+
+
+       /* OkHttpUtils.get()
                 .url(Constant.API.USER_ADDR_DEL_URL)
                 .addParams("id", id)
                 .build()
@@ -136,6 +150,6 @@ public class AddressListActivity extends AppCompatActivity {
                             Toast.makeText(AddressListActivity.this, result.getMsg(), Toast.LENGTH_LONG).show();
                         }
                     }
-                });
+                });*/
     }
 }

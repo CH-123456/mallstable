@@ -18,6 +18,23 @@ public class Product {
     private Integer hot;//是否热销：1热销；2不热销。默认2
     private Date created;//创建时间
     private Date updated;//更新时间
+    public Product(){}
+    public Product(Integer id, String name, Integer productId, Integer partsId, String iconUrl, String subImages, String detail, String specParam, BigDecimal price, Integer stock, Integer status, Integer hot, Date created, Date updated) {
+        this.id = id;
+        this.name = name;
+        this.productId = productId;
+        this.partsId = partsId;
+        this.iconUrl = iconUrl;
+        this.subImages = subImages;
+        this.detail = detail;
+        this.specParam = specParam;
+        this.price = price;
+        this.stock = stock;
+        this.status = status;
+        this.hot = hot;
+        this.created = created;
+        this.updated = updated;
+    }
 
     public Integer getId() {
         return id;

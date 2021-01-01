@@ -30,6 +30,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
+import java.sql.Date;
 
 import okhttp3.Call;
 
@@ -128,44 +129,65 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     //加载商品数据
     private void loadProductById(String id) {
-        OkHttpUtils.get()
-                .url(Constant.API.PRODUCT_DETAIL_URL)
-                .addParams("productId", id)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
+        /**
+         * Created by wangquanli 2021/1/1
+         */
+        //显示配件信息
+        Glide.with(DetailActivity.this).load(Constant.API.BASE_URL + product.getIconUrl())
+                .into(icon_url);
+        name.setText(product.getName());
+        parts.setText("配件类型：" +"可爱型");
+        price.setText("￥" + "000");
+        stock.setText("库存：" + "100");
+        num.setText("1");//设置购买数量默认值
 
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Type type = new TypeToken<SverResponse<Product>>() {
-                        }.getType();
-                        SverResponse<Product> result = JSONUtils.formJson(response, type);
-                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
-                            if (result.getData() == null) {
-                                return;
-                            }
-                            product = result.getData();
-                            //显示配件信息
-                            Glide.with(DetailActivity.this).load(Constant.API.BASE_URL + product.getIconUrl())
-                                    .into(icon_url);
-                            name.setText(product.getName());
-                            parts.setText("配件类型：" + product.getPartsId());
-                            price.setText("￥" + product.getPrice());
-                            stock.setText("库存：" + product.getStock());
-                            num.setText("1");//设置购买数量默认值
-                            product_detail.loadDataWithBaseURL(Constant.API.BASE_URL,
+        for (int i=0;i<3;i++) {
+            Product result = new Product(1, "可爱", 2, 3, "sss", "sss", "ssss", "sss", null, 20, 1, 1, null, null);
+            product_detail.loadDataWithBaseURL(Constant.API.BASE_URL,
                                     product.getDetail(),
                                     "text/html",
                                     "utf-8",
                                     null);
-                        } else {
-                            DetailActivity.this.finish();
-                        }
-                    }
-                });
+
+        }
+//        OkHttpUtils.get()
+//                .url(Constant.API.PRODUCT_DETAIL_URL)
+//                .addParams("productId", id)
+//                .build()
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onResponse(String response, int id) {
+//                        Type type = new TypeToken<SverResponse<Product>>() {
+//                        }.getType();
+//                        SverResponse<Product> result = JSONUtils.formJson(response, type);
+//                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+//                            if (result.getData() == null) {
+//                                return;
+//                            }
+//                            product = result.getData();
+//                            //显示配件信息
+//                            Glide.with(DetailActivity.this).load(Constant.API.BASE_URL + product.getIconUrl())
+//                                    .into(icon_url);
+//                            name.setText(product.getName());
+//                            parts.setText("配件类型：" + product.getPartsId());
+//                            price.setText("￥" + product.getPrice());
+//                            stock.setText("库存：" + product.getStock());
+//                            num.setText("1");//设置购买数量默认值
+//                            product_detail.loadDataWithBaseURL(Constant.API.BASE_URL,
+//                                    product.getDetail(),
+//                                    "text/html",
+//                                    "utf-8",
+//                                    null);
+//                        } else {
+//                            DetailActivity.this.finish();
+//                        }
+//                    }
+//                });
     }
 
     //加入购物车功能
