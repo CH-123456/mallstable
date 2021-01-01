@@ -18,7 +18,8 @@ import com.example.mallstable.fragment.HomeFragment;
 import com.example.mallstable.fragment.UserFragment;
 
 /*
- *modified by liben 12.31 add data
+ * modified by liben 12.31 add data
+ * modified by bing 1.1 添加方法gotoCartFragment 为了跳转到购物车fragment(从我的点购物车)
  */
 
 public class MainActivity extends AppCompatActivity {
