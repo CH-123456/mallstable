@@ -1,6 +1,6 @@
 package com.example.mallstable.config;
 /*
-*created by wangquanli 12.29
+* created by wangquanli 12.29
 * modified by liben 12.30
 * modified by bing 12.30 10:21
 * modified by bing 12.30 10:42

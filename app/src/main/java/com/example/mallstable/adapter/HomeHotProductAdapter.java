@@ -74,7 +74,6 @@ public class HomeHotProductAdapter extends DelegateAdapter.Adapter<HomeHotProduc
             }
         });
     }
-
     @Override
     public int getItemCount() {
         return data.size();
