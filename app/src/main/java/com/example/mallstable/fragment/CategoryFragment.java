@@ -105,7 +105,7 @@ public class CategoryFragment extends Fragment {
         categoryRightAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
-                //跳转到详情页面
+                //跳转 到详情页面
 
             }
         });
@@ -170,7 +170,7 @@ public class CategoryFragment extends Fragment {
 //        OkHttpUtils.get()
 //                .url(Constant.API.CATEGORY_PARAM_URL)
 //                .build()
-//                .execute(new StringCallback() {
+//              0  .execute(new StringCallback() {
 //                    @Override
 //                    public void onError(Call call, Exception e, int id) {
 //
