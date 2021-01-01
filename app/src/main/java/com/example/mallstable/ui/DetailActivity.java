@@ -171,7 +171,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     //加入购物车功能
     private void addProduct2Cart() {
         if (product != null) {
-            OkHttpUtils.post()
+            /*zhai*/
+           /* OkHttpUtils.post()
                     .url(Constant.API.CART_ADD_URL)
                     .addParams("productId", product.getId() + "")
                     .addParams("count", num.getText().toString())
@@ -187,11 +188,12 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                             SverResponse result = JSONUtils.formJson(response, SverResponse.class);
                             if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
                                 //
+
                             } else {
                                 Toast.makeText(DetailActivity.this, result.getMsg(), Toast.LENGTH_LONG).show();
                             }
                         }
-                    });
+                    });*/
         }
     }
 }
