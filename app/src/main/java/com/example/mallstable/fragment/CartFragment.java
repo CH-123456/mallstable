@@ -139,7 +139,6 @@ public class CartFragment extends Fragment {
             @Override
             public void updateProductCount(int productId, int count) {
                 updateProduct(productId, count);
-
             }
 
             @Override
@@ -156,7 +155,6 @@ public class CartFragment extends Fragment {
                     for (CartItem item : mData) {
                         item.setEdit(true);
                     }
-
                 } else {
                     isEdit = true;
                     for (CartItem item : mData) {
