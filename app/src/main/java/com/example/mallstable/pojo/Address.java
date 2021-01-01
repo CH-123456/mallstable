@@ -24,7 +24,6 @@ public class Address implements Serializable {
     private Date created;//创建时间
     private Date updated;//更新时间
 
-
     public Integer getId() {
         return id;
     }
