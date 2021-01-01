@@ -1,6 +1,5 @@
 package com.example.mallstable.fragment;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -52,8 +51,8 @@ import okhttp3.Call;
  * reated by ZangJie 12.30
  * modified by liben 12.31 add data
  * modified by liben 1.1 add function search
- *          商品按名称搜索的功能不知道好不好使（不知道接口是怎么传递参数的）
- *          而且首页的搜索框应该执行什么逻辑也不知道，是搜索全部商品还是搜索热销的商品
+ * 商品按名称搜索的功能不知道好不好使（不知道接口是怎么传递参数的）
+ * 而且首页的搜索框应该执行什么逻辑也不知道，是搜索全部商品还是搜索热销的商品
  */
 
 /**
@@ -166,12 +165,11 @@ public class HomeFragment extends Fragment {
         banner.start();
 
         //搜索功能
-        search=view.findViewById(R.id.toolbar_searchview);
+        search = view.findViewById(R.id.toolbar_searchview);
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEARCH)
-                {
+                if (i == EditorInfo.IME_ACTION_SEARCH) {
                     loadSearch();
                 }
                 return false;
@@ -181,9 +179,9 @@ public class HomeFragment extends Fragment {
 
     private void loadParams() {
         //添加的数据（类别的）
-        List<Param> result =new ArrayList<Param>();
-        for(int i=0;i<9;i++){
-            Param param=new Param(123,456, "sfd",true,33, 2,"", "");
+        List<Param> result = new ArrayList<Param>();
+        for (int i = 0; i < 9; i++) {
+            Param param = new Param(123, 456, "sfd", true, 33, 2, "", "");
             result.add(param);
         }
         mCategoryData.addAll(result);
@@ -221,9 +219,9 @@ public class HomeFragment extends Fragment {
 
     private void loadHotProducts() {
         //热销产品
-        List<Product> products =new ArrayList<Product>();
-        for(int i=0;i<9;i++){
-            Product param=new Product();
+        List<Product> products = new ArrayList<Product>();
+        for (int i = 0; i < 9; i++) {
+            Product param = new Product();
             param.setDetail("fdsfsd");
             param.setHot(1);
             param.setIconUrl("sdfsd");
@@ -262,10 +260,10 @@ public class HomeFragment extends Fragment {
 //                });
     }
 
-    private void loadSearch(){
-        List<Product> result1=new ArrayList<>();
-        for(int i=0;i<9;i++){
-            Product param=new Product();
+    private void loadSearch() {
+        List<Product> result1 = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            Product param = new Product();
             param.setStock(111);
             param.setStatus(2);
             param.setProductId(13);
