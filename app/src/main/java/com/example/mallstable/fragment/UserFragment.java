@@ -98,7 +98,7 @@ public class UserFragment extends Fragment {
         view.findViewById(R.id.btn_all).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
+
             }
         });
 
