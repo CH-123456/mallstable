@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 监听chang事件
+     * 监听change事件
      */
     private void bindEvent(){
         //查找控件

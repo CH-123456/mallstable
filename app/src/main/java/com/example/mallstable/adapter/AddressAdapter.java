@@ -107,6 +107,5 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
     public interface OnAddrOptListener {
         //删除
         public void deleteItem(View v, int pos);
-
     }
 }
