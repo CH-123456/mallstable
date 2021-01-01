@@ -8,13 +8,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.cjj.MaterialRefreshLayout;
@@ -47,7 +43,6 @@ import okhttp3.Call;
 /**
  * A simple {@link Fragment} subclass.
  * modified by liben 12.31
- * modified by liben 12.31 add function search 可能存在需要具体修改的问题
  */
 /*zhai*/
 public class CategoryFragment extends Fragment {
@@ -61,7 +56,6 @@ public class CategoryFragment extends Fragment {
     private MaterialRefreshLayout refreshLayout;
     private SverResponse<PageBean<Product>> result;
     private String typeId;
-    private EditText search;
 
     public CategoryFragment() {
         // Required empty public constructor
@@ -117,19 +111,6 @@ public class CategoryFragment extends Fragment {
         rightRecyclerView.addItemDecoration(new SpaceItemDecoration(Utils.dp2px(getActivity(),10),Utils.dp2px(getActivity(),5)));
         rightRecyclerView.setLayoutManager(gridLayoutManager);
        rightRecyclerView.setAdapter(categoryRightAdapter);
-
-        //搜索功能
-        search=view.findViewById(R.id.toolbar_searchview);
-        search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEARCH)
-                {
-                    loadSearch();
-                }
-                return false;
-            }
-        });
 
     }
 
@@ -255,57 +236,5 @@ public class CategoryFragment extends Fragment {
 
     }
 
-    private void loadSearch() {
-        List<Product> result1 = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
-            Product param = new Product();
-            param.setStock(111);
-            param.setStatus(2);
-            param.setProductId(13);
-            param.setPrice(new BigDecimal(1465));
-            param.setName("搜索的");
-            param.setId(6545);
-            param.setHot(2);
-            param.setDetail("搜索的");
-            param.setSpecParam("搜索的");
-            param.setPartsId(65465);
-            result1.add(param);
-        }
-        rightProductData.clear();
-        rightProductData.addAll(result1);
-        categoryRightAdapter.notifyDataSetChanged();
 
-        //HTTP 请求要添加的参数好像不对，具体修改
-//        OkHttpUtils.get()
-//                .url(Constant.API.CATEGORY_PRODUCT_URL)
-//                .addParams("productTypeId",productTypeId)
-//                .addParams("pageNum",pageNum+"")
-//                .addParams("pageSize",pageSize+"")
-//                .build()
-//                .execute(new StringCallback() {
-//                    @Override
-//                    public void onError(Call call, Exception e, int id) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onResponse(String response, int id) {
-//                        final Type type = new TypeToken<SverResponse<PageBean<Product>>>(){}.getType();
-//                       result = JSONUtils.fromJson(response,type);
-//
-//                        if (result.getStatus()== ResponeCode.SUCCESS.getCode()) {
-//                            if (result.getData() == null) {
-//                                if (flag){
-//                                    rightProductData.clear();
-//                                }
-//                                rightProductData.addAll(result.getData().getData());
-//                                categoryRightAdapter.notifyDataSetChanged();
-//                            }
-//                            if(!flag){
-//                                refreshLayout.finishRefreshLoadMore();
-//                            }
-//                    }
-//                    }
-//                });
-    }
 }

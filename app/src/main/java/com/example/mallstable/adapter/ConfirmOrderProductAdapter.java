@@ -18,7 +18,7 @@ import com.example.mallstable.pojo.CartItem;
 import java.util.List;
 
 /*
- *created by liben 12.30
+ * created by liben 12.30
  */
 
 public class ConfirmOrderProductAdapter extends RecyclerView.Adapter<ConfirmOrderProductAdapter.ConfirmOrderViewHolder> {
