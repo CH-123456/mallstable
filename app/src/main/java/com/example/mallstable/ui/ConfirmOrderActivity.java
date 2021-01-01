@@ -192,7 +192,7 @@ public class ConfirmOrderActivity extends AppCompatActivity {
                 });*/
     }
 
-    /**
+    /*
      * 加载购物车数据
      */
     private void initCartProducts() {
