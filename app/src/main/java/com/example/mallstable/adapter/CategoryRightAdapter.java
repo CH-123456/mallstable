@@ -40,7 +40,6 @@ implements View.OnClickListener{
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context).inflate(R.layout.fragment_category_right_list_item,null,false);
         return new ProductViewHolder(view);
-
     }
 
     @Override
@@ -52,7 +51,6 @@ implements View.OnClickListener{
         //
         holder.itemView.setTag(position);
         holder.itemView.setOnClickListener(this);
-
     }
 
     @Override
@@ -60,7 +58,6 @@ implements View.OnClickListener{
         if (onItemClickListener!=null) {
             onItemClickListener.onItemClick(v,(int)v.getTag());
         }
-
     }
 
     @Override

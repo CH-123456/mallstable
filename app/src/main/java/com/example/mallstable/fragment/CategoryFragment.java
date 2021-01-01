@@ -82,10 +82,8 @@ public class CategoryFragment extends Fragment {
         rightRecyclerView = (RecyclerView) view.findViewById(R.id.product_rv);
         refreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh_layout);
 
-
         leftCategoryData = new ArrayList<>();
         categoryLeftAdapter = new CategoryLeftAdapter(getActivity(), leftCategoryData);
-
         rightProductData = new ArrayList<>();
         categoryRightAdapter = new CategoryRightAdapter(getActivity(), rightProductData);
 
@@ -149,7 +147,6 @@ public class CategoryFragment extends Fragment {
                 } else {
                     materialRefreshLayout.finishRefreshLoadMore();
                 }
-
             }
         });
     }
