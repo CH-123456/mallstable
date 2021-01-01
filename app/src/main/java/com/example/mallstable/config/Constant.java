@@ -9,7 +9,7 @@ public class Constant {
     //api 接口
     public static class API{
         //基地址
-        public static final  String BASE_URL = "http://192.168.1.60:8080/mallstable";//文件名待查
+        public static final  String BASE_URL = "http://192.168.43.137:8011/jxshop";//文件名待查
         //产品类型参数地址
         public static final String CATEGORY_PARAM_URL =BASE_URL+"param/findallparams.do";
         //热销商品

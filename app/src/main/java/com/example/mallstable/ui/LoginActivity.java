@@ -66,36 +66,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
         //用于绕过数据库验证
-        Intent intent=new Intent(Constant.ACTION.LOAD_CART_ACTION);
-        LocalBroadcastManager.getInstance(LoginActivity.this).sendBroadcast(intent);
-        Intent c =new Intent(LoginActivity.this,MainActivity.class);
-        startActivity(c);
-        LoginActivity.this.finish();
-//        OkHttpUtils.post()
-//                .url(Constant.API.USER_LOGIN_URL)
-//                .addParams("account",account)
-//                .addParams("paasword",password)
-//                .build()
-//                .execute(new StringCallback() {
-//                    @Override
-//                    public void onError(Call call, Exception e, int id) {
-//                        Toast.makeText(LoginActivity.this,"网络问题，请稍后重试！",Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onResponse(String response, int id) {
-//                        Type type=new TypeToken<SverResponse<User>>(){}.getType();
-//                        /*TypeToken 导包*/
-//                        SverResponse<User> result= JSONUtils.fromJson(response,type);
-//                        if(result.getStatus()== ResponeCode.SUCCESS.getCode()){
-//                            //发送本地广播
-//                            Intent intent=new Intent(Constant.ACTION.LOAD_CART_ACTION);
-//                            LocalBroadcastManager.getInstance(LoginActivity.this).sendBroadcast(intent);
-//                            LoginActivity.this.finish();
-//                        }else{
-//                            Toast.makeText(LoginActivity.this,result.getMsg(),Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
+//        Intent intent=new Intent(Constant.ACTION.LOAD_CART_ACTION);
+//        LocalBroadcastManager.getInstance(LoginActivity.this).sendBroadcast(intent);
+//        Intent c =new Intent(LoginActivity.this,MainActivity.class);
+//        startActivity(c);
+//        LoginActivity.this.finish();
+
+        OkHttpUtils.post()
+                .url(Constant.API.USER_LOGIN_URL)
+                .addParams("account",account)
+                .addParams("paasword",password)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Toast.makeText(LoginActivity.this,"网络问题，请稍后重试！",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Type type=new TypeToken<SverResponse<User>>(){}.getType();
+                        /*TypeToken 导包*/
+                        SverResponse<User> result= JSONUtils.fromJson(response,type);
+                        if(result.getStatus()== ResponeCode.SUCCESS.getCode()){
+                            //发送本地广播
+                            Intent intent=new Intent(Constant.ACTION.LOAD_CART_ACTION);
+                            LocalBroadcastManager.getInstance(LoginActivity.this).sendBroadcast(intent);
+                            LoginActivity.this.finish();
+                        }else{
+                            Toast.makeText(LoginActivity.this,result.getMsg(),Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }

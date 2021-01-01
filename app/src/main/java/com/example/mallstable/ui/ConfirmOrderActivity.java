@@ -20,6 +20,7 @@ import com.example.mallstable.pojo.Address;
 import com.example.mallstable.pojo.Cart;
 import com.example.mallstable.pojo.CartItem;
 import com.example.mallstable.pojo.Order;
+import com.example.mallstable.pojo.Param;
 import com.example.mallstable.pojo.ResponeCode;
 import com.example.mallstable.pojo.SverResponse;
 import com.example.mallstable.pojo.User;
@@ -29,7 +30,9 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.Call;
@@ -127,7 +130,27 @@ public class ConfirmOrderActivity extends AppCompatActivity {
      * 加载默认地址
      */
     private void initDefaultAdr() {
-        OkHttpUtils.get()
+        /*zhai*/
+        List<Address> addresses = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            Address param = new Address();
+            param.setAddr("address");
+            param.setCity("city");
+            param.setCreated(null);
+            param.setDel(false);
+            param.setDfault(true);
+            param.setDistrict("district");
+            param.setId(12);
+            param.setMobile("123456");
+            param.setName("CH");
+            param.setPhone("123456");
+            param.setProvince("province");
+            param.setUid(13);
+            param.setUpdated(null);
+            param.setZip("123");
+            addresses.add(param);
+        }
+      /*OkHttpUtils.get()
                 .url(Constant.API.USER_ADDR_LIST_URL)
                 .build()
                 .execute(new StringCallback() {
@@ -166,14 +189,33 @@ public class ConfirmOrderActivity extends AppCompatActivity {
                             addr_detail.setText("请选择收件地址");
                         }
                     }
-                });
+                });*/
     }
 
-    /**
+    /*
      * 加载购物车数据
      */
     private void initCartProducts() {
-        OkHttpUtils.get()
+        /*zhai*/
+        List<CartItem> lists = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            CartItem param = new CartItem();
+            param.setEdit(true);
+            param.setIconUrl("初始加载的2");
+            param.setId(322);
+            param.setName("初始加载的2");
+            param.setPrice(new BigDecimal(56462));
+            param.setProductId(6542);
+            param.setStatus(522);
+            param.setStock(322);
+            param.setUserId(62);
+            param.setTotalPrice(new BigDecimal(987988989));
+            param.setQuantity(32);
+            lists.add(param);
+        }
+        cartItems.addAll(lists);
+        confirmOrderProductAdapter.notifyDataSetChanged();
+        /*OkHttpUtils.get()
                 .url(Constant.API.CART_LIST_URL)
                 .build()
                 .execute(new StringCallback() {
@@ -194,7 +236,8 @@ public class ConfirmOrderActivity extends AppCompatActivity {
                         }
                         total.setText("合计：" + result.getData().getTotalPrice());
                     }
-                });
+                });*/
+
     }
 
     private void submitOrder() {
@@ -202,6 +245,7 @@ public class ConfirmOrderActivity extends AppCompatActivity {
             Toast.makeText(this, "请选择收货地址！", Toast.LENGTH_LONG).show();
             return;
         }
+        /*
         OkHttpUtils.post()
                 .url(Constant.API.ORDER_CREATED_URL)
                 .addParams("addrId", defaultAddr.getId() + "")
@@ -223,6 +267,7 @@ public class ConfirmOrderActivity extends AppCompatActivity {
                             Toast.makeText(ConfirmOrderActivity.this, result.getStatus(), Toast.LENGTH_LONG).show();
                         }
                     }
-                });
+                });*/
+
     }
 }
