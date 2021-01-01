@@ -1,5 +1,6 @@
 package com.example.mallstable.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -28,6 +29,7 @@ import com.example.mallstable.pojo.Param;
 import com.example.mallstable.pojo.Product;
 import com.example.mallstable.pojo.ResponeCode;
 import com.example.mallstable.pojo.SverResponse;
+import com.example.mallstable.ui.DetailActivity;
 import com.example.mallstable.utils.JSONUtils;
 import com.example.mallstable.utils.SpaceItemDecoration;
 import com.example.mallstable.utils.Utils;
@@ -103,8 +105,13 @@ public class CategoryFragment extends Fragment {
         categoryRightAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
-                //跳转 到详情页面
-
+                //跳转到详情页面
+                //提取产品编号并跳转
+                //谁删谁是Big SB
+                String id = rightProductData.get(pos).getId() + "";
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
             }
         });
         //网格布局管理器
