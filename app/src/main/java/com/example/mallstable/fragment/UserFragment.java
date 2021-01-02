@@ -20,7 +20,11 @@ import com.example.mallstable.config.Constant;
 import com.example.mallstable.pojo.ResponeCode;
 import com.example.mallstable.pojo.SverResponse;
 import com.example.mallstable.pojo.User;
+import com.example.mallstable.ui.AddressListActivity;
+import com.example.mallstable.ui.ConfirmOrderActivity;
 import com.example.mallstable.ui.LoginActivity;
+import com.example.mallstable.ui.MainActivity;
+import com.example.mallstable.ui.OrderActivity;
 import com.example.mallstable.utils.JSONUtils;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -35,6 +39,7 @@ import okhttp3.Response;
  * A simple {@link Fragment} subclass.
  * create by liben12.29
  * modified by liben 12.31
+ * modified by bing 1.1 about 三个事件监听
  */
 public class UserFragment extends Fragment {
     private TextView user;
@@ -92,13 +97,22 @@ public class UserFragment extends Fragment {
         view.findViewById(R.id.btn_addr).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), AddressListActivity.class);
+                startActivity(intent);
             }
         });
         view.findViewById(R.id.btn_all).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), OrderActivity.class);
+                startActivity(intent);
+            }
+        });
+        view.findViewById(R.id.btn_cart).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.gotoCartFragment();
             }
         });
 
