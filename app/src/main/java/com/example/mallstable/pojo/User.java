@@ -11,8 +11,8 @@ public class User {
     private String question;
     private String asw;
     private Integer role;
-    private Date create_time;
-    private Date update_time;
+    private String create_time;
+    private String update_time;
     private Integer age;
     private Integer sex;
     private Integer del;
@@ -82,19 +82,19 @@ public class User {
         this.role = role;
     }
 
-    public Date getCreate_time() {
+    public String getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(Date create_time) {
+    public void setCreate_time(String create_time) {
         this.create_time = create_time;
     }
 
-    public Date getUpdate_time() {
+    public String getUpdate_time() {
         return update_time;
     }
 
-    public void setUpdate_time(Date update_time) {
+    public void setUpdate_time(String update_time) {
         this.update_time = update_time;
     }
 
