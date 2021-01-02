@@ -21,8 +21,8 @@ public class Address implements Serializable {
     private String zip;//邮编
     private boolean dfault;//是否为默认地址，默认为是
     private boolean isDel;//是否删除
-    private Date created;//创建时间
-    private Date updated;//更新时间
+    private String created;//创建时间
+    private String updated;//更新时间
 
     public Integer getId() {
         return id;
@@ -120,19 +120,19 @@ public class Address implements Serializable {
         isDel = del;
     }
 
-    public Date getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(String created) {
         this.created = created;
     }
 
-    public Date getUpdated() {
+    public String getUpdated() {
         return updated;
     }
 
-    public void setUpdated(Date updated) {
+    public void setUpdated(String updated) {
         this.updated = updated;
     }
 }
