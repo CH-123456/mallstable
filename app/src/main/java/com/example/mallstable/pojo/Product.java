@@ -16,10 +16,10 @@ public class Product {
     private Integer stock;//库存
     private Integer status;//商品状态：1待售；2上架；3下架停售.默认值1
     private Integer hot;//是否热销：1热销；2不热销。默认2
-    private Date created;//创建时间
-    private Date updated;//更新时间
+    private String created;//创建时间
+    private String updated;//更新时间
     public Product(){}
-    public Product(Integer id, String name, Integer productId, Integer partsId, String iconUrl, String subImages, String detail, String specParam, BigDecimal price, Integer stock, Integer status, Integer hot, Date created, Date updated) {
+    public Product(Integer id, String name, Integer productId, Integer partsId, String iconUrl, String subImages, String detail, String specParam, BigDecimal price, Integer stock, Integer status, Integer hot, String created, String updated) {
         this.id = id;
         this.name = name;
         this.productId = productId;
@@ -132,19 +132,19 @@ public class Product {
         this.hot = hot;
     }
 
-    public Date getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(String created) {
         this.created = created;
     }
 
-    public Date getUpdated() {
+    public String getUpdated() {
         return updated;
     }
 
-    public void setUpdated(Date updated) {
+    public void setUpdated(String updated) {
         this.updated = updated;
     }
 }

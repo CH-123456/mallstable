@@ -120,30 +120,30 @@ public class UserFragment extends Fragment {
 
     private void initUserInfo() {
         //添加用户数据
-        user.setText("sdfsf");
+//        user.setText("sdfsf");
 
-//        OkHttpUtils.get()
-//                .url(Constant.API.USER_INFO_URL)
-//                .build()
-//                .execute(new StringCallback() {
-//                    @Override
-//                    public void onError(Call call, Exception e, int id) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onResponse(String response, int id) {
-//                        Type type=new TypeToken<SverResponse<User>>(){}.getType();
-//                        SverResponse<User> result= JSONUtils.formJson(response,type);
-//                        if(result.getStatus()== ResponeCode.SUCCESS.getCode()){
-//                            user.setText(result.getData().getAccount());
-//                        }
-//                        else {
-//                            //跳转到登陆页面
-//                            Intent intent=new Intent(getActivity(), LoginActivity.class);
-//                            startActivity(intent);
-//                        }
-//                    }
-//                });
+        OkHttpUtils.get()
+                .url(Constant.API.USER_INFO_URL)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Type type=new TypeToken<SverResponse<User>>(){}.getType();
+                        SverResponse<User> result= JSONUtils.formJson(response,type);
+                        if(result.getStatus()== ResponeCode.SUCCESS.getCode()){
+                            user.setText(result.getData().getAccount());
+                        }
+                        else {
+                            //跳转到登陆页面
+                            Intent intent=new Intent(getActivity(), LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                });
     }
 }

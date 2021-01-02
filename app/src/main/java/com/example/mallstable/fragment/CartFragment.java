@@ -189,7 +189,7 @@ public class CartFragment extends Fragment {
     /*加载购物车数据*/
     private void loadCartData() {
         // 12.30 li
-        List<CartItem> lists = new ArrayList<>();
+        /*List<CartItem> lists = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             CartItem param = new CartItem();
             param.setEdit(true);
@@ -207,34 +207,34 @@ public class CartFragment extends Fragment {
         }
         mData.addAll(lists);
         cartAdapter.notifyDataSetChanged(); //放进
-        total.setText("合计：￥" + "AADD");
+        total.setText("合计：￥" + "AADD");*/
 
-//        OkHttpUtils.get()
-//                .url(Constant.API.CART_LIST_URL)
-//                .build()
-//                .execute(new StringCallback() {
-//                    @Override
-//                    public void onError(Call call, Exception e, int id) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onResponse(String response, int id) {
-//                        //在这里取数据
-//                        Type type = new TypeToken<SverResponse<Cart>>() {
-//                        }.getType();
-//                        SverResponse<Cart> result = JSONUtils.fromJson(response, type);
-//                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
-//                            if (result.getData().getLists() != null) { //拿到项的集合
-//
-//                                mData.clear();   //先清空
-//                                mData.addAll(result.getData().getLists());
-//                                cartAdapter.notifyDataSetChanged(); //放进
-//                            }
-//                            total.setText("合计：￥" + result.getData().getTotalPrice());
-//                        }
-//                    }
-//                });
+        OkHttpUtils.get()
+                .url(Constant.API.CART_LIST_URL)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        //在这里取数据
+                        Type type = new TypeToken<SverResponse<Cart>>() {
+                        }.getType();
+                        SverResponse<Cart> result = JSONUtils.fromJson(response, type);
+                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+                            if (result.getData().getLists() != null) { //拿到项的集合
+
+                                mData.clear();   //先清空
+                                mData.addAll(result.getData().getLists());
+                                cartAdapter.notifyDataSetChanged(); //放进
+                            }
+                            total.setText("合计：￥" + result.getData().getTotalPrice());
+                        }
+                    }
+                });
         //12.30
         /*
         if(result.getStatus()....)
@@ -246,7 +246,7 @@ public class CartFragment extends Fragment {
     }
 
     private void updateProduct(int productId, int count) {
-        List<CartItem> lists = new ArrayList<>();
+        /*List<CartItem> lists = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             CartItem param = new CartItem();
             param.setEdit(true);
@@ -264,40 +264,40 @@ public class CartFragment extends Fragment {
         }
         mData.addAll(lists);
         cartAdapter.notifyDataSetChanged(); //放进
-        total.setText("合计：￥" + "AADD");
+        total.setText("合计：￥" + "AADD");*/
 
-//        OkHttpUtils.get()
-//                .url(Constant.API.CART_UPDATE_URL)
-//                .addParams("productId", productId + "")
-//                .addParams("count", count + "")
-//                .build()
-//                .execute(new StringCallback() {
-//                    @Override
-//                    public void onError(Call call, Exception e, int id) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onResponse(String response, int id) {
-//                        Type type = new TypeToken<SverResponse<Cart>>() {
-//                        }.getType();
-//                        SverResponse<Cart> result = JSONUtils.fromJson(response, type);
-//                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
-//                            if (result.getData().getLists() != null) {
-//                                mData.clear();
-//                                mData.addAll(result.getData().getLists());
-//                                cartAdapter.notifyDataSetChanged();
-//                            }
-//                            total.setText("合计：￥" + result.getData().getTotalPrice());
-//                        }
-//
-//                    }
-//                });
+        OkHttpUtils.get()
+                .url(Constant.API.CART_UPDATE_URL)
+                .addParams("productId", productId + "")
+                .addParams("count", count + "")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Type type = new TypeToken<SverResponse<Cart>>() {
+                        }.getType();
+                        SverResponse<Cart> result = JSONUtils.fromJson(response, type);
+                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+                            if (result.getData().getLists() != null) {
+                                mData.clear();
+                                mData.addAll(result.getData().getLists());
+                                cartAdapter.notifyDataSetChanged();
+                            }
+                            total.setText("合计：￥" + result.getData().getTotalPrice());
+                        }
+
+                    }
+                });
     }
 
     /*删除商品 12.30 li*/
     private void delProductById(int productId) {
-        List<CartItem> lists = new ArrayList<>();
+        /*List<CartItem> lists = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             CartItem param = new CartItem();
             param.setEdit(true);
@@ -315,32 +315,32 @@ public class CartFragment extends Fragment {
         }
         mData.addAll(lists);
         cartAdapter.notifyDataSetChanged(); //放进
-        total.setText("合计：￥" + "AADD");
-//        OkHttpUtils.get()
-//                .url(Constant.API.CART_DEL_URL)
-//                .addParams("productId", productId + "")
-//                .build()
-//                .execute(new StringCallback() {
-//                    @Override
-//                    public void onError(Call call, Exception e, int id) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onResponse(String response, int id) {
-//                        Type type = new TypeToken<SverResponse<Cart>>() {
-//                        }.getType();
-//                        SverResponse<Cart> result = JSONUtils.fromJson(response, type);
-//                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
-//                            if (result.getData().getLists() != null) {
-//                                mData.clear();
-//                                mData.addAll(result.getData().getLists());
-//                                cartAdapter.notifyDataSetChanged();
-//                            }
-//                            total.setText("合计：￥" + result.getData().getTotalPrice());
-//                        }
-//                    }
-//                });
+        total.setText("合计：￥" + "AADD");*/
+        OkHttpUtils.get()
+                .url(Constant.API.CART_DEL_URL)
+                .addParams("productId", productId + "")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Type type = new TypeToken<SverResponse<Cart>>() {
+                        }.getType();
+                        SverResponse<Cart> result = JSONUtils.fromJson(response, type);
+                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+                            if (result.getData().getLists() != null) {
+                                mData.clear();
+                                mData.addAll(result.getData().getLists());
+                                cartAdapter.notifyDataSetChanged();
+                            }
+                            total.setText("合计：￥" + result.getData().getTotalPrice());
+                        }
+                    }
+                });
     }
 
 }
