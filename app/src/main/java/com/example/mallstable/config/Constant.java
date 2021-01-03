@@ -13,7 +13,7 @@ public class Constant {
         //产品类型参数地址
         public static final String CATEGORY_PARAM_URL =BASE_URL+"param/findallparams.do";
         //热销商品
-        public static final String HOT_PRODUCT_URL = BASE_URL+"product/findhotproducts.do";
+        public static final String HOT_PRODUCT_URL = BASE_URL+"product/findHotProducts.do";
 
         //商品分类查询
         public static final String CATEGORY_PRODUCT_URL= BASE_URL+"product/findproducts.do";

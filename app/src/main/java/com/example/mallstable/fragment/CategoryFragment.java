@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.cjj.MaterialRefreshLayout;
@@ -161,15 +163,15 @@ public class CategoryFragment extends Fragment {
     private void loadParams() {
         //
 
-        List<Param> result = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
-            Param param = new Param(123, 456, "sfd", true, 33, 2, "", "");
-            result.add(param);
-        }
-        leftCategoryData.addAll(result);
-        findProductByParam(typeId, 1, 10, true);
-
-        categoryLeftAdapter.notifyDataSetChanged();
+//        List<Param> result = new ArrayList<>();
+//        for (int i = 0; i < 9; i++) {
+//            Param param = new Param(123, 456, "sfd", true, 33, 2, "", "");
+//            result.add(param);
+//        }
+//        leftCategoryData.addAll(result);
+//        findProductByParam(typeId, 1, 10, true);
+//
+//        categoryLeftAdapter.notifyDataSetChanged();
         //加载产品分类参数
         OkHttpUtils.get()
                 .url(Constant.API.CATEGORY_PARAM_URL)
@@ -177,11 +179,12 @@ public class CategoryFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        Toast.makeText(getActivity(),"参数加载失败",Toast.LENGTH_LONG).show();
+                        Log.e("参数加载",e.toString());
                     }
-
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.e("参数加载","参数加载成功");
                         final Type type = new TypeToken<SverResponse<List<Param>>>(){}.getType();
                         SverResponse<List<Param>> result = JSONUtils.fromJson(response,type);
                         if (result.getStatus()== ResponeCode.SUCCESS.getCode()) {
@@ -229,11 +232,13 @@ public class CategoryFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        Toast.makeText(getActivity(),"通过参数加载产品失败",Toast.LENGTH_LONG).show();
+                        Log.e("产品加载",e.toString());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.e("产品加载","产品加载成功");
                         final Type type = new TypeToken<SverResponse<PageBean<Product>>>(){}.getType();
                        result = JSONUtils.fromJson(response,type);
 

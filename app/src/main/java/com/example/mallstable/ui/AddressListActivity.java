@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -107,11 +108,13 @@ public class AddressListActivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        Toast.makeText(AddressListActivity.this,"地址列表加载失败",Toast.LENGTH_LONG).show();
+                        Log.e("地址列表加载",e.toString());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.e("地址列表加载","地址列表加载成功");
                         Type type = new TypeToken<SverResponse<List<Address>>>() {
                         }.getType();
                         SverResponse<List<Address>> result = JSONUtils.fromJson(response, type);
@@ -137,11 +140,13 @@ public class AddressListActivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        Toast.makeText(AddressListActivity.this,"删除地址失败",Toast.LENGTH_LONG).show();
+                        Log.e("删除地址",e.toString());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.e("删除地址","删除地址成功");
                         SverResponse result = JSONUtils.formJson(response, SverResponse.class);
                         if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
                             //重新加载数据

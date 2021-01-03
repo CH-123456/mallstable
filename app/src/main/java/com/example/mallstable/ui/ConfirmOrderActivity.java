@@ -2,6 +2,7 @@ package com.example.mallstable.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -156,11 +157,13 @@ public class ConfirmOrderActivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        Toast.makeText(ConfirmOrderActivity.this,"默认地址加载失败",Toast.LENGTH_LONG).show();
+                        Log.e("默认地址加载",e.toString());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.e("默认地址加载","默认地址加载成功");
                         Type type = new TypeToken<SverResponse<List<Address>>>() {
                         }.getType();
                         SverResponse<List<Address>> result = JSONUtils.formJson(response, type);
@@ -221,11 +224,13 @@ public class ConfirmOrderActivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        Toast.makeText(ConfirmOrderActivity.this,"购物车数据加载失败",Toast.LENGTH_LONG).show();
+                        Log.e("购物车数据加载",e.toString());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.e("购物车数据加载","购物车数据加载成功");
                         Type type = new TypeToken<SverResponse<Cart>>() {
                         }.getType();
                         SverResponse<Cart> result = JSONUtils.formJson(response, type);
@@ -252,11 +257,13 @@ public class ConfirmOrderActivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        Toast.makeText(ConfirmOrderActivity.this,"订单确定",Toast.LENGTH_LONG).show();
+                        Log.e("订单确定",e.toString());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.e("订单确定","订单确定成功");
                         Type type = new TypeToken<SverResponse<Order>>() {
                         }.getType();
                         SverResponse<Order> result = JSONUtils.formJson(response, type);

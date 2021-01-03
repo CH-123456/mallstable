@@ -12,11 +12,13 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mallstable.R;
 import com.example.mallstable.adapter.CartAdapter;
@@ -215,11 +217,13 @@ public class CartFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        Toast.makeText(getActivity(),"购物车数据加载产品失败",Toast.LENGTH_LONG).show();
+                        Log.e("购物车加载",e.toString());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.e("购物车加载","购物车数据加载成功");
                         //在这里取数据
                         Type type = new TypeToken<SverResponse<Cart>>() {
                         }.getType();
@@ -274,11 +278,13 @@ public class CartFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        Toast.makeText(getActivity(),"购物车数据更新产品失败",Toast.LENGTH_LONG).show();
+                        Log.e("购物车更新",e.toString());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.e("购物车更新","购物车更新成功");
                         Type type = new TypeToken<SverResponse<Cart>>() {
                         }.getType();
                         SverResponse<Cart> result = JSONUtils.fromJson(response, type);
@@ -323,11 +329,13 @@ public class CartFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        Toast.makeText(getActivity(),"购物车商品删除产品失败",Toast.LENGTH_LONG).show();
+                        Log.e("购物车商品删除",e.toString());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.e("购物车商品删除","购物车商品删除成功");
                         Type type = new TypeToken<SverResponse<Cart>>() {
                         }.getType();
                         SverResponse<Cart> result = JSONUtils.fromJson(response, type);

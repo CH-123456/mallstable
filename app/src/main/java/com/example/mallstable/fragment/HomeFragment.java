@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
@@ -193,11 +195,13 @@ public class HomeFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        Toast.makeText(getActivity(),"参数加载失败",Toast.LENGTH_LONG).show();
+                        Log.e("参数加载",e.toString());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.e("参数加载","参数加载成功");
                         final Type type = new TypeToken<SverResponse<List<Param>>>() {
                         }.getType();
                         SverResponse<List<Param>> result = JSONUtils.fromJson(response, type);
@@ -235,6 +239,7 @@ public class HomeFragment extends Fragment {
 //        }
 //        mProductData.addAll(products);
 //        homeHotProductAdapter.notifyDataSetChanged();
+        Log.e("热销产品加载","热销产品加载成功");
         OkHttpUtils.get()
                 .url(Constant.API.HOT_PRODUCT_URL)
                 .addParams("num", "10")
@@ -242,7 +247,8 @@ public class HomeFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        Toast.makeText(getActivity(),"热销产品加载失败",Toast.LENGTH_LONG).show();
+                        Log.e("热销产品加载",e.toString());
                     }
 
                     @Override

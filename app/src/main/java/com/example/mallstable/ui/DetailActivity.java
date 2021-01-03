@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.EditText;
@@ -157,11 +158,13 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        Toast.makeText(DetailActivity.this,"详情数据加载失败",Toast.LENGTH_LONG).show();
+                        Log.e("详情数据加载",e.toString());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.e("详情数据加载","详情数据加载成功");
                         Type type = new TypeToken<SverResponse<Product>>() {
                         }.getType();
                         SverResponse<Product> result = JSONUtils.formJson(response, type);
@@ -202,11 +205,13 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
-
+                            Toast.makeText(DetailActivity.this,"加入购物车失败",Toast.LENGTH_LONG).show();
+                            Log.e("加入购物车",e.toString());
                         }
 
                         @Override
                         public void onResponse(String response, int id) {
+                            Log.e("加入购物车","加入购物车成功");
                             SverResponse result = JSONUtils.formJson(response, SverResponse.class);
                             if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
                                 //

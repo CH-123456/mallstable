@@ -10,10 +10,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mallstable.R;
 import com.example.mallstable.config.Constant;
@@ -128,11 +130,13 @@ public class UserFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        Toast.makeText(getActivity(),"用户数据加载失败",Toast.LENGTH_LONG).show();
+                        Log.e("用户数据加载",e.toString());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.e("用户数据加载","用户数据加载成功");
                         Type type=new TypeToken<SverResponse<User>>(){}.getType();
                         SverResponse<User> result= JSONUtils.formJson(response,type);
                         if(result.getStatus()== ResponeCode.SUCCESS.getCode()){
