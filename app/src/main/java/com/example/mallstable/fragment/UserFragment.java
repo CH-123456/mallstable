@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,34 +119,36 @@ public class UserFragment extends Fragment {
 
     }
 
+    //private void initUserInfo() {
     private void initUserInfo() {
         //添加用户数据
-//        user.setText("sdfsf");
+        Intent intent=getActivity().getIntent();
+        String Account=intent.getStringExtra("账户");
+        Toast.makeText(getActivity(),Account,Toast.LENGTH_LONG).show();
+        user.setText(Account);
 
-        OkHttpUtils.get()
-                .url(Constant.API.USER_INFO_URL)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(getActivity(),"用户数据加载失败",Toast.LENGTH_LONG).show();
-                        Log.e("用户数据加载",e.toString());
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.e("用户数据加载","用户数据加载成功");
-                        Type type=new TypeToken<SverResponse<User>>(){}.getType();
-                        SverResponse<User> result= JSONUtils.formJson(response,type);
-                        if(result.getStatus()== ResponeCode.SUCCESS.getCode()){
-                            user.setText(result.getData().getAccount());
-                        }
-                        else {
-                            //跳转到登陆页面
-                            Intent intent=new Intent(getActivity(), LoginActivity.class);
-                            startActivity(intent);
-                        }
-                    }
-                });
+//        OkHttpUtils.get()
+//                .url(Constant.API.USER_INFO_URL)
+//                .build()
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//                        Toast.makeText(getActivity(),"网络问题，请稍后重试！",Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                    @Override
+//                    public void onResponse(String response, int id) {
+//                        Type type=new TypeToken<SverResponse<User>>(){}.getType();
+//                        SverResponse<User> result= JSONUtils.formJson(response,type);
+//                        if(result.getStatus()== ResponeCode.SUCCESS.getCode()){
+//                            user.setText(result.getData().getAccount());
+//                        }
+//                        else {
+//                            //跳转到登陆页面
+//                            Intent intent=new Intent(getActivity(), LoginActivity.class);
+//                            startActivity(intent);
+//                        }
+//                    }
+//                });
     }
 }

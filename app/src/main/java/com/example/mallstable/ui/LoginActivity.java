@@ -91,12 +91,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onResponse(String response, int id) {
                         Type type=new TypeToken<SverResponse<User>>(){}.getType();
                         /*TypeToken 导包*/
-                        Log.e("返回数据",response);
                         SverResponse<User> result= JSONUtils.fromJson(response,type);
-                        Log.e("数据",result.getData().getCreate_time());
                         if(result.getStatus()== ResponeCode.SUCCESS.getCode()){
                             //发送本地广播
                             Intent intent=new Intent(Constant.ACTION.LOAD_CART_ACTION);
+                            intent.putExtra("账户",result.getData().getAccount());
+                            //intent.putExtra("账户",result.getData().getAccount());
                             LocalBroadcastManager.getInstance(LoginActivity.this).sendBroadcast(intent);
                             startActivity(new Intent(LoginActivity.this,MainActivity.class));
                             LoginActivity.this.finish();

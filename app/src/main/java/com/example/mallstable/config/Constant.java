@@ -16,7 +16,7 @@ public class Constant {
         public static final String HOT_PRODUCT_URL = BASE_URL+"product/findHotProducts.do";
 
         //商品分类查询
-        public static final String CATEGORY_PRODUCT_URL= BASE_URL+"product/findproducts.do";
+        public static final String CATEGORY_PRODUCT_URL= BASE_URL+"product/findProducts.do";
         //购物车列表
         public static final String CART_LIST_URL= BASE_URL+"cart/findallcarts.do";
         //加入购物车
@@ -26,11 +26,11 @@ public class Constant {
         //删除购物车中商品
         public static final String CART_DEL_URL= BASE_URL+"cart/delcarts.do";
         //登录接口
-        public static final String USER_LOGIN_URL= BASE_URL+"user/do_login.do";
+        public static final String USER_LOGIN_URL= BASE_URL+"user/login.do";
         //获取用户信息
         public static final String USER_INFO_URL= BASE_URL+"user/getuserinfo.do";
         //地址列表
-        public static final String USER_ADDR_LIST_URL= BASE_URL+"addr/findaddrs.do";
+        public static final String USER_ADDR_LIST_URL= BASE_URL+"addr/findaddress.do";
         //删除地址
         public static final String USER_ADDR_DEL_URL= BASE_URL+"addr/dekaddr.do";
         //设置默认地址
