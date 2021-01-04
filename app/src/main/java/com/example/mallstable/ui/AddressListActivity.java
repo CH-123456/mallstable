@@ -55,7 +55,7 @@ public class AddressListActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                //finish();
                 //应该加载地址详情页
             }
         });
@@ -116,6 +116,7 @@ public class AddressListActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Toast.makeText(AddressListActivity.this,"地址列表加载成功",Toast.LENGTH_LONG).show();
                         Log.e("地址列表加载","地址列表加载成功");
                         Type type = new TypeToken<SverResponse<List<Address>>>() {
                         }.getType();

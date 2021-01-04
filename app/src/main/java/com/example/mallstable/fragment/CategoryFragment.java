@@ -187,16 +187,17 @@ public class CategoryFragment extends Fragment {
                         Log.e("参数加载","参数加载成功");
                         final Type type = new TypeToken<SverResponse<List<Param>>>(){}.getType();
                         SverResponse<List<Param>> result = JSONUtils.fromJson(response,type);
+                        Toast.makeText(getActivity(),"参数shuliang"+result.getData().size(),Toast.LENGTH_LONG).show();
                         if (result.getStatus()== ResponeCode.SUCCESS.getCode()) {
                             if (result.getData() == null)
                                 return;
                             leftCategoryData.addAll(result.getData());
-
-                            typeId=leftCategoryData.get(0).getId()+"";
-                               leftCategoryData.get(0).setPressed(true);
-                               findProductByParam(typeId,1,10,true);
-
                             categoryLeftAdapter.notifyDataSetChanged();
+//                            typeId=leftCategoryData.get(0).getId()+"";
+//                               leftCategoryData.get(0).setPressed(true);
+//                               findProductByParam(typeId,1,10,true);
+
+
 
                         }
                     }

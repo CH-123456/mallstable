@@ -217,7 +217,7 @@ public class CartFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(getActivity(),"购物车数据加载产品失败",Toast.LENGTH_LONG).show();
+
                         Log.e("购物车加载",e.toString());
                     }
 
@@ -278,7 +278,7 @@ public class CartFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(getActivity(),"购物车数据更新产品失败",Toast.LENGTH_LONG).show();
+
                         Log.e("购物车更新",e.toString());
                     }
 
@@ -329,7 +329,7 @@ public class CartFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(getActivity(),"购物车商品删除产品失败",Toast.LENGTH_LONG).show();
+
                         Log.e("购物车商品删除",e.toString());
                     }
 

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mallstable.R;
 import com.example.mallstable.listener.OnItemClickListener;
+import com.example.mallstable.pojo.ActionOrderVo;
 import com.example.mallstable.pojo.Address;
 import com.example.mallstable.pojo.Order;
 
@@ -19,11 +20,11 @@ import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
     private Context context;
-    private List<Order> mData;
+    private List<ActionOrderVo> mData;
     private OnItemClickListener onItemClickListener;
     //private OrderAdapter.OnOrderOptListener onOrderOptListener;
 
-    public OrderAdapter(Context context, List<Order> mData) {
+    public OrderAdapter(Context context, List<ActionOrderVo> mData) {
         this.context = context;
         this.mData = mData;
     }
@@ -45,9 +46,18 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     @Override
     public void onBindViewHolder(@NonNull OrderAdapter.OrderViewHolder holder, final int position) {
-        Order order = mData.get(position);
-        holder.name.setText(String.valueOf(order.getOrderNo()) );
-        holder.mobile.setText(order.getStatus());
+        ActionOrderVo order = mData.get(position);
+        holder.orderNo.setText(String.valueOf(order.getOrderNo()) );
+        String status="";
+        switch (order.getStatus()){
+            case 1:status="未付款";break;
+            case 2:status="已付款";break;
+            case 3:status="已发货";break;
+            case 4:status="交易成功";break;
+            case 5:status="交易关闭";break;
+            case 6:status="已取消";break;
+        }
+        holder.orderStatus.setText(status);
         StringBuffer sb = new StringBuffer();
 //        if (!TextUtils.isEmpty(order.getProvince())) {
 //            sb.append(order.getProvince()).append(" ");
@@ -89,16 +99,16 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
         public View itemView;
-        public TextView name;
-        public TextView mobile;
+        public TextView orderNo;
+        public TextView orderStatus;
         public TextView order_detail;
         //public TextView bt_del;
 
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
             this.itemView = itemView;
-            name = (TextView) itemView.findViewById(R.id.name);
-            mobile = (TextView) itemView.findViewById(R.id.mobile);
+            orderNo = (TextView) itemView.findViewById(R.id.orderNo);
+            orderStatus = (TextView) itemView.findViewById(R.id.orderStatus);
             order_detail = (TextView) itemView.findViewById(R.id.order_detail);
             //bt_del = (TextView) itemView.findViewById(R.id.btn_del);
         }

@@ -1,5 +1,6 @@
 package com.example.mallstable.ui;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -18,8 +19,10 @@ import com.example.mallstable.adapter.AddressAdapter;
 import com.example.mallstable.adapter.OrderAdapter;
 import com.example.mallstable.config.Constant;
 import com.example.mallstable.listener.OnItemClickListener;
+import com.example.mallstable.pojo.ActionOrderVo;
 import com.example.mallstable.pojo.Address;
 import com.example.mallstable.pojo.Order;
+import com.example.mallstable.pojo.PageBean;
 import com.example.mallstable.pojo.ResponeCode;
 import com.example.mallstable.pojo.SverResponse;
 import com.example.mallstable.utils.JSONUtils;
@@ -37,7 +40,7 @@ import okhttp3.Call;
  * created by zangjie 1.1
  */
 public class OrderActivity extends AppCompatActivity {
-    private List<Order> mData;
+    private List<ActionOrderVo> mData;
     private OrderAdapter orderAdapter;
 
     @Override
@@ -56,7 +59,7 @@ public class OrderActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                //finish();
                 //应该加载订单详情页
             }
         });
@@ -70,9 +73,9 @@ public class OrderActivity extends AppCompatActivity {
         orderAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
-                Order order = mData.get(pos);
+                ActionOrderVo order = mData.get(pos);
                 Intent intent = new Intent();
-                intent.putExtra("order",(Order)order);
+                intent.putExtra("order",order);
                 setResult(RESULT_OK, intent);
                 //销毁自己
                 finish();
@@ -106,7 +109,7 @@ public class OrderActivity extends AppCompatActivity {
 //        addressAdapter.notifyDataSetChanged();
         OkHttpUtils.get()
                 .url(Constant.API.ORDER_LIST_URL)
-                .addParams("status","1")
+                .addParams("status","0")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -118,12 +121,13 @@ public class OrderActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e("订单列表加载","订单列表加载成功");
-                        Type type = new TypeToken<SverResponse<List<Order>>>() {
+                        Type type = new TypeToken<SverResponse<PageBean<ActionOrderVo>>>() {
                         }.getType();
-                        SverResponse<List<Order>> result = JSONUtils.fromJson(response, type);
+                        SverResponse<PageBean<ActionOrderVo>> result = JSONUtils.fromJson(response, type);
                         if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
                             mData.clear();
-                            mData.addAll(result.getData());
+                            Toast.makeText(OrderActivity.this,"shuliang"+result.getData().getData().get(1).getOrderNo(),Toast.LENGTH_LONG).show();
+                            mData.addAll(result.getData().getData());
                             orderAdapter.notifyDataSetChanged();
                         }
                     }

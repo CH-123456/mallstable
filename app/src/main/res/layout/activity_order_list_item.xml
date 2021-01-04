@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp">
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/orderNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -29,12 +29,11 @@
                 android:textColor="@color/font_color_dark"/>
 
             <TextView
-                android:id="@+id/mobile"
+                android:id="@+id/orderStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:text="ddddd_mobile"
-
                 android:textColor="@color/font_color_dark"/>
         </LinearLayout>
         <TextView
@@ -46,28 +45,4 @@
             android:text="ddddd_detail"
             android:textColor="@color/font_color"/>
     </LinearLayout>
-
-    <RelativeLayout
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical">
-        <CheckBox
-            android:id="@+id/chk_default"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@null"
-            android:layout_alignParentLeft="true"
-            android:visibility="gone"
-            android:background="@color/colorPrimaryDark"/>
-        <TextView
-            android:layout_toRightOf="@id/chk_default"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="5dp"
-            android:visibility="gone"
-            android:text="设为默认"/>
-
-    </RelativeLayout>
 </LinearLayout>
