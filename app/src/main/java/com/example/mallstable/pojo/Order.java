@@ -1,11 +1,12 @@
 package com.example.mallstable.pojo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /*
  *created by liben 12.30
  */
-public class Order {
+public class Order implements Serializable {
     private Long orderNo;//订单编号
     private BigDecimal amount;//订单总价
     private Integer type;//支付类型

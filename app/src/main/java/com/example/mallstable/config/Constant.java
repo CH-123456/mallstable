@@ -24,7 +24,7 @@ public class Constant {
         //更新购物车中的商品的数量
         public static final String CART_UPDATE_URL= BASE_URL+"cart/updatecarts.do";
         //删除购物车中商品
-        public static final String CART_DEL_URL= BASE_URL+"cart/delcarts.do";
+        public static final String CART_DEL_URL= BASE_URL+"cart/deletecarts.do";
         //登录接口
         public static final String USER_LOGIN_URL= BASE_URL+"user/login.do";
         //获取用户信息

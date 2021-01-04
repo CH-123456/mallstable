@@ -269,6 +269,7 @@ public class ConfirmOrderActivity extends AppCompatActivity {
                         SverResponse<Order> result = JSONUtils.formJson(response, type);
                         if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
                             //跳转到订单详情
+                            Toast.makeText(ConfirmOrderActivity.this, "订单提交成功", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(ConfirmOrderActivity.this, result.getStatus(), Toast.LENGTH_LONG).show();
                         }

@@ -44,7 +44,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     private EditText num;
     private TextView stock;
     private Toolbar toolbar;//Toobar包不一定对，与视频略不同
-
+    private String ida;
     private Product product;  //Product 在 pojo文件夹里
 
     @Override
@@ -55,9 +55,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
         //提取其他界面传递过来的产品编号
         Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
-        if (!TextUtils.isEmpty(id)) {
-            loadProductById(id);
+        ida = intent.getStringExtra("id");
+        if (!TextUtils.isEmpty(ida)) {
+            loadProductById(ida);
         }
     }
 
@@ -214,8 +214,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                             Log.e("加入购物车","加入购物车成功");
                             SverResponse result = JSONUtils.formJson(response, SverResponse.class);
                             if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
-                                //
-
+                                Toast.makeText(DetailActivity.this,"添加成功",Toast.LENGTH_LONG).show();
+                                loadProductById(ida);
                             } else {
                                 Toast.makeText(DetailActivity.this, result.getMsg(), Toast.LENGTH_LONG).show();
                             }

@@ -56,6 +56,7 @@ public class AddressListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+                //应该加载地址详情页
             }
         });
 
@@ -104,6 +105,7 @@ public class AddressListActivity extends AppCompatActivity {
 //        addressAdapter.notifyDataSetChanged();
         OkHttpUtils.get()
                 .url(Constant.API.USER_ADDR_LIST_URL)
+                .addParams("status","3")
                 .build()
                 .execute(new StringCallback() {
                     @Override
