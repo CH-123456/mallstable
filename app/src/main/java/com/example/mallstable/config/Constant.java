@@ -16,7 +16,7 @@ public class Constant {
         public static final String HOT_PRODUCT_URL = BASE_URL+"product/findHotProducts.do";
 
         //商品分类查询
-        public static final String CATEGORY_PRODUCT_URL= BASE_URL+"product/findProducts.do";
+        public static final String CATEGORY_PRODUCT_URL= BASE_URL+"product/findProductsByParam.do";
         //购物车列表
         public static final String CART_LIST_URL= BASE_URL+"cart/findallcarts.do";
         //加入购物车

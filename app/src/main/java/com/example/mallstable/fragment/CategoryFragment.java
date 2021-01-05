@@ -60,7 +60,7 @@ public class CategoryFragment extends Fragment {
     private List<Product> rightProductData;
     private CategoryRightAdapter categoryRightAdapter;
     private MaterialRefreshLayout refreshLayout;
-    private SverResponse<PageBean<Product>> result;
+    private SverResponse<List<Product>> result;
     private String typeId;
     private TextView search;
 
@@ -100,6 +100,7 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onItemClick(View view, int pos) {
                 typeId = leftCategoryData.get(pos).getId() + "";
+                Toast.makeText(getActivity(),"类型"+typeId,Toast.LENGTH_LONG).show();
                 findProductByParam(typeId, 1, 10, true);
             }
         });
@@ -147,15 +148,15 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
                 //super.onRefreshLoadMore(materialRefreshLayout);
-                if (result != null && result.getStatus() == ResponeCode.SUCCESS.getCode()) {
-                    PageBean pageBean = result.getData();
-                    if (pageBean.getPageNum() != pageBean.getNextPage()) {
-                        findProductByParam(typeId, pageBean.getNextPage(), pageBean.getPageSize(), false);
-                    }
-
-                } else {
-                    materialRefreshLayout.finishRefreshLoadMore();
-                }
+//                if (result != null && result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+//                    PageBean pageBean = result.getData();
+//                    if (pageBean.getPageNum() != pageBean.getNextPage()) {
+//                        findProductByParam(typeId, pageBean.getNextPage(), pageBean.getPageSize(), false);
+//                    }
+//
+//                } else {
+//                    materialRefreshLayout.finishRefreshLoadMore();
+//                }
             }
         });
     }
@@ -193,9 +194,9 @@ public class CategoryFragment extends Fragment {
                                 return;
                             leftCategoryData.addAll(result.getData());
                             categoryLeftAdapter.notifyDataSetChanged();
-//                            typeId=leftCategoryData.get(0).getId()+"";
-//                               leftCategoryData.get(0).setPressed(true);
-//                               findProductByParam(typeId,1,10,true);
+                            typeId=leftCategoryData.get(0).getId()+"";
+                            leftCategoryData.get(0).setPressed(true);
+                             findProductByParam(typeId,1,10,true);
 
 
 
@@ -227,8 +228,6 @@ public class CategoryFragment extends Fragment {
         OkHttpUtils.get()
                 .url(Constant.API.CATEGORY_PRODUCT_URL)
                 .addParams("productTypeId",productTypeId)
-                .addParams("pageNum",pageNum+"")
-                .addParams("pageSize",pageSize+"")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -240,20 +239,25 @@ public class CategoryFragment extends Fragment {
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e("产品加载","产品加载成功");
-                        final Type type = new TypeToken<SverResponse<PageBean<Product>>>(){}.getType();
+                        final Type type = new TypeToken<SverResponse<List<Product>>>(){}.getType();
                        result = JSONUtils.fromJson(response,type);
-
                         if (result.getStatus()== ResponeCode.SUCCESS.getCode()) {
-                            if (result.getData() == null) {
-                                if (flag){
-                                    rightProductData.clear();
-                                }
-                                rightProductData.addAll(result.getData().getData());
-                                categoryRightAdapter.notifyDataSetChanged();
-                            }
-                            if(!flag){
-                                refreshLayout.finishRefreshLoadMore();
-                            }
+                            Toast.makeText(getActivity(),"a",Toast.LENGTH_LONG).show();
+                            rightProductData.clear();
+                            rightProductData.addAll(result.getData());
+                            categoryRightAdapter.notifyDataSetChanged();
+//                            if (result.getData() == null) {
+//                                Toast.makeText(getActivity(),"b",Toast.LENGTH_LONG).show();
+//                                if (flag){
+//                                    rightProductData.clear();
+//                                }
+//                                Toast.makeText(getActivity(),"适配器数据更改",Toast.LENGTH_LONG).show();
+//                                rightProductData.addAll(result.getData());
+//                                categoryRightAdapter.notifyDataSetChanged();
+//                            }
+//                            if(!flag){
+//                                refreshLayout.finishRefreshLoadMore();
+//                            }
                     }
                     }
                 });
