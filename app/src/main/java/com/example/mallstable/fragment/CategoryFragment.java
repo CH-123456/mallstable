@@ -198,8 +198,6 @@ public class CategoryFragment extends Fragment {
                             leftCategoryData.get(0).setPressed(true);
                              findProductByParam(typeId,1,10,true);
 
-
-
                         }
                     }
                 });
