@@ -3,14 +3,15 @@
     created by bing 12.30 16:19
     modified by liben 12.31 change checkbox's background
  -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/fragment_home_hot_list_item_background"
-    android:orientation="vertical">
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="@drawable/fragment_home_hot_list_item_background"-->
+<!--    android:orientation="vertical">-->
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/detail_product_bottom_background"
         android:orientation="vertical"
         android:padding="10dp">
@@ -22,7 +23,7 @@
             android:layout_marginTop="5dp">
             <TextView
                 android:id="@+id/orderNo"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:text="ddddd_name"
@@ -30,7 +31,7 @@
 
             <TextView
                 android:id="@+id/orderStatus"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:text="ddddd_mobile"
@@ -45,4 +46,4 @@
             android:text="ddddd_detail"
             android:textColor="@color/font_color"/>
     </LinearLayout>
-</LinearLayout>
+<!--</LinearLayout>-->

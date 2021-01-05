@@ -66,12 +66,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 //            sb.append(order.getCity()).append(" ");
 //        }
 //        if (!TextUtils.isEmpty(order.getDistrict())) {
-//            sb.append(order.getDistrict()).append(" ");
-//        }
+//            sb.append(order.getDistrict()).append(" ");//        }
 //        if (!TextUtils.isEmpty(order.getAddr())) {
 //            sb.append(order.getAddr()).append(" ");
 //        }
-        holder.order_detail.setText(sb.toString());
+        holder.order_detail.setText(order.ge);
 
 //        holder.bt_del.setOnClickListener(new View.OnClickListener() {
 //            @Override
