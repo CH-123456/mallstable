@@ -2,6 +2,7 @@ package com.example.mallstable.adapter;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,9 +48,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     @Override
     public void onBindViewHolder(@NonNull OrderAdapter.OrderViewHolder holder, final int position) {
         ActionOrderVo order = mData.get(position);
-        holder.orderNo.setText(String.valueOf(order.getOrderNo()) );
-        String status="";
-        switch (order.getStatus()){
+        holder.orderNo.setText("订单编号："+String.valueOf(order.getOrderNo()) );
+        String status=" ";
+        Log.e("状态",order.getStatus().getClass().toString());
+        Log.e("状态",order.getStatus().toString());
+        switch ((int)order.getStatus()){
             case 1:status="未付款";break;
             case 2:status="已付款";break;
             case 3:status="已发货";break;
@@ -57,7 +60,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             case 5:status="交易关闭";break;
             case 6:status="已取消";break;
         }
-        holder.orderStatus.setText(status);
+        holder.orderStatus.setText("订单状态："+status);
         StringBuffer sb = new StringBuffer();
 //        if (!TextUtils.isEmpty(order.getProvince())) {
 //            sb.append(order.getProvince()).append(" ");
@@ -70,8 +73,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 //        if (!TextUtils.isEmpty(order.getAddr())) {
 //            sb.append(order.getAddr()).append(" ");
 //        }
-        holder.order_detail.setText(order.ge);
-
+        holder.order_detail.setText("订单金额："+String.valueOf(order.getAmount()));
 //        holder.bt_del.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {

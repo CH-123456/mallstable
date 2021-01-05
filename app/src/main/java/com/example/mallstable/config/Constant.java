@@ -47,6 +47,7 @@ public class Constant {
 
         //商品详情 by bing 12.30 10:21
         public static final String PRODUCT_DETAIL_URL=BASE_URL+"product/getdetail.do";
+        public static final String USER_REGISTER_URL= BASE_URL+"user/aregisterUser.do";
     }
     //广播
     public static class ACTION{

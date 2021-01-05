@@ -59,7 +59,7 @@ public class OrderActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //finish();
+                finish();
                 //应该加载订单详情页
             }
         });
@@ -126,7 +126,6 @@ public class OrderActivity extends AppCompatActivity {
                         SverResponse<PageBean<ActionOrderVo>> result = JSONUtils.fromJson(response, type);
                         if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
                             //mData.clear();
-                            Toast.makeText(OrderActivity.this,"shuliang"+result.getData().getData().get(1).getStatus(),Toast.LENGTH_LONG).show();
                             mData.addAll(result.getData().getData());
                             orderAdapter.notifyDataSetChanged();
                         }

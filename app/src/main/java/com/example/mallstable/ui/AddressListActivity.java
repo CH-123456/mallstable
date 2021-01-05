@@ -55,7 +55,7 @@ public class AddressListActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //finish();
+                finish();
                 //应该加载地址详情页
             }
         });
