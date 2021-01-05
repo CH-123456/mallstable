@@ -20,7 +20,7 @@
         app:navigationIcon="?attr/homeAsUpIndicator"
         app:theme="@style/ToolbarTheme"
         app:titleTextColor="#fff">
-
+<!--jhghjgjhgjh-->
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
