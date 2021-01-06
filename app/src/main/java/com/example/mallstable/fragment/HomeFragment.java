@@ -172,7 +172,7 @@ public class HomeFragment extends Fragment {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
-                    String name= (String) search.getText();
+                    String name= String.valueOf(search.getText());
                     loadSearch(name);
                 }
                 return false;
@@ -288,7 +288,7 @@ public class HomeFragment extends Fragment {
 //        homeHotProductAdapter.notifyDataSetChanged();
 
         //HTTP 请求要添加的参数好像不对，具体修改
-        OkHttpUtils.get()
+        OkHttpUtils.post()
                 .url(Constant.API.SEARCH_PRODUCT_URL)
                 .addParams("name",name)
                 .build()
@@ -306,6 +306,7 @@ public class HomeFragment extends Fragment {
                         SverResponse<List<Product>> result = JSONUtils.fromJson(response, type);
                         if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
                             if (result.getData() != null) {
+                                mProductData.clear();
                                 mProductData.addAll(result.getData());
                             }
                             homeHotProductAdapter.notifyDataSetChanged();

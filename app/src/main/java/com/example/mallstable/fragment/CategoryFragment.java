@@ -129,7 +129,7 @@ public class CategoryFragment extends Fragment {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
-                    String name= (String) search.getText();
+                    String name= String.valueOf(search.getText());
                     loadSearch(name);
                 }
                 return false;
@@ -284,7 +284,7 @@ public class CategoryFragment extends Fragment {
 //        homeHotProductAdapter.notifyDataSetChanged();
 
         //HTTP 请求要添加的参数好像不对，具体修改
-        OkHttpUtils.get()
+        OkHttpUtils.post()
                 .url(Constant.API.SEARCH_PRODUCT_URL)
                 .addParams("name",name)
                 .build()
