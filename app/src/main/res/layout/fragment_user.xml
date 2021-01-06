@@ -94,6 +94,7 @@
                 android:orientation="horizontal"
                 android:background="@color/colorWhite">
                 <TextView
+                    android:id="@+id/not_pay"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -101,6 +102,7 @@
                     android:gravity="center"
                     android:text="待付款"/>
                 <TextView
+                    android:id="@+id/not_send"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -109,7 +111,7 @@
                     android:text="待发货"/>
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/not_receive"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -118,6 +120,7 @@
                     android:text="待收货" />
 
                 <TextView
+                    android:id="@+id/not_commen"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"

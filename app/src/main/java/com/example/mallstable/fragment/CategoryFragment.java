@@ -129,7 +129,8 @@ public class CategoryFragment extends Fragment {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
-                    loadSearch();
+                    String name= (String) search.getText();
+                    loadSearch(name);
                 }
                 return false;
             }
@@ -262,57 +263,51 @@ public class CategoryFragment extends Fragment {
 
     }
 
-    private void loadSearch() {
-        List<Product> result1 = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
-            Product param = new Product();
-            param.setStock(111);
-            param.setStatus(2);
-            param.setProductId(13);
-            param.setPrice(new BigDecimal(1465));
-            param.setName("搜索的");
-            param.setId(6545);
-            param.setHot(2);
-            param.setDetail("搜索的");
-            param.setSpecParam("搜索的");
-            param.setPartsId(65465);
-            result1.add(param);
-        }
-        rightProductData.clear();
-        rightProductData.addAll(result1);
-        categoryRightAdapter.notifyDataSetChanged();
+    private void loadSearch(String name) {
+//        List<Product> result1 = new ArrayList<>();
+//        for (int i = 0; i < 9; i++) {
+//            Product param = new Product();
+//            param.setStock(111);
+//            param.setStatus(2);
+//            param.setProductId(13);
+//            param.setPrice(new BigDecimal(1465));
+//            param.setName("搜索的");
+//            param.setId(6545);
+//            param.setHot(2);
+//            param.setDetail("搜索的");
+//            param.setSpecParam("搜索的");
+//            param.setPartsId(65465);
+//            result1.add(param);
+//        }
+//        mProductData.clear();
+//        mProductData.addAll(result1);
+//        homeHotProductAdapter.notifyDataSetChanged();
 
         //HTTP 请求要添加的参数好像不对，具体修改
-        /*OkHttpUtils.get()
-                .url(Constant.API.CATEGORY_PRODUCT_URL)
-                .addParams("productTypeId",productTypeId)
-                .addParams("pageNum",pageNum+"")
-                .addParams("pageSize",pageSize+"")
+        OkHttpUtils.get()
+                .url(Constant.API.SEARCH_PRODUCT_URL)
+                .addParams("name",name)
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        Toast.makeText(getActivity(),"搜索失败",Toast.LENGTH_LONG).show();
+                        Log.e("搜索失败",e.toString());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        final Type type = new TypeToken<SverResponse<PageBean<Product>>>(){}.getType();
-                       result = JSONUtils.fromJson(response,type);
-
-                        if (result.getStatus()== ResponeCode.SUCCESS.getCode()) {
-                            if (result.getData() == null) {
-                                if (flag){
-                                    rightProductData.clear();
-                                }
-                                rightProductData.addAll(result.getData().getData());
-                                categoryRightAdapter.notifyDataSetChanged();
+                        final Type type = new TypeToken<SverResponse<List<Product>>>() {
+                        }.getType();
+                        SverResponse<List<Product>> result = JSONUtils.fromJson(response, type);
+                        if (result.getStatus() == ResponeCode.SUCCESS.getCode()) {
+                            if (result.getData() != null) {
+                                rightProductData.clear();
+                                rightProductData.addAll(result.getData());
                             }
-                            if(!flag){
-                                refreshLayout.finishRefreshLoadMore();
-                            }
+                            categoryRightAdapter.notifyDataSetChanged();
+                        }
                     }
-                    }
-                });*/
+                });
     }
 }

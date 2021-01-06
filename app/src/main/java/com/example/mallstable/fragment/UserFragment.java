@@ -106,6 +106,7 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), OrderActivity.class);
+                intent.putExtra("status","0");
                 startActivity(intent);
             }
         });
@@ -117,6 +118,42 @@ public class UserFragment extends Fragment {
             }
         });
 
+        view.findViewById(R.id.not_pay).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), OrderActivity.class);
+                intent.putExtra("status","1");
+                startActivity(intent);
+            }
+        });
+
+        view.findViewById(R.id.not_receive).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), OrderActivity.class);
+                intent.putExtra("status","3");
+                startActivity(intent);
+            }
+        });
+
+        view.findViewById(R.id.not_send).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), OrderActivity.class);
+                intent.putExtra("status","2");
+                startActivity(intent);
+            }
+        });
+
+        view.findViewById(R.id.not_commen).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), OrderActivity.class);
+                intent.putExtra("status","4");
+                startActivity(intent);
+
+            }
+        });
     }
 
     //private void initUserInfo() {

@@ -42,13 +42,16 @@ import okhttp3.Call;
 public class OrderActivity extends AppCompatActivity {
     private List<ActionOrderVo> mData;
     private OrderAdapter orderAdapter;
+    private String status="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_list);
+        Intent intent=getIntent();
+        status=intent.getStringExtra("status");
         initView();
-        loadOrderList();//加载订单列表数据的方法
+        loadOrderList(status);//加载订单列表数据的方法
     }
 
     private void initView() {
@@ -94,7 +97,7 @@ public class OrderActivity extends AppCompatActivity {
     /**
      * 加载订单列表
      */
-    private void loadOrderList() {
+    private void loadOrderList(String status) {
         /**
          * Created by wangquanli 2021/1/1
          */
@@ -109,7 +112,7 @@ public class OrderActivity extends AppCompatActivity {
 //        addressAdapter.notifyDataSetChanged();
         OkHttpUtils.get()
                 .url(Constant.API.ORDER_LIST_URL)
-                .addParams("status","0")
+                .addParams("status",status)
                 .build()
                 .execute(new StringCallback() {
                     @Override

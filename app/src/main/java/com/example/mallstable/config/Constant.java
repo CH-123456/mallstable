@@ -10,6 +10,7 @@ public class Constant {
     public static class API{
         //基地址
         public static final  String BASE_URL = "http://192.168.43.137:8011/jxshop/";//文件名待查
+        //public static final  String BASE_URL = "http://10.21.154.45:8011/jxshop/";//文件名待查
         //产品类型参数地址
         public static final String CATEGORY_PARAM_URL =BASE_URL+"param/findallparams.do";
         //热销商品
@@ -17,6 +18,8 @@ public class Constant {
 
         //商品分类查询
         public static final String CATEGORY_PRODUCT_URL= BASE_URL+"product/findProductsByParam.do";
+        //商品分类查询
+        public static final String SEARCH_PRODUCT_URL= BASE_URL+"product/searchproduct.do";
         //购物车列表
         public static final String CART_LIST_URL= BASE_URL+"cart/findallcarts.do";
         //加入购物车
