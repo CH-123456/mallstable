@@ -1,6 +1,7 @@
 package com.example.mallstable.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +65,7 @@ public class HomeHotProductAdapter extends DelegateAdapter.Adapter<HomeHotProduc
         holder.price.setText("价格：¥" + product.getPrice());
         holder.stock.setText("库存：" + product.getStock());
         holder.contentContainer.setTag(position);
+        Log.e("图片",Constant.API.BASE_URL + product.getIconUrl());
         Glide.with(context).load(Constant.API.BASE_URL + product.getIconUrl()).into(holder.icon_url);
         holder.contentContainer.setOnClickListener(new View.OnClickListener() {
             @Override
